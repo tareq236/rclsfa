@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#27517C</color>
+    <color name="colorPrimaryDark">#27517C</color>
+    <color name="black">#FF000000</color>
+    <color name="text">#303030</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bg">#E2E4ED</color>
+    <color name="menu_bd">#30557C</color>
+    <color name="edit_text_color">#303030</color>
+    <color name="button_bg">#27517C</color>
+</resources>
