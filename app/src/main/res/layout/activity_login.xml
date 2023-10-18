@@ -33,6 +33,7 @@
             android:background="@drawable/edittext_background"
             android:padding="15dp"
             android:textSize="14sp"
+            android:text="360221"
             android:textColor="@color/edit_text_color"
             android:textColorHint="@color/edit_text_color"
             />
@@ -48,6 +49,7 @@
             android:background="@drawable/edittext_background"
             android:padding="15dp"
             android:textSize="14sp"
+            android:text="123"
             android:textColor="@color/edit_text_color"
             android:textColorHint="@color/edit_text_color"
             />

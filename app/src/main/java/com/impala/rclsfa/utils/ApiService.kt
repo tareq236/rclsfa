@@ -14,6 +14,7 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -36,7 +37,10 @@ interface ApiService {
     ): Call<AttendanceResponse>
 
     @GET("api/v1/mobile/get_menu_list")
-    fun getMenuItems(): Call<MenuResponse>
+    fun getMenuItems(
+        @Query("user_id") userId : String,
+        @Query("designation_id") designationId : String
+    ): Call<MenuResponse>
 
     @POST("api/v1/login")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
