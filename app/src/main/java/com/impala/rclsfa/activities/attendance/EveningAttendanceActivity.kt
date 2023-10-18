@@ -277,6 +277,8 @@ class EveningAttendanceActivity : AppCompatActivity() {
             .setConfirmClickListener {
                 it.dismissWithAnimation()
                 callback?.invoke()
+
+                finish()
             }
         sweetAlertDialog.show()
     }

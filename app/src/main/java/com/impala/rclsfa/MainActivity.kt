@@ -45,6 +45,7 @@ import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
+import com.impala.rclsfa.utils.SessionManager
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
     private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        sessionManager = SessionManager(this)
         drawerLayout = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
@@ -140,9 +143,12 @@ class MainActivity : AppCompatActivity() {
         // Create a Retrofit API service (assuming you have Retrofit set up)
         val apiService = ApiService.CreateApi1()
 
+        val userId = sessionManager.userId
+        val designationId = sessionManager.designationId
+
         showLoadingDialog()
         // Make the API call to get menu items
-        apiService.getMenuItems().enqueue(object : Callback<MenuResponse> {
+        apiService.getMenuItems(userId!!,designationId.toString()).enqueue(object : Callback<MenuResponse> {
             override fun onResponse(call: Call<MenuResponse>, response: Response<MenuResponse>) {
                 if (response.isSuccessful) {
                     val menuResponse = response.body()

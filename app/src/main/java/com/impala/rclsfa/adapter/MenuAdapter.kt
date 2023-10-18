@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
 import com.impala.rclsfa.activities.attendance.AttendanceMenuActivity
+import com.impala.rclsfa.activities.auth.ProfileActivity
 import com.impala.rclsfa.activities.order.NewOrderActivity
 import com.impala.rclsfa.activities.order.OrderMenuActivity
 import com.impala.rclsfa.models.MenuItem
@@ -49,6 +50,11 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
                 }
                 if(menuItem.func == "order"){
                     val intent = Intent(itemView.context, OrderMenuActivity::class.java)
+                    itemView.context.startActivity(intent)
+                }
+
+                if(menuItem.func == "profile"){
+                    val intent = Intent(itemView.context, ProfileActivity::class.java)
                     itemView.context.startActivity(intent)
                 }
 

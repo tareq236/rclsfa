@@ -15,6 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.impala.rclsfa.utils.SessionManager
 
 
 class LoginActivity : AppCompatActivity() {
@@ -23,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
     private lateinit var loadingDialog: Dialog
+    lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
         usernameEditText = findViewById(R.id.usernameEditText)
         passwordEditText = findViewById(R.id.passwordEditText)
         loginButton = findViewById(R.id.loginButton)
+        sessionManager = SessionManager(this)
 
         // Initialize the loading dialog
         loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
@@ -128,6 +131,9 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("designation", result.result.designation)
         editor.putString("password", result.result.password)
         editor.putBoolean("isLoggedIn", true)
+
+        sessionManager.userId = result.result.id
+        sessionManager.designationId = result.result.designation_id
         // Add other properties as needed
 
         // Apply changes
