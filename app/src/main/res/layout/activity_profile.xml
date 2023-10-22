@@ -1,400 +1,573 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
    >
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:title="Profile"
-            app:titleTextColor="@color/white" />
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@drawable/multicolor_gradiant"
-                >
-
-
-            </LinearLayout>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/profile_image"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:src="@drawable/splash"
-                app:civ_border_width="3dp"
-                android:layout_gravity="center_horizontal"
-                app:civ_border_color="#fff"
-                android:layout_marginTop="90dp"
-                />
-
-
-        </FrameLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile Photo"
-            android:layout_gravity="center"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Test SO(360221)"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#295B67"
-            android:layout_marginTop="10dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SR"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#295B67"
-
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#E6E6E6"
-            android:layout_marginTop="05dp"
-            android:layout_marginHorizontal="10dp"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:orientation="horizontal"
-            >
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/profileUpdate"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#295B67"
-                android:layout_weight="1"
-                app:cardCornerRadius="6dp">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Profile Update"
-                        android:layout_centerInParent="true"
-                        android:textColor="@color/white"
-                        />
-                </RelativeLayout>
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/changePassword"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-
-                android:layout_weight="1"
-                app:cardCornerRadius="6dp">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Change Password"
-                        android:textColor="#295B67" />
-                </RelativeLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
-        </LinearLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:title="Profile"
+        app:titleTextColor="@color/white" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
             >
-            <RelativeLayout
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:background="#D6E8FC"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    />
-                <TextView
-                    android:id="@+id/nameId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Test So"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@drawable/multicolor_gradiant"
+                    >
+
+
+                </LinearLayout>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/splash"
+                    app:civ_border_width="3dp"
+                    android:layout_gravity="center_horizontal"
+                    app:civ_border_color="#fff"
+                    android:layout_marginTop="90dp"
                     />
 
-            </RelativeLayout>
-            <RelativeLayout
+
+            </FrameLayout>
+            <TextView
+                android:id="@+id/editPhotoId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile Photo"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                />
+            <TextView
+                android:id="@+id/userNameId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test SO(360221)"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#295B67"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/designation1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SR"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#295B67"
+
+                />
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
+                android:layout_height="1dp"
+                android:background="#E6E6E6"
+                android:layout_marginTop="05dp"
+                android:layout_marginHorizontal="10dp"
+                />
 
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Designation"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    />
-                <TextView
-                    android:id="@+id/designationId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SR"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
-                    />
-
-            </RelativeLayout>
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
                 android:orientation="horizontal"
-                android:background="#D6E8FC"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mail Id"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/profileUpdate"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    />
-                <TextView
-                    android:id="@+id/mailId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="545"
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="#295B67"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="6dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Profile Update"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/white"
+                            />
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/changePassword"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
-                    />
+                    android:layout_marginTop="10dp"
 
-            </RelativeLayout>
+                    android:layout_weight="1"
+                    app:cardCornerRadius="6dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-            <RelativeLayout
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="Change Password"
+                            android:textColor="#295B67" />
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="#D6E8FC"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/nameId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Test So"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Designation"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/designationId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SR"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="#D6E8FC"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mail Id"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/mailId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="545"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone Number"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/phoneNumberId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SR"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="#D6E8FC"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NID"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/nid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="545"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Blood Group"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/bloodGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A+"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="#D6E8FC"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Father Name"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/fatherNameId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="asas"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Father NID"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/fatherNid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="545656"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="#D6E8FC"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mother Name"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/motherNameId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="asas"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mother NID"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/motherNid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="545656"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Phone Number"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
+                    android:text="Alternative One"
+                    app:cornerRadius="6dp"
                     />
-                <TextView
-                    android:id="@+id/phoneNumberId"
-                    android:layout_width="wrap_content"
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/alterNameId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="545656"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="#D6E8FC"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/alterPhoneId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="asas"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Relation"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/alterRelationId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="545656"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SR"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
+                    android:text="Alternative Two"
+                    app:cornerRadius="6dp"
                     />
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:background="#D6E8FC"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NID"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    />
-                <TextView
-                    android:id="@+id/nid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="545"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
-                    />
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/alter2NameId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="545656"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="#D6E8FC"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/alter2PhoneId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="asas"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
 
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Blood Group"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    />
-                <TextView
-                    android:id="@+id/bloodGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="A+"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
-                    />
+                </RelativeLayout>
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:background="#D6E8FC"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Father Name"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    />
-                <TextView
-                    android:id="@+id/fatherNameId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="asas"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
-                    />
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Relation"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/alter2RelationId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="545656"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Father NID"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    />
-                <TextView
-                    android:id="@+id/fatherNid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="545656"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
-                    />
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:background="#D6E8FC"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mother Name"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    />
-                <TextView
-                    android:id="@+id/motherNameId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="asas"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
-                    />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mother NID"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    />
-                <TextView
-                    android:id="@+id/motherNid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="545656"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
-                    />
-
-            </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
-
-
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>

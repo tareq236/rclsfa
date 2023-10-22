@@ -9,4 +9,5 @@
     <color name="menu_bd">#30557C</color>
     <color name="edit_text_color">#303030</color>
     <color name="button_bg">#27517C</color>
+    <color name="transparent_90">#E6FFFFFF</color>
 </resources>
