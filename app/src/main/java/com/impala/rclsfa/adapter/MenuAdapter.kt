@@ -8,10 +8,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
+import com.impala.rclsfa.activities.DashboardActivity
 import com.impala.rclsfa.activities.attendance.AttendanceMenuActivity
 import com.impala.rclsfa.activities.auth.ProfileActivity
 import com.impala.rclsfa.activities.order.NewOrderActivity
 import com.impala.rclsfa.activities.order.OrderMenuActivity
+import com.impala.rclsfa.activities.outlet_management.OutletManagementMainMenuActivity
 import com.impala.rclsfa.models.MenuItem
 import com.squareup.picasso.Picasso
 
@@ -58,6 +60,14 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
                     itemView.context.startActivity(intent)
                 }
 
+                if(menuItem.func == "dashboard"){
+                    val intent = Intent(itemView.context, DashboardActivity::class.java)
+                    itemView.context.startActivity(intent)
+                }
+                if(menuItem.func == "outlet"){
+                    val intent = Intent(itemView.context, OutletManagementMainMenuActivity::class.java)
+                    itemView.context.startActivity(intent)
+                }
             }
 
         }

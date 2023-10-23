@@ -24,6 +24,18 @@
         android:theme="@style/Theme.RCLSFA"
         tools:targetApi="31">
         <activity
+            android:name=".activities.outlet_management.SearchRouteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.outlet_management.OutletEntryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.outlet_management.OutletManagementMainMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.auth.ProfilePhotoUploadActivity"
             android:exported="false" />
         <activity
