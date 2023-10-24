@@ -24,13 +24,25 @@
         android:theme="@style/Theme.RCLSFA"
         tools:targetApi="31">
         <activity
-            android:name=".activities.outlet_management.SearchRouteActivity"
+            android:name=".activities.outlet_management.outlet_entry.SearchCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.OutletEntryActivity"
+            android:name=".activities.outlet_management.outlet_entry.SearchUpazilaActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.OutletManagementMainMenuActivity"
+            android:name=".activities.outlet_management.outlet_entry.SearchDistrictActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.outlet_management.outlet_entry.SearchDivisionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.outlet_management.outlet_entry.SearchRouteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.outlet_management.outlet_entry.OutletEntryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.outlet_management.outlet_entry.OutletManagementMainMenuActivity"
             android:exported="false" />
         <activity
             android:name=".activities.DashboardActivity"

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_linear_layout"
+    android:layout_margin="3dp"
+    android:padding="8dp"
+    android:id="@+id/itemView"
+    >
+
+
+
+    <TextView
+        android:id="@+id/titleId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color"
+        android:text="Menu Name"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="10dp"
+        android:textSize="16sp" />
+</RelativeLayout>

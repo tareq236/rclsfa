@@ -1,18 +1,15 @@
-package com.impala.rclsfa.activities.outlet_management
+package com.impala.rclsfa.activities.outlet_management.outlet_entry
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.impala.rclsfa.R
-import com.impala.rclsfa.databinding.ActivityOutletEntryBinding
 import com.impala.rclsfa.databinding.ActivityOutletManagementMainMenuBinding
 
-class OutletEntryActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityOutletEntryBinding
-
+class OutletManagementMainMenuActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityOutletManagementMainMenuBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOutletEntryBinding.inflate(layoutInflater)
+        binding = ActivityOutletManagementMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -20,10 +17,12 @@ class OutletEntryActivity : AppCompatActivity() {
 
         initView()
     }
+
     private fun initView() {
 
-        binding.actvRoute.setOnClickListener {
-            startActivity(Intent(this,SearchRouteActivity::class.java))
+        binding.btnOutletEntry.setOnClickListener {
+            startActivity(Intent(this, OutletEntryActivity::class.java))
         }
+
     }
 }

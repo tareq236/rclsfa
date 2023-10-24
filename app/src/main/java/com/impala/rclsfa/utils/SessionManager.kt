@@ -15,9 +15,29 @@ class SessionManager(context: Context) {
         set(designationId) = sharedPreferences.edit().putInt("designation_id", designationId!!).apply()
 
 
-    var password: String?
-        get() = sharedPreferences.getString("password", "")
-        set(password) = sharedPreferences.edit().putString("password", password).apply()
+    var routeName: String?
+        get() = sharedPreferences.getString("routeName", "")
+        set(routeName) = sharedPreferences.edit().putString("routeName", routeName).apply()
+
+    var categoryName: String?
+        get() = sharedPreferences.getString("categoryName", "")
+        set(categoryName) = sharedPreferences.edit().putString("categoryName", categoryName).apply()
+
+    var routeId: Int?
+        get() = sharedPreferences.getInt("routeId", 0)
+        set(routeId) = sharedPreferences.edit().putInt("routeId", routeId!!).apply()
+
+    var categoryId: Int?
+        get() = sharedPreferences.getInt("categoryId", 0)
+        set(categoryId) = sharedPreferences.edit().putInt("categoryId", categoryId!!).apply()
+
+    var divId: Int?
+        get() = sharedPreferences.getInt("divId", 0)
+        set(divId) = sharedPreferences.edit().putInt("divId", divId!!).apply()
+
+    var divName: String?
+        get() = sharedPreferences.getString("divName", "")
+        set(divName) = sharedPreferences.edit().putString("divName", divName).apply()
 
     var isSaveLogin: Boolean?
         get() = sharedPreferences.getBoolean("is_save", false)

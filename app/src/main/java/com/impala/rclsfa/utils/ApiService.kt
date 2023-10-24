@@ -3,6 +3,9 @@ package com.impala.rclsfa.utils
 import com.impala.rclsfa.activities.auth.model.ImageUploadModel
 import com.impala.rclsfa.activities.auth.model.ProfileDataModel
 import com.impala.rclsfa.activities.auth.model.ProfileUpdateModel
+import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.CategoryListModel
+import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.DivisionListModel
+import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.RouteListModel
 import com.impala.rclsfa.models.AttendanceResponse
 import com.impala.rclsfa.models.LoginRequest
 import com.impala.rclsfa.models.LoginResponse
@@ -86,6 +89,21 @@ interface ApiService {
     ): Call<ImageUploadModel>
 
 
+    @GET("api/route_list_by_sr/{user_id}/{designation_id}")
+    fun routeList(
+        @Path("user_id") userId : String,
+        @Path("designation_id") designationId : String
+    ): Call<RouteListModel>
+
+    @GET("api/category_list")
+    fun categoryList(
+
+    ): Call<CategoryListModel>
+
+    @GET("api/division_list")
+    fun divisionList(
+
+    ): Call<DivisionListModel>
 
     companion object {
         // This function creates an instance of ApiService

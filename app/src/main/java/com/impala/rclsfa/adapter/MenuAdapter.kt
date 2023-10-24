@@ -11,9 +11,8 @@ import com.impala.rclsfa.R
 import com.impala.rclsfa.activities.DashboardActivity
 import com.impala.rclsfa.activities.attendance.AttendanceMenuActivity
 import com.impala.rclsfa.activities.auth.ProfileActivity
-import com.impala.rclsfa.activities.order.NewOrderActivity
 import com.impala.rclsfa.activities.order.OrderMenuActivity
-import com.impala.rclsfa.activities.outlet_management.OutletManagementMainMenuActivity
+import com.impala.rclsfa.activities.outlet_management.outlet_entry.OutletManagementMainMenuActivity
 import com.impala.rclsfa.models.MenuItem
 import com.squareup.picasso.Picasso
 
