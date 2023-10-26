@@ -135,6 +135,14 @@ class LoginActivity : AppCompatActivity() {
         sessionManager.userId = result.result.id
         sessionManager.designationId = result.result.designation_id
         // Add other properties as needed
+        //remove save data
+        sessionManager.routeName=""
+        sessionManager.districtName=""
+        sessionManager.divName=""
+        sessionManager.categoryName=""
+        sessionManager.divId=-1
+        sessionManager.districtId=-1
+        sessionManager.upzId=-1
 
         // Apply changes
         editor.apply()

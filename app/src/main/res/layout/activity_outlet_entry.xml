@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/linearlayout"
     >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -167,7 +168,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:maxLines="1"
                     android:textSize="14sp" />
 
@@ -193,7 +194,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:maxLines="1"
                     android:textSize="14sp" />
 
@@ -304,11 +305,13 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-
+                    android:id="@+id/tieBirthDay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:editable="false"
+                    android:focusable="false"
                     android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -329,10 +332,12 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-
+                    android:id="@+id/tieMarriageDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:focusable="false"
+                    android:editable="false"
                     android:maxLines="1"
                     android:textSize="14sp" />
 
@@ -380,9 +385,12 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tieChild1stBDay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:focusable="false"
+                    android:editable="false"
                     android:maxLines="1"
                     android:textSize="14sp" />
 
@@ -430,9 +438,12 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tieChild2ndBDay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:focusable="false"
+                    android:editable="false"
                     android:maxLines="1"
                     android:textSize="14sp" />
 

@@ -4,8 +4,12 @@ import com.impala.rclsfa.activities.auth.model.ImageUploadModel
 import com.impala.rclsfa.activities.auth.model.ProfileDataModel
 import com.impala.rclsfa.activities.auth.model.ProfileUpdateModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.CategoryListModel
+import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.DistrictModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.DivisionListModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.RouteListModel
+import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.SaveRetailerModel
+import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.UpazilaListModel
+import com.impala.rclsfa.activities.retailer.model.RetailerListModel
 import com.impala.rclsfa.models.AttendanceResponse
 import com.impala.rclsfa.models.LoginRequest
 import com.impala.rclsfa.models.LoginResponse
@@ -104,6 +108,52 @@ interface ApiService {
     fun divisionList(
 
     ): Call<DivisionListModel>
+
+    @GET("api/district_list/{id}")
+    fun districtList(
+        @Path("id") divId : String,
+    ): Call<DistrictModel>
+
+    @GET("api/upazila_list/{id}")
+    fun upazilaList(
+        @Path("id") divId : String,
+    ): Call<UpazilaListModel>
+
+
+    @FormUrlEncoded
+    @POST("api/save_new_retailer")
+    fun saveNewRetailer(
+        @Field("sr_id") srId : String,
+        @Field("route_id") routeId : String,
+        @Field("retailer_name") retailer_name : String,
+        @Field("name_bn") nameBn : String,
+        @Field("proprietor_name") proprietorName : String,
+        @Field("outlet_category") outletCategory : String,
+        @Field("mobile_number") mobileNumber : String,
+        @Field("address") address : String,
+        @Field("nid") nid : String,
+        @Field("birthday") birthday : String,
+        @Field("marriage_date") marriageDate : String,
+        @Field("first_children_name") firstChildrenName : String,
+        @Field("first_children_birthday") firstChildrenBirthDay : String,
+        @Field("second_children_name") secondChildrenName : String,
+        @Field("second_children_birthday") secondChildrenBirthDay : String,
+        @Field("latitude") latitude : String,
+        @Field("longitude") longitude : String,
+        @Field("division_id") divisionId : String,
+        @Field("district_id") districtId : String,
+        @Field("upazila_id") upazila_id : String,
+        @Field("image_base") image_base : String
+    ): Call<SaveRetailerModel>
+
+
+    @FormUrlEncoded
+    @POST("api/retailer_list_by_name")
+    fun retailerListByName(
+        @Field("sr_id") srId : String,
+        @Field("designation_id") designation_id : String,
+        @Field("retailer_name") retailer_name : String
+    ): Call<RetailerListModel>
 
     companion object {
         // This function creates an instance of ApiService

@@ -13,6 +13,7 @@ import com.impala.rclsfa.activities.attendance.AttendanceMenuActivity
 import com.impala.rclsfa.activities.auth.ProfileActivity
 import com.impala.rclsfa.activities.order.OrderMenuActivity
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.OutletManagementMainMenuActivity
+import com.impala.rclsfa.activities.retailer.RetailerSummeryActivity
 import com.impala.rclsfa.models.MenuItem
 import com.squareup.picasso.Picasso
 
@@ -67,6 +68,13 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
                     val intent = Intent(itemView.context, OutletManagementMainMenuActivity::class.java)
                     itemView.context.startActivity(intent)
                 }
+
+                if(menuItem.func == "retailer_summary"){
+                    val intent = Intent(itemView.context, RetailerSummeryActivity::class.java)
+                    itemView.context.startActivity(intent)
+                }
+
+
             }
 
         }

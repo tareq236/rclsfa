@@ -39,6 +39,22 @@ class SessionManager(context: Context) {
         get() = sharedPreferences.getString("divName", "")
         set(divName) = sharedPreferences.edit().putString("divName", divName).apply()
 
+    var districtId: Int?
+        get() = sharedPreferences.getInt("districtId", 0)
+        set(districtId) = sharedPreferences.edit().putInt("districtId", districtId!!).apply()
+
+    var districtName: String?
+        get() = sharedPreferences.getString("districtName", "")
+        set(districtName) = sharedPreferences.edit().putString("districtName", districtName).apply()
+
+    var upzId: Int?
+        get() = sharedPreferences.getInt("upzId", 0)
+        set(upzId) = sharedPreferences.edit().putInt("upzId", upzId!!).apply()
+
+    var upzName: String?
+        get() = sharedPreferences.getString("upzName", "")
+        set(upzName) = sharedPreferences.edit().putString("upzName", upzName).apply()
+
     var isSaveLogin: Boolean?
         get() = sharedPreferences.getBoolean("is_save", false)
         set(isSaveLogin) = sharedPreferences.edit().putBoolean("is_save", isSaveLogin!!).apply()

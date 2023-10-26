@@ -1,47 +1,45 @@
-package com.impala.rclsfa.activities.outlet_management.outlet_entry
+package com.impala.rclsfa.activities.retailer
 
 import android.annotation.SuppressLint
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.impala.rclsfa.R
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.adapter.DistrictAdapter
-import com.impala.rclsfa.activities.outlet_management.outlet_entry.adapter.DivisionAdapter
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.DistrictModel
-import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.DivisionListModel
+import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.SaveRetailerModel
+import com.impala.rclsfa.activities.retailer.adapter.RetailerListAdapter
+import com.impala.rclsfa.activities.retailer.model.RetailerListModel
+import com.impala.rclsfa.databinding.ActivityRetailerSummeryBinding
 import com.impala.rclsfa.databinding.ActivitySearchDistrictBinding
-import com.impala.rclsfa.databinding.ActivitySearchDivisionBinding
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.Locale
+import retrofit2.http.Field
 
-class SearchDistrictActivity : AppCompatActivity(), DistrictAdapter.IClickManage {
-    private lateinit var binding: ActivitySearchDistrictBinding
+class RetailerSummeryActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRetailerSummeryBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
-    lateinit var adapter: DistrictAdapter
-    lateinit var dataList: MutableList<DistrictModel.Result>
+    lateinit var adapter: RetailerListAdapter
+    lateinit var dataList: MutableList<RetailerListModel.Result>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySearchDistrictBinding.inflate(layoutInflater)
+        binding = ActivityRetailerSummeryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.setNavigationOnClickListener { finish() }
-
         initView()
     }
 
     private fun initView() {
-        adapter = DistrictAdapter(this, this)
+        adapter = RetailerListAdapter(this)
         sessionManager = SessionManager(this)
         val userId = sessionManager.userId
         val designationId = sessionManager.designationId
@@ -55,66 +53,39 @@ class SearchDistrictActivity : AppCompatActivity(), DistrictAdapter.IClickManage
         binding.recyclerView.adapter = adapter
         binding.recyclerView.setHasFixedSize(true)
 
-        val divisionId = sessionManager.divId
         showLoadingDialog()
-        districtListByDivisionId(divisionId.toString())
-
-
-
-        binding.edtSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
-                if (s.toString().isNotEmpty()) {
-                    filter(s.toString())
-                }else {
-                    showLoadingDialog()
-                    adapter.clearData()
-                    districtListByDivisionId(divisionId.toString())
-                }
-
-            }
-
-            override fun afterTextChanged(s: Editable) {}
-        })
+        retailerListByName(userId!!, designationId.toString(), "")
     }
-    fun filter(text: String) {
 
-        val filteredList: ArrayList<DistrictModel.Result> = ArrayList()
-
-        //val courseAry : ArrayList<Course> = Helper.Companion.getVersionsList()
-
-        for (eachItem in dataList) {
-            if (eachItem.name!!.toUpperCase(Locale.getDefault()).contains(text.toUpperCase()) || eachItem.name!!.toUpperCase(
-                    Locale.getDefault()).contains(text.toLowerCase())) {
-                filteredList.add(eachItem)
-            }
-        }
-
-        //calling a method of the adapter class and passing the filtered list
-        adapter.filterList(filteredList);
-    }
-    private fun districtListByDivisionId(divId : String) {
+    private fun retailerListByName(
+        srId: String,
+        designation_id: String,
+        retailer_name: String
+    ) {
         val apiService = ApiService.CreateApi2()
-        apiService.districtList(divId).enqueue(object :
-            Callback<DistrictModel> {
+        apiService.retailerListByName(
+            srId,
+            designation_id,
+            retailer_name
+        ).enqueue(object :
+            Callback<RetailerListModel> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(
-                call: Call<DistrictModel>,
-                response: Response<DistrictModel>
+                call: Call<RetailerListModel>,
+                response: Response<RetailerListModel>
             ) {
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null) {
                         if (data.getSuccess()!!) {
-                            dataList = data.getResult() as MutableList<DistrictModel.Result>
-                            adapter.addData(dataList as MutableList<DistrictModel.Result>)
+                            val dataList = data.getResult()
+                            adapter.addData(dataList as MutableList<RetailerListModel.Result>)
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()
                             showDialogBox(
                                 SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
-                                "Failed!!"
+                                " Failed"
                             )
                         }
                     } else {
@@ -135,7 +106,7 @@ class SearchDistrictActivity : AppCompatActivity(), DistrictAdapter.IClickManage
                 }
             }
 
-            override fun onFailure(call: Call<DistrictModel>, t: Throwable) {
+            override fun onFailure(call: Call<RetailerListModel>, t: Throwable) {
                 dismissLoadingDialog()
                 showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
             }
@@ -163,13 +134,9 @@ class SearchDistrictActivity : AppCompatActivity(), DistrictAdapter.IClickManage
             .setConfirmClickListener {
                 it.dismissWithAnimation()
                 callback?.invoke()
+
+
             }
         sweetAlertDialog.show()
-    }
-
-    override fun doClick(distId: Int,distName:String) {
-        sessionManager.districtId=distId
-        sessionManager.districtName=distName
-        finish()
     }
 }
