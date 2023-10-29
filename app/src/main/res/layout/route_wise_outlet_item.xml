@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="3dp"
+    android:padding="8dp"
+    android:id="@+id/itemView"
+    app:cardBackgroundColor="#E3E3E3"
+    app:strokeColor="#E3E3E3"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="15dp"
+        android:paddingTop="10dp"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="Route Name:"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/routeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="Zinzara,Keraniganj"
+                android:layout_marginHorizontal="0dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tgtId"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="80%"
+            android:layout_alignParentRight="true"
+            android:gravity="left|center_vertical"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/circle_tgt"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tgtId"
+            android:layout_marginTop="05dp"
+            android:layout_marginHorizontal="05dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4580%"
+                android:layout_alignParentRight="true"
+                android:gravity="left|center_vertical"
+                android:layout_marginHorizontal="10dp"
+                android:background="#C5FDA6"
+                android:paddingTop="05dp"
+                android:paddingBottom="05dp"
+                android:paddingLeft="05dp"
+                android:paddingRight="05dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.080%"
+                android:layout_alignParentRight="true"
+                android:gravity="left|center_vertical"
+                android:layout_marginHorizontal="0dp"
+                android:background="#B0B0B0"
+                android:paddingTop="05dp"
+                android:paddingBottom="05dp"
+                android:paddingLeft="05dp"
+                android:paddingRight="05dp"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

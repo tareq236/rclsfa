@@ -26,6 +26,7 @@
         android:layout_marginTop="10dp"
         >
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/routeWiseOutMapping"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Route Wise Outlet Mapping"
@@ -41,6 +42,7 @@
             app:cornerRadius="6dp"
             />
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/outletSearching"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Outlet Searching"

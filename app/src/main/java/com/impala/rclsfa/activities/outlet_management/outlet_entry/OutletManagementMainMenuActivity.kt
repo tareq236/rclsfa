@@ -3,6 +3,8 @@ package com.impala.rclsfa.activities.outlet_management.outlet_entry
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.impala.rclsfa.activities.outlet_management.OutletSearchingActivity
+import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.RouteWiseOutletMappingActivity
 import com.impala.rclsfa.databinding.ActivityOutletManagementMainMenuBinding
 import com.impala.rclsfa.utils.SessionManager
 
@@ -22,6 +24,14 @@ class OutletManagementMainMenuActivity : AppCompatActivity() {
 
     private fun initView() {
         sessionManager = SessionManager(this)
+
+        binding.routeWiseOutMapping.setOnClickListener {
+            startActivity(Intent(this, RouteWiseOutletMappingActivity::class.java))
+        }
+
+        binding.outletSearching.setOnClickListener {
+            startActivity(Intent(this,OutletSearchingActivity::class.java))
+        }
 
         binding.btnOutletEntry.setOnClickListener {
             sessionManager.routeName=""

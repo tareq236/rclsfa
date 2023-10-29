@@ -24,6 +24,12 @@
         android:theme="@style/Theme.RCLSFA"
         tools:targetApi="31">
         <activity
+            android:name=".activities.outlet_management.OutletSearchingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.outlet_management.route_wise_outlet_mapping.RouteWiseOutletMappingActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.retailer.RetailerSummeryActivity"
             android:exported="false" />
         <activity
