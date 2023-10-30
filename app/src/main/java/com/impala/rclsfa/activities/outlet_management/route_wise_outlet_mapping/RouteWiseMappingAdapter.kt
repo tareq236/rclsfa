@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
+import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.RouteListBySRModel
 import com.impala.rclsfa.databinding.RouteWiseOutletItemBinding
 import java.text.SimpleDateFormat
 
@@ -14,23 +15,19 @@ import java.text.SimpleDateFormat
 class RouteWiseMappingAdapter(val context: Context) :
     RecyclerView.Adapter<RouteWiseMappingAdapter.ViewHolder>() {
 
-  //  var list: MutableList<RetailerListModel.Result> = mutableListOf()
+    var list: MutableList<RouteListBySRModel.Result> = mutableListOf()
 
-//    fun filterList(filteredList: ArrayList<RetailerListModel.Result>) {
-//        this.list = filteredList;
-//        notifyDataSetChanged();
-//    }
 
-//    fun addData(allCus: MutableList<RetailerListModel.Result>) {
-//        list.addAll(allCus)
-//        notifyDataSetChanged()
-//
-//    }
+    fun addData(allCus: MutableList<RouteListBySRModel.Result>) {
+        list.addAll(allCus)
+        notifyDataSetChanged()
 
-//    fun clearData() {
-//        list.clear()
-//        notifyDataSetChanged()
-//    }
+    }
+
+    fun clearData() {
+        list.clear()
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = RouteWiseOutletItemBinding.bind(itemView)
@@ -45,21 +42,19 @@ class RouteWiseMappingAdapter(val context: Context) :
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-      //  val item = list[position]
+       val item = list[position]
 
         with(holder) {
+
+            binding.routeName.text = item.routeName
+            binding.tgtId.text = item.contribution
 
         }
 
     }
 
     override fun getItemCount(): Int {
-        return 10
-    }
-
-    interface IClickManage {
-        fun doClick(cateId: Int,cateName:String)
-
+        return list.size
     }
 
 

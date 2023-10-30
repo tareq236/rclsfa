@@ -32,6 +32,7 @@
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:background="@drawable/rounded_corner_grey">
 
                 <TextView
@@ -78,43 +79,68 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="05dp"
                 />
-            <RelativeLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:background="@drawable/rounded_corner_spinner"
+                android:layout_marginTop="0dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 >
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                     android:id="@+id/spinnerDiv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:spinnerMode="dialog"
-                   />
-            </RelativeLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Zone"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="05dp"
-                />
-            <RelativeLayout
+                    android:focusable="false"
+                    android:editable="false"
+                    android:hint="Select an option"
+                    android:textColorHint="@color/text_color"
+                    android:textColor="@color/text_color"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:id="@+id/linZoneId"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@drawable/rounded_corner_spinner"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
                 >
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinnerZone"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zone"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="05dp"
+                    />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilZoneId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:spinnerMode="dialog"
-                    />
-            </RelativeLayout>
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="0dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/spinnerZone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:editable="false"
+                        android:hint="Select an option"
+                        android:textColorHint="@color/text_color"
+                        android:textColor="@color/text_color"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linDistriId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,21 +148,35 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="05dp"
                 />
-            <RelativeLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDistrId"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:background="@drawable/rounded_corner_spinner"
+                android:layout_marginTop="0dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 >
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                     android:id="@+id/spinnerDistributor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:spinnerMode="dialog"
+                    android:focusable="false"
+                    android:editable="false"
+                    android:hint="Select an option"
+                    android:textColorHint="@color/text_color"
+                    android:textColor="@color/text_color"
                     />
-            </RelativeLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linSoId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -144,38 +184,39 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="05dp"
                 />
-            <RelativeLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilSoId"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:background="@drawable/rounded_corner_spinner"
+                android:layout_marginTop="0dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 >
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinnerSO"
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/spinnerSo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:spinnerMode="dialog"
+                    android:focusable="false"
+                    android:editable="false"
+                    android:hint="Select an option"
+                    android:textColorHint="@color/text_color"
+                    android:textColor="@color/text_color"
                     />
-            </RelativeLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/searchId"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Search"
                 android:layout_gravity="right"
                 app:cornerRadius="6dp"
-                android:layout_marginTop="05dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginHorizontal="16dp"
                 />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="05dp"
-                android:visibility="gone"
-                android:layout_marginHorizontal="10dp"
-                />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

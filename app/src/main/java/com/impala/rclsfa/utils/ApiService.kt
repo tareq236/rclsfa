@@ -9,7 +9,10 @@ import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.Divisio
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.RouteListModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.SaveRetailerModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.UpazilaListModel
+import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.DistributorListModel
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.DivisionRouteModel
+import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.RouteListBySRModel
+import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.SoListModel
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.ZoneListModel
 import com.impala.rclsfa.activities.retailer.model.RetailerListModel
 import com.impala.rclsfa.models.AttendanceResponse
@@ -169,6 +172,22 @@ interface ApiService {
         @Query("user_id") user_id : String,
         @Query("designation_id") designation_id : String,
     ): Call<ZoneListModel>
+
+    @GET("api/distributor_list/")
+    fun distributorListByRoute(
+        @Query("tsm_code") tsm_code : String,
+    ): Call<DistributorListModel>
+
+    @GET("api/so_list_from_distributor_id/")
+    fun soListListByRoute(
+        @Query("distributor_id") distributor_id : String,
+    ): Call<SoListModel>
+
+    @GET("api/route_list_by_sr/{sr_code}/{designation_id}")
+    fun routeListBySr(
+        @Path("sr_code") sr_code : String,
+        @Path("designation_id") designation_id : String
+    ): Call<RouteListBySRModel>
 
     companion object {
         // This function creates an instance of ApiService

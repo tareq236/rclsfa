@@ -2,6 +2,7 @@ package com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -10,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.impala.rclsfa.R
+import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.DistributorListModel
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.DivisionRouteModel
+import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.SoListModel
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.ZoneListModel
 import com.impala.rclsfa.databinding.ActivityRouteWiseOutletMappingBinding
 import com.impala.rclsfa.utils.ApiService
@@ -24,8 +27,12 @@ class RouteWiseOutletMappingActivity : AppCompatActivity() {
 
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
-    lateinit var adapter: RouteWiseMappingAdapter
+
+    //  lateinit var adapter: RouteWiseMappingAdapter
     var dsmCode = ""
+    var tsmCode = ""
+    var distbId = -1
+    var srId = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRouteWiseOutletMappingBinding.inflate(layoutInflater)
@@ -36,58 +43,70 @@ class RouteWiseOutletMappingActivity : AppCompatActivity() {
 
         initView()
     }
+
     private fun initView() {
-        adapter = RouteWiseMappingAdapter(this)
+        //  adapter = RouteWiseMappingAdapter(this)
         sessionManager = SessionManager(this)
         loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
             .setTitleText("Loading")
 
-        val linearLayoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerView.layoutManager = linearLayoutManager
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.setHasFixedSize(true)
 
-        binding.spinnerDiv.prompt = "Select an Option";
-        binding.spinnerZone.prompt = "Select an Option";
-        binding.spinnerDistributor.prompt = "Select an Option";
-        binding.spinnerSO.prompt = "Select an Option";
 
-//        binding.spinnerDiv.onItemClickListener =
-//            AdapterView.OnItemClickListener { parent, arg1, pos, id ->
-//                val item = parent.getItemAtPosition(pos) as DivisionRouteModel.Result
-//                dsmCode = item.dsmCode!!
-//
-//                showLoadingDialog()
-//                zoneListByRoute(dsmCode,"3")
-//            }
 
-        binding.spinnerDiv.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val item = parent!!.getItemAtPosition(position) as DivisionRouteModel.Result
+        binding.spinnerDiv.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, arg1, pos, id ->
+                val item = parent.getItemAtPosition(pos) as DivisionRouteModel.Result
                 dsmCode = item.dsmCode!!
-
+                binding.linZoneId.visibility = View.VISIBLE
                 showLoadingDialog()
-                zoneListByRoute(dsmCode,"3")
+                zoneListByRoute(dsmCode, "3")
             }
 
-        }
+        binding.spinnerZone.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, arg1, pos, id ->
+                val item = parent.getItemAtPosition(pos) as ZoneListModel.Result
+                tsmCode = item.tsmCode!!
+                binding.linDistriId.visibility = View.VISIBLE
+                showLoadingDialog()
+                distributorListByRoute(tsmCode)
+            }
+
+        binding.spinnerDistributor.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, arg1, pos, id ->
+                val item = parent.getItemAtPosition(pos) as DistributorListModel.Result
+                distbId = item.id!!
+                binding.linSoId.visibility = View.VISIBLE
+                showLoadingDialog()
+                soListByRoute(distbId.toString())
+            }
+
+        binding.spinnerSo.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, arg1, pos, id ->
+                val item = parent.getItemAtPosition(pos) as SoListModel.Result
+                srId = item.id!!
+
+            }
+
 
         val designationId = sessionManager.designationId
         showLoadingDialog()
-        divisionListByRoute("",designationId!!.toString())
+        divisionListByRoute("", designationId!!.toString())
+
+        binding.searchId.setOnClickListener {
+            startActivity(Intent(this,ShowSRListActivity::class.java)
+                .putExtra("sr_id",srId)
+            )
+        }
     }
 
-    private fun divisionListByRoute(user_id : String,
-                                    designation_id : String) {
+    private fun divisionListByRoute(
+        user_id: String,
+        designation_id: String
+    ) {
         val apiService = ApiService.CreateApi2()
         apiService.divisionListByRoute(
-              user_id  ,
-              designation_id
+            user_id,
+            designation_id
         ).enqueue(object :
             Callback<DivisionRouteModel> {
             @SuppressLint("SetTextI18n")
@@ -99,14 +118,14 @@ class RouteWiseOutletMappingActivity : AppCompatActivity() {
                     val data = response.body()
                     if (data != null) {
                         if (data.getSuccess()!!) {
-                           val dataList = data.getResult()
-                            val adapter: ArrayAdapter<DivisionRouteModel.Result> =
+                            val dataList = data.getResult()
+                            val adapterD: ArrayAdapter<DivisionRouteModel.Result> =
                                 ArrayAdapter<DivisionRouteModel.Result>(
-                                    this@RouteWiseOutletMappingActivity ,
+                                    this@RouteWiseOutletMappingActivity,
                                     R.layout.spinner_item_text,
                                     dataList as MutableList<DivisionRouteModel.Result>
                                 )
-                            binding.spinnerDiv.adapter = adapter
+                            binding.spinnerDiv.setAdapter(adapterD)
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()
@@ -141,11 +160,13 @@ class RouteWiseOutletMappingActivity : AppCompatActivity() {
     }
 
 
-    private fun zoneListByRoute(user_id : String,
-                                    designation_id : String) {
+    private fun zoneListByRoute(
+        user_id: String,
+        designation_id: String
+    ) {
         val apiService = ApiService.CreateApi2()
         apiService.zoneListByRoute(
-            user_id  ,
+            user_id,
             designation_id
         ).enqueue(object :
             Callback<ZoneListModel> {
@@ -161,11 +182,11 @@ class RouteWiseOutletMappingActivity : AppCompatActivity() {
                             val dataList = data.getResult()
                             val adapter: ArrayAdapter<ZoneListModel.Result> =
                                 ArrayAdapter<ZoneListModel.Result>(
-                                    this@RouteWiseOutletMappingActivity ,
+                                    this@RouteWiseOutletMappingActivity,
                                     R.layout.spinner_item_text,
                                     dataList as MutableList<ZoneListModel.Result>
                                 )
-                            binding.spinnerZone.adapter = adapter
+                            binding.spinnerZone.setAdapter(adapter)
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()
@@ -193,6 +214,118 @@ class RouteWiseOutletMappingActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ZoneListModel>, t: Throwable) {
+                dismissLoadingDialog()
+                showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
+            }
+        })
+    }
+
+    private fun distributorListByRoute(tsm_code: String) {
+        val apiService = ApiService.CreateApi2()
+        apiService.distributorListByRoute(
+            tsm_code
+        ).enqueue(object :
+            Callback<DistributorListModel> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(
+                call: Call<DistributorListModel>,
+                response: Response<DistributorListModel>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    if (data != null) {
+                        if (data.getSuccess()!!) {
+                            val dataList = data.getResult()
+                            val adapter: ArrayAdapter<DistributorListModel.Result> =
+                                ArrayAdapter<DistributorListModel.Result>(
+                                    this@RouteWiseOutletMappingActivity,
+                                    R.layout.spinner_item_text,
+                                    dataList as MutableList<DistributorListModel.Result>
+                                )
+                            binding.spinnerDistributor.setAdapter(adapter)
+                            dismissLoadingDialog()
+                        } else {
+                            dismissLoadingDialog()
+                            showDialogBox(
+                                SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
+                                "Failed!!"
+                            )
+                        }
+                    } else {
+                        dismissLoadingDialog()
+                        showDialogBox(
+                            SweetAlertDialog.WARNING_TYPE,
+                            "Error-RN5801",
+                            "Response NULL value. Try later."
+                        )
+                    }
+                } else {
+                    dismissLoadingDialog()
+                    showDialogBox(
+                        SweetAlertDialog.WARNING_TYPE,
+                        "Error-RR5801",
+                        "Response failed. Try later."
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<DistributorListModel>, t: Throwable) {
+                dismissLoadingDialog()
+                showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
+            }
+        })
+    }
+
+    private fun soListByRoute(distributor_id: String) {
+        val apiService = ApiService.CreateApi2()
+        apiService.soListListByRoute(
+            distributor_id
+        ).enqueue(object :
+            Callback<SoListModel> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(
+                call: Call<SoListModel>,
+                response: Response<SoListModel>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    if (data != null) {
+                        if (data.getSuccess()!!) {
+                            val dataList = data.getResult()
+                            val adapter: ArrayAdapter<SoListModel.Result> =
+                                ArrayAdapter<SoListModel.Result>(
+                                    this@RouteWiseOutletMappingActivity,
+                                    R.layout.spinner_item_text,
+                                    dataList as MutableList<SoListModel.Result>
+                                )
+                            binding.spinnerSo.setAdapter(adapter)
+                            dismissLoadingDialog()
+                        } else {
+                            dismissLoadingDialog()
+                            showDialogBox(
+                                SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
+                                "Failed!!"
+                            )
+                        }
+                    } else {
+                        dismissLoadingDialog()
+                        showDialogBox(
+                            SweetAlertDialog.WARNING_TYPE,
+                            "Error-RN5801",
+                            "Response NULL value. Try later."
+                        )
+                    }
+                } else {
+                    dismissLoadingDialog()
+                    showDialogBox(
+                        SweetAlertDialog.WARNING_TYPE,
+                        "Error-RR5801",
+                        "Response failed. Try later."
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<SoListModel>, t: Throwable) {
                 dismissLoadingDialog()
                 showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
             }
