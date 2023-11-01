@@ -24,6 +24,12 @@
         android:theme="@style/Theme.RCLSFA"
         tools:targetApi="31">
         <activity
+            android:name=".activities.outlet_management.UpdateLocationPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.outlet_management.LocationUpdateActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.outlet_management.route_wise_outlet_mapping.ShowSRListActivity"
             android:exported="false" />
         <activity

@@ -7,19 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
-import com.impala.rclsfa.databinding.OutletListItemBinding
+import com.impala.rclsfa.databinding.OutletListForLocationBinding
 import java.text.SimpleDateFormat
 
 
-class OutletListAdapter(val context: Context) :
-    RecyclerView.Adapter<OutletListAdapter.ViewHolder>() {
+class OutletListForLocationAdapter(val context: Context,val click:IClickManage) :
+    RecyclerView.Adapter<OutletListForLocationAdapter.ViewHolder>() {
 
     var list: MutableList<SearchOutletListModel.Result> = mutableListOf()
 
+//    fun filterList(filteredList: ArrayList<RetailerListModel.Result>) {
+//        this.list = filteredList;
+//        notifyDataSetChanged();
+//    }
 
     fun addData(allCus: MutableList<SearchOutletListModel.Result>) {
         list.addAll(allCus)
         notifyDataSetChanged()
+
     }
 
     fun clearData() {
@@ -28,12 +33,12 @@ class OutletListAdapter(val context: Context) :
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val binding = OutletListItemBinding.bind(itemView)
+        val binding = OutletListForLocationBinding.bind(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.outlet_list_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.outlet_list_for_location, parent, false)
         return ViewHolder(view)
     }
 
@@ -45,9 +50,10 @@ class OutletListAdapter(val context: Context) :
         with(holder) {
             binding.nameEn.text = item.retailerName
             binding.nameBn.text = item.nameBn
-            binding.targetAmountId.text = item.targetAmountRe
-            binding.achId.text = item.ach.toString()+" %"
-            binding.conId.text = item.con.toString()+" %"
+
+            binding.itemView.setOnClickListener {
+                click.doClick(item.id!!,item.nameBn!!,item.retailerName!!,item.address!!)
+            }
 
         }
 
@@ -56,6 +62,12 @@ class OutletListAdapter(val context: Context) :
     override fun getItemCount(): Int {
         return list.size
     }
+
+    interface IClickManage {
+        fun doClick(retailerId: Int,nameBn:String,retailerName:String,outletAddress:String)
+
+    }
+
 
     @SuppressLint("SimpleDateFormat")
     fun dateFormatter(dateTime: String): String {

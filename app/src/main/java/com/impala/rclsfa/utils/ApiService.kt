@@ -3,6 +3,7 @@ package com.impala.rclsfa.utils
 import com.impala.rclsfa.activities.auth.model.ImageUploadModel
 import com.impala.rclsfa.activities.auth.model.ProfileDataModel
 import com.impala.rclsfa.activities.auth.model.ProfileUpdateModel
+import com.impala.rclsfa.activities.outlet_management.SearchOutletListModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.CategoryListModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.DistrictModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.DivisionListModel
@@ -188,6 +189,20 @@ interface ApiService {
         @Path("sr_code") sr_code : String,
         @Path("designation_id") designation_id : String
     ): Call<RouteListBySRModel>
+
+
+    @FormUrlEncoded
+    @POST("api/retailer_list_by_name")
+    fun searchOutletByName(
+        @Field("sr_id") srId : String,
+        @Field("designation_id") designation_id : String,
+        @Field("retailer_name") retailer_name : String
+    ): Call<SearchOutletListModel>
+
+
+
+
+
 
     companion object {
         // This function creates an instance of ApiService

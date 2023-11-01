@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Search Outlet"
+        app:title="Search Location"
         app:titleTextColor="@color/white" />
 
     <RelativeLayout
@@ -30,10 +30,11 @@
             android:id="@+id/edtSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search Outlet"
+            android:hint="Search Here"
             android:background="@null"
             android:layout_marginHorizontal="30dp"
             android:layout_centerVertical="true"
+
             />
 
         <ImageView

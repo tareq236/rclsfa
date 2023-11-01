@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.impala.rclsfa.activities.outlet_management.OutletSearchingActivity
+import com.impala.rclsfa.activities.outlet_management.LocationUpdateActivity
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.RouteWiseOutletMappingActivity
 import com.impala.rclsfa.databinding.ActivityOutletManagementMainMenuBinding
 import com.impala.rclsfa.utils.SessionManager
@@ -31,6 +32,10 @@ class OutletManagementMainMenuActivity : AppCompatActivity() {
 
         binding.outletSearching.setOnClickListener {
             startActivity(Intent(this,OutletSearchingActivity::class.java))
+        }
+
+        binding.locationUpdate.setOnClickListener {
+            startActivity(Intent(this, LocationUpdateActivity::class.java))
         }
 
         binding.btnOutletEntry.setOnClickListener {

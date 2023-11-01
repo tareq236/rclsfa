@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_margin="3dp"
+    android:orientation="vertical"
     android:padding="8dp"
-    android:id="@+id/itemView"
     app:cardBackgroundColor="#E3E3E3"
-    app:strokeColor="#E3E3E3"
-    >
+    app:strokeColor="#E3E3E3">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="15dp"
         android:paddingTop="10dp"
-        >
+        android:paddingBottom="15dp">
+
         <TextView
             android:id="@+id/nameEn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color"
+            android:layout_marginHorizontal="10dp"
             android:text="Mohammad Ali Store"
 
-            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/text_color"
             android:textSize="14sp" />
+
         <TextView
             android:id="@+id/nameBn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color"
-            android:text="মোহাম্মদ আলী স্টোর "
-            android:layout_marginHorizontal="10dp"
             android:layout_below="@+id/nameEn"
+            android:layout_marginHorizontal="10dp"
+            android:text="মোহাম্মদ আলী স্টোর "
+            android:textColor="@color/text_color"
             android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/nameBn"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:text="Target Amount:"
                 android:layout_marginHorizontal="10dp"
+                android:text="Target Amount:"
+                android:textColor="@color/text_color"
                 android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/targetAmountId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:text="121212"
                 android:layout_marginHorizontal="0dp"
+                android:text="121212"
+                android:textColor="@color/text_color"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -64,11 +64,40 @@
             android:id="@+id/tgtId"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="80%"
             android:layout_alignParentRight="true"
+            android:layout_marginHorizontal="40dp"
+            android:background="@drawable/circle_tgt"
             android:gravity="left|center_vertical"
-            android:layout_marginHorizontal="10dp"
-            android:background="@drawable/circle_ach"/>
+            android:text="80%" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tgtId"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/achId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="05dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="#C5FDA6"
+                android:text="80%" />
+
+            <TextView
+                android:id="@+id/conId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="#B0B0B0"
+                android:text="80%" />
+        </LinearLayout>
     </RelativeLayout>
 
 

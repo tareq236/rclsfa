@@ -1,12 +1,19 @@
 package com.impala.rclsfa.activities.outlet_management
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.impala.rclsfa.activities.outlet_management.outlet_entry.adapter.RouteAdapter
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.impala.rclsfa.databinding.ActivityOutletSearchingBinding
+import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class OutletSearchingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOutletSearchingBinding
@@ -28,7 +35,11 @@ class OutletSearchingActivity : AppCompatActivity() {
     private fun initView() {
         adapter = OutletListAdapter(this)
         sessionManager = SessionManager(this)
-
+        val userId = sessionManager.userId
+        val designationId = sessionManager.designationId
+        // Initialize the loading dialog
+        loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+            .setTitleText("Loading")
 
         val linearLayoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -37,5 +48,108 @@ class OutletSearchingActivity : AppCompatActivity() {
         binding.recyclerView.setHasFixedSize(true)
 
 
+        binding.edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if(s.toString().isNotEmpty()){
+                    searchOutletByName(userId!!,designationId.toString(),s.toString())
+                }else{
+                    adapter.clearData()
+                    adapter.notifyDataSetChanged()
+                }
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+
     }
+
+    private fun searchOutletByName(
+        srId: String,
+        designation_id: String,
+        retailer_name: String
+    ) {
+        val apiService = ApiService.CreateApi2()
+        apiService.searchOutletByName(
+            srId,
+            designation_id,
+            retailer_name
+        ).enqueue(object :
+            Callback<SearchOutletListModel> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(
+                call: Call<SearchOutletListModel>,
+                response: Response<SearchOutletListModel>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    if (data != null) {
+                        if (data.getSuccess()!!) {
+                            val dataList = data.getResult()
+                            adapter.addData(dataList as MutableList<SearchOutletListModel.Result>)
+                            dismissLoadingDialog()
+                        } else {
+                            dismissLoadingDialog()
+                            showDialogBox(
+                                SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
+                                " Failed"
+                            )
+                        }
+                    } else {
+                        dismissLoadingDialog()
+                        showDialogBox(
+                            SweetAlertDialog.WARNING_TYPE,
+                            "Error-RN5801",
+                            "Response NULL value. Try later."
+                        )
+                    }
+                } else {
+                    dismissLoadingDialog()
+                    showDialogBox(
+                        SweetAlertDialog.WARNING_TYPE,
+                        "Error-RR5801",
+                        "Response failed. Try later."
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<SearchOutletListModel>, t: Throwable) {
+                dismissLoadingDialog()
+                showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
+            }
+        })
+    }
+
+    private fun showLoadingDialog() {
+        loadingDialog.setCancelable(false)
+        loadingDialog.show()
+    }
+
+    private fun dismissLoadingDialog() {
+        loadingDialog.dismiss()
+    }
+
+    private fun showDialogBox(
+        type: Int,
+        title: String,
+        message: String,
+        callback: (() -> Unit)? = null
+    ) {
+        val sweetAlertDialog = SweetAlertDialog(this, type)
+            .setTitleText(title)
+            .setContentText(message)
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                callback?.invoke()
+
+
+            }
+        sweetAlertDialog.show()
+    }
+
 }
