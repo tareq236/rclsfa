@@ -4,6 +4,7 @@ import com.impala.rclsfa.activities.auth.model.ImageUploadModel
 import com.impala.rclsfa.activities.auth.model.ProfileDataModel
 import com.impala.rclsfa.activities.auth.model.ProfileUpdateModel
 import com.impala.rclsfa.activities.outlet_management.SearchOutletListModel
+import com.impala.rclsfa.activities.outlet_management.UpdateLocationModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.CategoryListModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.DistrictModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.DivisionListModel
@@ -200,7 +201,13 @@ interface ApiService {
     ): Call<SearchOutletListModel>
 
 
-
+    @FormUrlEncoded
+    @POST("api/update_retailer_geo_location")
+    fun updateGeoLocation(
+        @Field("id") id : String,
+        @Field("latitude") latitude : String,
+        @Field("longitude") longitude : String
+    ): Call<UpdateLocationModel>
 
 
 
