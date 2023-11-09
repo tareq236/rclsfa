@@ -24,7 +24,7 @@ class RouteListDetailsActivity : AppCompatActivity() {
     var routeId = ""
     var contribution = ""
     var retailerSize = ""
-    var achAmount = ""
+    var routeTarget = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +44,8 @@ class RouteListDetailsActivity : AppCompatActivity() {
         routeId = this.intent.getStringExtra("route_id")!!
         contribution = this.intent.getStringExtra("contribution")!!
         retailerSize = this.intent.getStringExtra("retailerSize")!!
-        achAmount = this.intent.getStringExtra("achAmount")!!
-        adapter = RouteDetailsAdapter(this,contribution,retailerSize,achAmount)
+        routeTarget = this.intent.getStringExtra("route_target")!!
+        adapter = RouteDetailsAdapter(this,contribution,retailerSize,routeTarget)
         val designationId = sessionManager.designationId
         val srId = sessionManager.userId
 

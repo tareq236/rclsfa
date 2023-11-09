@@ -16,7 +16,7 @@ class RouteDetailsAdapter(
     val context: Context,
     val contribution: String,
     val retailerSize: String,
-    val achAmount: String
+    val targetA: String
 ) :
     RecyclerView.Adapter<RouteDetailsAdapter.ViewHolder>() {
 
@@ -57,9 +57,9 @@ class RouteDetailsAdapter(
             val result = (dContribution / iRetailerS) / 100
             binding.contribution.text = roundTheNumber(result)+"%"
 
-            val achAmount = achAmount.toDouble()
-            val result1 = (achAmount / iRetailerS) / 100
-            binding.targetAmountId.text = roundTheNumber(result1)
+            val routeTarget = targetA.toInt()
+            val result1 = (routeTarget / iRetailerS) / 100
+            binding.targetAmountId.text = result1.toString()
         }
 
     }

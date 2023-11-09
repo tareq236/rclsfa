@@ -20,7 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class RouteListActivity : AppCompatActivity(),RouteListByTGTAdapter.MainClickManage {
+class RouteListActivity : AppCompatActivity(), RouteListByTGTAdapter.MainClickManage {
     private lateinit var binding: ActivityRouteListBinding
     lateinit var adapter: RouteListByTGTAdapter
     private lateinit var loadingDialog: Dialog
@@ -40,7 +40,7 @@ class RouteListActivity : AppCompatActivity(),RouteListByTGTAdapter.MainClickMan
 
     private fun initView() {
         sessionManager = SessionManager(this)
-        adapter =RouteListByTGTAdapter(
+        adapter = RouteListByTGTAdapter(
             this,
             sessionManager,
             this
@@ -59,6 +59,15 @@ class RouteListActivity : AppCompatActivity(),RouteListByTGTAdapter.MainClickMan
 
         binding.searchId.setOnClickListener {
             val targetAmount = binding.edtSearch.text.toString()
+            if (targetAmount.isEmpty()) {
+                showDialogBoxForValidation(
+                    SweetAlertDialog.WARNING_TYPE,
+                    "Validation",
+                    "Route Target is required"
+                )
+                return@setOnClickListener
+            }
+
             sessionManager.targetAmount = targetAmount
             showLoadingDialog()
             routeListBySr(srId, designationId.toString())
@@ -148,12 +157,35 @@ class RouteListActivity : AppCompatActivity(),RouteListByTGTAdapter.MainClickMan
         sweetAlertDialog.show()
     }
 
-    override fun doClick(id: String, contribution: String, retailerSize: String,achAmount:String) {
-        startActivity(Intent(this,RouteListDetailsActivity::class.java)
-            .putExtra("route_id",id)
-            .putExtra("contribution",contribution)
-            .putExtra("retailerSize",retailerSize)
-            .putExtra("achAmount",achAmount)
+    private fun showDialogBoxForValidation(
+        type: Int,
+        title: String,
+        message: String,
+        callback: (() -> Unit)? = null
+    ) {
+        val sweetAlertDialog = SweetAlertDialog(this, type)
+            .setTitleText(title)
+            .setContentText(message)
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                callback?.invoke()
+
+            }
+        sweetAlertDialog.show()
+    }
+
+    override fun doClick(
+        id: String,
+        contribution: String,
+        retailerSize: String,
+        achAmount: String
+    ) {
+        startActivity(
+            Intent(this, RouteListDetailsActivity::class.java)
+                .putExtra("route_id", id)
+                .putExtra("contribution", contribution)
+                .putExtra("retailerSize", retailerSize)
+                .putExtra("route_target", binding.edtSearch.text.toString())
         )
     }
 
