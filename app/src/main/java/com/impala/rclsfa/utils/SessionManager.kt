@@ -59,7 +59,9 @@ class SessionManager(context: Context) {
         get() = sharedPreferences.getBoolean("is_save", false)
         set(isSaveLogin) = sharedPreferences.edit().putBoolean("is_save", isSaveLogin!!).apply()
 
-    var email: String?
-        get() = sharedPreferences.getString("email", "")
-        set(email) = sharedPreferences.edit().putString("email", email).apply()
+    var targetAmount: String?
+        get() = sharedPreferences.getString("targetAmount", "")
+        set(targetAmount) = sharedPreferences.edit().putString("targetAmount", targetAmount).apply()
+
+
 }

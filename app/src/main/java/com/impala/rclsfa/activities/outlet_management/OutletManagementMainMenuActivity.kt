@@ -1,10 +1,9 @@
-package com.impala.rclsfa.activities.outlet_management.outlet_entry
+package com.impala.rclsfa.activities.outlet_management
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.impala.rclsfa.activities.outlet_management.OutletSearchingActivity
-import com.impala.rclsfa.activities.outlet_management.LocationUpdateActivity
+import com.impala.rclsfa.activities.outlet_management.outlet_entry.OutletEntryActivity
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.RouteWiseOutletMappingActivity
 import com.impala.rclsfa.databinding.ActivityOutletManagementMainMenuBinding
 import com.impala.rclsfa.utils.SessionManager

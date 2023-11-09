@@ -17,6 +17,8 @@ import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.SoListModel
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.ZoneListModel
 import com.impala.rclsfa.activities.retailer.model.RetailerListModel
+import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtModel
+import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.TgtRouteDetailsM
 import com.impala.rclsfa.models.AttendanceResponse
 import com.impala.rclsfa.models.LoginRequest
 import com.impala.rclsfa.models.LoginResponse
@@ -191,6 +193,12 @@ interface ApiService {
         @Path("designation_id") designation_id : String
     ): Call<RouteListBySRModel>
 
+    @GET("api/route_list_by_sr/{sr_code}/{designation_id}")
+    fun routeListBySrTgt(
+        @Path("sr_code") sr_code : String,
+        @Path("designation_id") designation_id : String
+    ): Call<RouteListByTgtModel>
+
 
     @FormUrlEncoded
     @POST("api/retailer_list_by_name")
@@ -209,7 +217,12 @@ interface ApiService {
         @Field("longitude") longitude : String
     ): Call<UpdateLocationModel>
 
-
+    @GET("api/retailer_list_by_sr_route/{sr_id}/{route_id}/{designation_id}")
+    fun retailerListBySrRoute(
+        @Path("sr_id") sr_id : String,
+        @Path("route_id") route_id : String,
+        @Path("designation_id") designation_id : String
+    ): Call<TgtRouteDetailsM>
 
     companion object {
         // This function creates an instance of ApiService

@@ -12,8 +12,9 @@ import com.impala.rclsfa.activities.DashboardActivity
 import com.impala.rclsfa.activities.attendance.AttendanceMenuActivity
 import com.impala.rclsfa.activities.auth.ProfileActivity
 import com.impala.rclsfa.activities.order.OrderMenuActivity
-import com.impala.rclsfa.activities.outlet_management.outlet_entry.OutletManagementMainMenuActivity
+import com.impala.rclsfa.activities.outlet_management.OutletManagementMainMenuActivity
 import com.impala.rclsfa.activities.retailer.RetailerSummeryActivity
+import com.impala.rclsfa.activities.tgt_setup.TGTSetupMainActivity
 import com.impala.rclsfa.models.MenuItem
 import com.squareup.picasso.Picasso
 
@@ -71,6 +72,11 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
 
                 if(menuItem.func == "retailer_summary"){
                     val intent = Intent(itemView.context, RetailerSummeryActivity::class.java)
+                    itemView.context.startActivity(intent)
+                }
+
+                if(menuItem.func == "tgt_setup"){
+                    val intent = Intent(itemView.context, TGTSetupMainActivity::class.java)
                     itemView.context.startActivity(intent)
                 }
 

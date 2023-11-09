@@ -55,6 +55,45 @@
             android:textColor="#FFFFFF"
             android:background="@drawable/rounded_button"
             android:onClick="onEveningAttendanceButtonClick"/>
+
+        <Button
+            android:id="@+id/iomApplication"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="IOM-Application"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button"
+            android:onClick="onEveningAttendanceButtonClick"/>
+
+        <Button
+            android:id="@+id/leaveApplication"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Leave Application"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button"
+            />
+
+        <Button
+            android:id="@+id/viewPaySlip"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="View Pay Slip"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button"
+            android:onClick="onEveningAttendanceButtonClick"/>
     </LinearLayout>
 
 

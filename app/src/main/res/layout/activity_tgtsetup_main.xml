@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="TGT Setup"
+        app:titleTextColor="@color/white" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        >
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/routeWiseTgtSetup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Route Wise TGT Setup"
+            android:layout_marginHorizontal="10dp"
+            app:cornerRadius="6dp"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/kroOutletSelection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="KRO Outlet Selection"
+            android:layout_marginHorizontal="10dp"
+            app:cornerRadius="6dp"
+            />
+    </LinearLayout>
+</LinearLayout>

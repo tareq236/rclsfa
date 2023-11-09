@@ -47,6 +47,7 @@
         android:background="@color/menu_bd"
         android:layout_gravity="start"
         android:layout_marginTop="64dp"
+        app:itemTextColor="@color/white"
         app:menu="@menu/nav_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

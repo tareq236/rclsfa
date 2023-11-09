@@ -1,17 +1,14 @@
-package com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping
+package com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.impala.rclsfa.R
-import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.RouteListBySRModel
-import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.ZoneListModel
-import com.impala.rclsfa.databinding.ActivityRouteWiseOutletMappingBinding
-import com.impala.rclsfa.databinding.ActivityShowSrlistBinding
+import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtModel
+import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.TgtRouteDetailsM
+import com.impala.rclsfa.databinding.ActivityRouteListDetailsBinding
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
@@ -19,15 +16,19 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Path
 
-class ShowSRListActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityShowSrlistBinding
-    lateinit var adapter: RouteWiseMappingAdapter
+class RouteListDetailsActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRouteListDetailsBinding
+    lateinit var adapter:RouteDetailsAdapter
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
-    var srId = -1
+    var routeId = ""
+    var contribution = ""
+    var retailerSize = ""
+    var achAmount = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityShowSrlistBinding.inflate(layoutInflater)
+        binding = ActivityRouteListDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -37,12 +38,17 @@ class ShowSRListActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        adapter = RouteWiseMappingAdapter(this)
         sessionManager = SessionManager(this)
         loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
             .setTitleText("Loading")
-        srId = intent.getIntExtra("sr_id", 0)
+        routeId = this.intent.getStringExtra("route_id")!!
+        contribution = this.intent.getStringExtra("contribution")!!
+        retailerSize = this.intent.getStringExtra("retailerSize")!!
+        achAmount = this.intent.getStringExtra("achAmount")!!
+        adapter = RouteDetailsAdapter(this,contribution,retailerSize,achAmount)
         val designationId = sessionManager.designationId
+        val srId = sessionManager.userId
+
 
         val linearLayoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -50,32 +56,34 @@ class ShowSRListActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.setHasFixedSize(true)
 
-
         showLoadingDialog()
-        routeListBySr(srId.toString(), designationId.toString())
+        retailerListBySrRoute(srId!!,routeId,designationId.toString())
+
     }
 
-    private fun routeListBySr(
-        sr_code: String,
-        designation_id: String
+    private fun retailerListBySrRoute(
+        sr_id : String,
+         route_id : String,
+        designation_id : String
     ) {
         val apiService = ApiService.CreateApi2()
-        apiService.routeListBySr(
-            sr_code,
+        apiService.retailerListBySrRoute(
+            sr_id  ,
+            route_id  ,
             designation_id
         ).enqueue(object :
-            Callback<RouteListBySRModel> {
+            Callback<TgtRouteDetailsM> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(
-                call: Call<RouteListBySRModel>,
-                response: Response<RouteListBySRModel>
+                call: Call<TgtRouteDetailsM>,
+                response: Response<TgtRouteDetailsM>
             ) {
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null) {
                         if (data.getSuccess()!!) {
                             val dataList = data.getResult()
-                            adapter.addData(dataList as MutableList<RouteListBySRModel.Result>)
+                            adapter.addData(dataList as MutableList<TgtRouteDetailsM.Result>)
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()
@@ -102,7 +110,7 @@ class ShowSRListActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<RouteListBySRModel>, t: Throwable) {
+            override fun onFailure(call: Call<TgtRouteDetailsM>, t: Throwable) {
                 dismissLoadingDialog()
                 showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
             }
@@ -133,4 +141,6 @@ class ShowSRListActivity : AppCompatActivity() {
             }
         sweetAlertDialog.show()
     }
+
+
 }
