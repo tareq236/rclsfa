@@ -62,6 +62,9 @@ class SessionManager(context: Context) {
     var targetAmount: String?
         get() = sharedPreferences.getString("targetAmount", "")
         set(targetAmount) = sharedPreferences.edit().putString("targetAmount", targetAmount).apply()
+    var userRoles: String?
+        get() = sharedPreferences.getString("user_roles", "")
+        set(userRoles) = sharedPreferences.edit().putString("user_roles", userRoles).apply()
 
 
 }

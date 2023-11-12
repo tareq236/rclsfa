@@ -42,6 +42,54 @@
             android:background="@drawable/rounded_button"
             android:onClick="onNewOrderButtonClick"/>
 
+        <Button
+            android:id="@+id/orderListButton"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Order List"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button" />
+
+        <Button
+            android:id="@+id/basicSummaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Basic Summary"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button" />
+
+        <Button
+            android:id="@+id/productWiseSummaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Product Wise Summary"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button" />
+
+        <Button
+            android:id="@+id/salesConfirmationNightWorkButton"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Sales Confirmation (Night Work)"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

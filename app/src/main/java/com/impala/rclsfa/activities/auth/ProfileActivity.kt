@@ -6,10 +6,16 @@ import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.google.android.material.card.MaterialCardView
+import com.google.gson.Gson
 import com.impala.rclsfa.activities.auth.model.ProfileDataModel
 import com.impala.rclsfa.databinding.ActivityProfileBinding
+import com.impala.rclsfa.models.AppButton
+import com.impala.rclsfa.models.UserRoles
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import okhttp3.MultipartBody
@@ -23,6 +29,10 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
+    private val appButtons : List<AppButton> = listOf(
+        AppButton("ProfileUpdate", "profileUpdate"),
+        AppButton("ChangePassword", "changePassword"),
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +42,7 @@ class ProfileActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.setNavigationOnClickListener { finish() }
 
+        userRolesCheck()
         initView()
     }
 
@@ -172,5 +183,20 @@ class ProfileActivity : AppCompatActivity() {
         loadingDialog.dismiss()
     }
 
+    private fun userRolesCheck(){
+        sessionManager = SessionManager(this)
+        val userRoles = sessionManager.userRoles
+        val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+        for (button in appButtons) {
+            val buttonDetails = userRolesList.firstOrNull { it.access_name == button.access_name }
+            if(buttonDetails != null){
+                val buttonView: MaterialCardView = findViewById(resources.getIdentifier(button.buttonIdentifier, "id", packageName))
+                buttonView.visibility = View.VISIBLE
+            }else{
+                val buttonView: MaterialCardView = findViewById(resources.getIdentifier(button.buttonIdentifier, "id", packageName))
+                buttonView.visibility = View.GONE
+            }
+        }
+    }
 
 }

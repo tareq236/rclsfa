@@ -1,16 +1,10 @@
 package com.impala.rclsfa
 
 import android.app.Dialog
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,10 +19,10 @@ import com.impala.rclsfa.utils.SocketManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 import android.Manifest
 import android.content.Context
 import android.content.IntentSender
+import android.content.SharedPreferences
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -40,12 +34,13 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsResponse
-import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
+import com.google.gson.Gson
 import com.impala.rclsfa.utils.SessionManager
+import com.impala.rclsfa.utils.UserRolesCheck
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -154,7 +149,13 @@ class MainActivity : AppCompatActivity() {
                     val menuResponse = response.body()
                     if (menuResponse != null) {
                         if(menuResponse.success){
-                            val menuList = menuResponse.result
+                            val sharedPreferences: SharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE)
+                            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                            val gson = Gson()
+                            val jsonStringUserRole = gson.toJson(menuResponse.user_roles)
+                            editor.putString("user_roles", jsonStringUserRole)
+                            sessionManager.userRoles = jsonStringUserRole
+                            val menuList = UserRolesCheck.checkMenuRole(menuResponse.result, jsonStringUserRole)
                             adapter = MenuAdapter(menuList)
                             recyclerView.adapter = adapter
                             dismissLoadingDialog()

@@ -33,7 +33,7 @@
             android:background="@drawable/edittext_background"
             android:padding="15dp"
             android:textSize="14sp"
-            android:text="360221"
+            android:text="30029"
             android:textColor="@color/edit_text_color"
             android:textColorHint="@color/edit_text_color"
             />

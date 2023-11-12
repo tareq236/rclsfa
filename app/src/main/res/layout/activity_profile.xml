@@ -115,13 +115,13 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Profile Update"
                             android:layout_centerInParent="true"
-                            android:textColor="@color/white"
-                            />
+                            android:text="Profile Update"
+                            android:textColor="@color/white" />
                     </RelativeLayout>
                 </com.google.android.material.card.MaterialCardView>
                 <com.google.android.material.card.MaterialCardView

@@ -3,14 +3,26 @@ package com.impala.rclsfa.activities.outlet_management
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import com.google.gson.Gson
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.OutletEntryActivity
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.RouteWiseOutletMappingActivity
 import com.impala.rclsfa.databinding.ActivityOutletManagementMainMenuBinding
+import com.impala.rclsfa.models.AppButton
+import com.impala.rclsfa.models.UserRoles
 import com.impala.rclsfa.utils.SessionManager
 
 class OutletManagementMainMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOutletManagementMainMenuBinding
     lateinit var sessionManager:SessionManager
+    private val appButtons : List<AppButton> = listOf(
+        AppButton("RouteWiseOutletMapping", "routeWiseOutMapping"),
+        AppButton("OutletEntry", "btnOutletEntry"),
+        AppButton("OutletSearching", "outletSearching"),
+        AppButton("LocationUpdate", "locationUpdate"),
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOutletManagementMainMenuBinding.inflate(layoutInflater)
@@ -19,6 +31,7 @@ class OutletManagementMainMenuActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.setNavigationOnClickListener { finish() }
 
+        userRolesCheck()
         initView()
     }
 
@@ -49,5 +62,22 @@ class OutletManagementMainMenuActivity : AppCompatActivity() {
             startActivity(Intent(this, OutletEntryActivity::class.java))
         }
 
+    }
+
+
+    private fun userRolesCheck(){
+        sessionManager = SessionManager(this)
+        val userRoles = sessionManager.userRoles
+        val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+        for (button in appButtons) {
+            val buttonDetails = userRolesList.firstOrNull { it.access_name == button.access_name }
+            if(buttonDetails != null){
+                val buttonView: Button = findViewById(resources.getIdentifier(button.buttonIdentifier, "id", packageName))
+                buttonView.visibility = View.VISIBLE
+            }else{
+                val buttonView: Button = findViewById(resources.getIdentifier(button.buttonIdentifier, "id", packageName))
+                buttonView.visibility = View.GONE
+            }
+        }
     }
 }

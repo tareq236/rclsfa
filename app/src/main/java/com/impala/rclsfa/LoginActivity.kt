@@ -15,6 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.google.gson.Gson
 import com.impala.rclsfa.utils.SessionManager
 
 
@@ -117,23 +118,19 @@ class LoginActivity : AppCompatActivity() {
 
         // Save properties from the Result data class to SharedPreferences
         editor.putString("id", result.result.id)
-        editor.putString("sr_code", result.result.sr_code)
-        editor.putString("tsm_code", result.result.tsm_code)
-        editor.putString("dsm_code", result.result.dsm_code)
-        editor.putString("hs_code", result.result.hs_code)
-        editor.putString("sr_address", result.result.sr_address)
-        editor.putString("tsm_address", result.result.tsm_address)
-        editor.putString("dsm_address", result.result.dsm_address)
-        editor.putString("hs_address", result.result.hs_address)
         editor.putString("name", result.result.name)
         editor.putString("mobile_number", result.result.mobile_number)
         editor.putInt("designation_id", result.result.designation_id)
-        editor.putString("designation", result.result.designation)
+        editor.putString("designation", result.result.designation_details.designation_name)
         editor.putString("password", result.result.password)
         editor.putBoolean("isLoggedIn", true)
+        val gson = Gson()
+        val jsonStringUserRole = gson.toJson(result.user_roles)
+        editor.putString("user_roles", jsonStringUserRole)
 
         sessionManager.userId = result.result.id
         sessionManager.designationId = result.result.designation_id
+        sessionManager.userRoles = jsonStringUserRole
         // Add other properties as needed
         //remove save data
         sessionManager.routeName=""

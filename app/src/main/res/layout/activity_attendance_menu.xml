@@ -57,7 +57,7 @@
             android:onClick="onEveningAttendanceButtonClick"/>
 
         <Button
-            android:id="@+id/iomApplication"
+            android:id="@+id/iomApplicationButton"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:text="IOM-Application"
@@ -70,7 +70,7 @@
             android:onClick="onEveningAttendanceButtonClick"/>
 
         <Button
-            android:id="@+id/leaveApplication"
+            android:id="@+id/leaveApplicationButton"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:text="Leave Application"
@@ -83,7 +83,7 @@
             />
 
         <Button
-            android:id="@+id/viewPaySlip"
+            android:id="@+id/viewPaySlipButton"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:text="View Pay Slip"
@@ -94,6 +94,18 @@
             android:textColor="#FFFFFF"
             android:background="@drawable/rounded_button"
             android:onClick="onEveningAttendanceButtonClick"/>
+
+        <Button
+            android:id="@+id/monthlyAttendanceButton"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Monthly Attendance"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button" />
     </LinearLayout>
 
 
