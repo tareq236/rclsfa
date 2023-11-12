@@ -5,7 +5,10 @@ import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.impala.rclsfa.R
 
 import com.impala.rclsfa.activities.auth.model.ProfileDataModel
 import com.impala.rclsfa.activities.auth.model.ProfileUpdateModel
@@ -23,6 +26,8 @@ class ProfileUpdateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileUpdateBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
+    data class BloodGroup(val name: String)
+    private lateinit var selectedBloodGroup: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +36,19 @@ class ProfileUpdateActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.setNavigationOnClickListener { finish() }
+
+        val bloodGroups = listOf(
+            BloodGroup("A+"), BloodGroup("A-"),
+            BloodGroup("B+"), BloodGroup("B-"),
+            BloodGroup("AB+"), BloodGroup("AB-"),
+            BloodGroup("O+"), BloodGroup("O-")
+        )
+        val bloodGroupAutoCompleteTextView: AppCompatAutoCompleteTextView = findViewById(R.id.actvBloodG)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, bloodGroups.map { it.name })
+        bloodGroupAutoCompleteTextView.setAdapter(adapter)
+        bloodGroupAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+            selectedBloodGroup = parent.getItemAtPosition(position) as String
+        }
 
         initView()
     }
@@ -48,7 +66,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
 
         binding.profileUpdate.setOnClickListener {
             val mailId = binding.edtMailId.editText!!.text.toString()
-            val bloodGroup = binding.edtMailId.editText!!.text.toString()
+            val bloodGroup =selectedBloodGroup
             val nid = binding.edtNid.editText!!.text.toString()
             val phoneNumber = binding.edtPhone.editText!!.text.toString()
             val fatherName = binding.edtFatherName.editText!!.text.toString()
@@ -95,7 +113,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
             return false
         }
 
-        if (bloodGroup.isEmpty()) {
+        if (selectedBloodGroup.isEmpty()) {
 //            passwordEditText.error = "Password is required"
             showDialogBoxForValidation(SweetAlertDialog.WARNING_TYPE, "Validation", "Blood Group is required")
             return false

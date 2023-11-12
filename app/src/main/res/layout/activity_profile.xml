@@ -403,11 +403,14 @@
                 </RelativeLayout>
 
 
-                <com.google.android.material.button.MaterialButton
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:text="Alternative One"
-                    app:cornerRadius="6dp"
+                    android:textStyle="bold"
+                    android:background="#005F8F"
+                    android:textColor="@color/white"
+                    android:gravity="center"
                     />
 
                 <RelativeLayout
@@ -484,11 +487,15 @@
                         />
 
                 </RelativeLayout>
-                <com.google.android.material.button.MaterialButton
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:text="Alternative Two"
-                    app:cornerRadius="6dp"
+                    android:textStyle="bold"
+                    android:background="#005F8F"
+                    android:textColor="@color/white"
+                    android:gravity="center"
                     />
 
                 <RelativeLayout
