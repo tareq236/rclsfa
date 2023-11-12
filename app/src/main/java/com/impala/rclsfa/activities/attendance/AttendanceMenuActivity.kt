@@ -46,7 +46,17 @@ class AttendanceMenuActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.leaveApplicationButton.setOnClickListener {
-            val intent = Intent(this, LeaveAttendancesApplicationActivity::class.java)
+            val intent = Intent(this, LeaveAttendanceApplicationListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.iomApplicationButton.setOnClickListener {
+            val intent = Intent(this, IOMApplicationActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.monthlyAttendanceButton.setOnClickListener {
+            val intent = Intent(this, MonthlyAttendaneActivity::class.java)
             startActivity(intent)
         }
 

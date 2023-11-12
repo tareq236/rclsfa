@@ -26,8 +26,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileUpdateBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
-    data class BloodGroup(val name: String)
-    private lateinit var selectedBloodGroup: String
+    lateinit var arrBloodG: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,18 +36,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.setNavigationOnClickListener { finish() }
 
-        val bloodGroups = listOf(
-            BloodGroup("A+"), BloodGroup("A-"),
-            BloodGroup("B+"), BloodGroup("B-"),
-            BloodGroup("AB+"), BloodGroup("AB-"),
-            BloodGroup("O+"), BloodGroup("O-")
-        )
-        val bloodGroupAutoCompleteTextView: AppCompatAutoCompleteTextView = findViewById(R.id.actvBloodG)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, bloodGroups.map { it.name })
-        bloodGroupAutoCompleteTextView.setAdapter(adapter)
-        bloodGroupAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
-            selectedBloodGroup = parent.getItemAtPosition(position) as String
-        }
+
 
         initView()
     }
@@ -59,14 +47,18 @@ class ProfileUpdateActivity : AppCompatActivity() {
         loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
             .setTitleText("Loading")
 
+        arrBloodG = resources.getStringArray(R.array.blood_group)
+
 
         val userId = sessionManager.userId
         showLoadingDialog()
         userDetails(userId!!)
 
+
+
         binding.profileUpdate.setOnClickListener {
             val mailId = binding.edtMailId.editText!!.text.toString()
-            val bloodGroup =selectedBloodGroup
+            val bloodGroup =binding.actvBloodG.text.toString()
             val nid = binding.edtNid.editText!!.text.toString()
             val phoneNumber = binding.edtPhone.editText!!.text.toString()
             val fatherName = binding.edtFatherName.editText!!.text.toString()
@@ -81,6 +73,8 @@ class ProfileUpdateActivity : AppCompatActivity() {
             val alterName2 = binding.edtAlter2Name.editText!!.text.toString()
             val alterPhone2 = binding.edtAlter2Phone.editText!!.text.toString()
             val alterReligion2 = binding.edtAlter2Religion.editText!!.text.toString()
+
+
 
             if(validateInput(mailId,bloodGroup,nid,phoneNumber)){
                 showLoadingDialog()
@@ -112,12 +106,13 @@ class ProfileUpdateActivity : AppCompatActivity() {
             showDialogBoxForValidation(SweetAlertDialog.WARNING_TYPE, "Validation", "Mail Id is required")
             return false
         }
-
-        if (selectedBloodGroup.isEmpty()) {
-//            passwordEditText.error = "Password is required"
-            showDialogBoxForValidation(SweetAlertDialog.WARNING_TYPE, "Validation", "Blood Group is required")
+        if (bloodGroup.isEmpty()) {
+//            usernameEditText.error = "Username is required"
+            showDialogBoxForValidation(SweetAlertDialog.WARNING_TYPE, "Validation", "Select your blood group")
             return false
         }
+
+
         if (nid.isEmpty()) {
 //            passwordEditText.error = "Password is required"
             showDialogBoxForValidation(SweetAlertDialog.WARNING_TYPE, "Validation", "NID is required")
@@ -239,8 +234,18 @@ class ProfileUpdateActivity : AppCompatActivity() {
                             binding.edtMailId.editText!!.setText(mailId)
                             val nid = dataList.nid
                             binding.edtNid.editText!!.setText(nid)
+
                             val bloodGroup = dataList.bloodGroup
                             binding.actvBloodG.setText(bloodGroup)
+
+                            binding.actvBloodG.setAdapter<ArrayAdapter<String>>(
+                                ArrayAdapter<String>(
+                                    this@ProfileUpdateActivity,
+                                    R.layout.dropdown_item, R.id.text1, arrBloodG
+                                )
+                            )
+
+
                             val fatherName = dataList.fatherName
                             binding.edtFatherName.editText!!.setText(fatherName)
                             val fatherNid = dataList.fatherNid

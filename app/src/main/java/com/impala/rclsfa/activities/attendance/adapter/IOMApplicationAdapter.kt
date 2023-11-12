@@ -13,8 +13,8 @@ import com.impala.rclsfa.databinding.OutletListItemBinding
 import java.text.SimpleDateFormat
 
 
-class LeaveApplicationAdapter(val context: Context) :
-    RecyclerView.Adapter<LeaveApplicationAdapter.ViewHolder>() {
+class IOMApplicationAdapter(val context: Context) :
+    RecyclerView.Adapter<IOMApplicationAdapter.ViewHolder>() {
 
     var list: MutableList<AllLeaveAttendListM.Result> = mutableListOf()
 

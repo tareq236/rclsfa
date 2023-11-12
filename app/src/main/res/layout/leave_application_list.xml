@@ -16,22 +16,45 @@
         android:paddingTop="10dp"
         android:paddingBottom="15dp">
         <LinearLayout
-            android:id="@+id/linDate"
+            android:id="@+id/linToDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="To Date:"
+                android:textColor="@color/text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/toDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="05dp"
+                android:text="12-10-2023"
+                android:textColor="@color/text_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linFromDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text="Date:"
+                android:text="From Date:"
                 android:textColor="@color/text_color"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/attendanceDate"
+                android:id="@+id/fromDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="0dp"
@@ -44,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@+id/linDate"
+            android:layout_below="@+id/linFromDate"
             >
             <TextView
 
@@ -58,7 +81,7 @@
             <TextView
                 android:id="@+id/firstApproval"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginHorizontal="0dp"
                 android:text="pending"
                 android:textColor="#A85756"

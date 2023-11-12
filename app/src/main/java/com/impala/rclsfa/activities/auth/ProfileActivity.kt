@@ -62,11 +62,18 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfilePhotoUploadActivity::class.java))
         }
 
+        binding.profileImage.setOnClickListener {
+            startActivity(Intent(this, ProfilePhotoUploadActivity::class.java))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         val userId = sessionManager.userId
         showLoadingDialog()
         userDetails(userId!!)
-    }
 
+    }
     private fun userDetails(userId: String) {
         val apiService = ApiService.CreateApi1()
         apiService.getUserDetails(userId).enqueue(object :

@@ -3,11 +3,11 @@ package com.impala.rclsfa.activities.attendance
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.impala.rclsfa.activities.attendance.model.SaveLeaveAttendM
-import com.impala.rclsfa.databinding.ActivityApplyLeaveApplicationBinding
+import com.impala.rclsfa.databinding.ActivityApplyIomapplicationBinding
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
@@ -17,8 +17,8 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class ApplyLeaveApplicationActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityApplyLeaveApplicationBinding
+class ApplyIOMApplicationActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityApplyIomapplicationBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
     var cal = Calendar.getInstance()
@@ -28,7 +28,7 @@ class ApplyLeaveApplicationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityApplyLeaveApplicationBinding.inflate(layoutInflater)
+        binding = ActivityApplyIomapplicationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -41,7 +41,6 @@ class ApplyLeaveApplicationActivity : AppCompatActivity() {
         finalApproval = this.intent.getStringExtra("final_approval")!!
         binding.firstApproveData.text = firstApproval
         binding.finalApproveData.text = finalApproval
-
         loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
             .setTitleText("Loading")
         sessionManager = SessionManager(this)
