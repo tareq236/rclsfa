@@ -60,17 +60,12 @@ class IOMApplicationActivity : AppCompatActivity() {
         }
 
         showLoadingDialog()
-        leaveAttendanceSrList(userId!!)
+        iomAttendanceSrList(userId!!)
     }
 
-    private fun leaveAttendanceSrList(
-        user_code: String
-    ) {
+    private fun iomAttendanceSrList(user_code: String) {
         val apiService = ApiService.CreateApi2()
-        apiService.leaveAttendanceSrList(
-            user_code
-        ).enqueue(object :
-            Callback<AllLeaveAttendListM> {
+        apiService.iomAttendanceSrList(user_code).enqueue(object : Callback<AllLeaveAttendListM> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(
                 call: Call<AllLeaveAttendListM>,

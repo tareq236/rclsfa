@@ -240,6 +240,20 @@ interface ApiService {
         @Path("sr_id") sr_id: String,
     ): Call<AllLeaveAttendListM>
 
+    @GET("api/pending_attendance_sr_list/{sr_id}")
+    fun iomAttendanceSrList(
+        @Path("sr_id") sr_id: String,
+    ): Call<AllLeaveAttendListM>
+
+    @FormUrlEncoded
+    @POST("api/save_pending_attendance_sr")
+    fun saveIomAttendanceBySr(
+        @Field("sr_code") sr_code: String,
+        @Field("absent_from_date") absent_from_date: String,
+        @Field("absent_to_date") absent_to_date: String,
+        @Field("comments") comments: String,
+        @Field("status") status: String
+    ): Call<SaveLeaveAttendM>
 
     companion object {
         // This function creates an instance of ApiService

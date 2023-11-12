@@ -111,13 +111,13 @@ class ApplyIOMApplicationActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             showLoadingDialog()
-            saveLeaveAttendanceBySr(srCode!!, fromDate, toDate, comments, "0")
+            saveIomAttendanceBySr(srCode!!, fromDate, toDate, comments, "0")
         }
 
     }
 
 
-    private fun saveLeaveAttendanceBySr(
+    private fun saveIomAttendanceBySr(
         sr_code: String,
         absent_from_date: String,
         absent_to_date: String,
@@ -125,7 +125,7 @@ class ApplyIOMApplicationActivity : AppCompatActivity() {
         status: String
     ) {
         val apiService = ApiService.CreateApi2()
-        apiService.saveLeaveAttendanceBySr(
+        apiService.saveIomAttendanceBySr(
             sr_code,
             absent_from_date,
             absent_to_date,
@@ -146,7 +146,7 @@ class ApplyIOMApplicationActivity : AppCompatActivity() {
                             showFDialogBox(
                                 SweetAlertDialog.SUCCESS_TYPE,
                                 "SUCCESS-S5803",
-                                "Leave Attendance Done  "
+                                "IOM Attendance Done  "
                             )
                             dismissLoadingDialog()
                         } else {
