@@ -52,6 +52,7 @@
             android:layout_marginTop="10dp"
             android:textSize="14sp"
             android:textColor="#FFFFFF"
+            android:onClick="onOrderListButtonClick"
             android:background="@drawable/rounded_button" />
 
         <Button

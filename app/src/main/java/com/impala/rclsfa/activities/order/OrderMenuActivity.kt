@@ -49,6 +49,12 @@ class OrderMenuActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun onOrderListButtonClick(view: View?) {
+        val intent = Intent(this, OrderListActivity::class.java)
+        startActivity(intent)
+    }
+
+
     // Handle the Up button click event
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
