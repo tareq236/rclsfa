@@ -50,6 +50,7 @@ class OutletListForLocationAdapter(val context: Context,val click:IClickManage) 
         with(holder) {
             binding.nameEn.text = item.retailerName
             binding.nameBn.text = item.nameBn
+            binding.address.text = item.address
 
             binding.itemView.setOnClickListener {
                 click.doClick(item.id!!,item.nameBn!!,item.retailerName!!,item.address!!)

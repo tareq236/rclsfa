@@ -24,6 +24,9 @@
         android:theme="@style/Theme.RCLSFA"
         tools:targetApi="31">
         <activity
+            android:name=".activities.outlet_management.OutletDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.attendance.ApplyIOMApplicationActivity"
             android:exported="false" />
         <activity

@@ -2,6 +2,7 @@ package com.impala.rclsfa.activities.outlet_management
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OutletSearchingActivity : AppCompatActivity() {
+class OutletSearchingActivity : AppCompatActivity(),OutletListAdapter.MainClickManage {
     private lateinit var binding: ActivityOutletSearchingBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
@@ -33,7 +34,7 @@ class OutletSearchingActivity : AppCompatActivity() {
         initView()
     }
     private fun initView() {
-        adapter = OutletListAdapter(this)
+        adapter = OutletListAdapter(this,this)
         sessionManager = SessionManager(this)
         val userId = sessionManager.userId
         val designationId = sessionManager.designationId
@@ -91,6 +92,7 @@ class OutletSearchingActivity : AppCompatActivity() {
                     if (data != null) {
                         if (data.getSuccess()!!) {
                             val dataList = data.getResult()
+                            adapter.clearData()
                             adapter.addData(dataList as MutableList<SearchOutletListModel.Result>)
                             dismissLoadingDialog()
                         } else {
@@ -147,6 +149,38 @@ class OutletSearchingActivity : AppCompatActivity() {
 
             }
         sweetAlertDialog.show()
+    }
+
+    override fun details(
+        retailerName: String,
+        nameBn: String,
+        proprietorName: String,
+        mobileNumber: String,
+        address: String,
+        birthDay: String,
+        marriageDate: String,
+        nid: String,
+        fChildName: String,
+        fChildBirthDay: String,
+        sChildName: String,
+        sChildBirthDay: String
+    ) {
+
+        startActivity(Intent(this,OutletDetailsActivity::class.java)
+            .putExtra("retailerName",retailerName)
+            .putExtra("nameBn",nameBn)
+            .putExtra("proprietorName",proprietorName)
+            .putExtra("mobileNumber",mobileNumber)
+            .putExtra("address",address)
+            .putExtra("birthDay",birthDay)
+            .putExtra("marriageDate",marriageDate)
+            .putExtra("nid",nid)
+            .putExtra("fChildName",fChildName)
+            .putExtra("fChildBirthDay",fChildBirthDay)
+            .putExtra("sChildName",sChildName)
+            .putExtra("sChildBirthDay",sChildBirthDay)
+        )
+
     }
 
 }

@@ -26,6 +26,15 @@
             android:textStyle="bold"
             android:textSize="14sp" />
 
+        <ImageView
+            android:id="@+id/call"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/phone_volume_solid"
+            android:layout_marginHorizontal="20dp"
+            android:layout_toRightOf="@+id/nameEn"
+            />
+
         <TextView
             android:id="@+id/nameBn"
             android:layout_width="wrap_content"
@@ -34,6 +43,7 @@
             android:layout_marginHorizontal="10dp"
             android:text="মোহাম্মদ আলী স্টোর "
             android:textColor="@color/text_color"
+            android:layout_marginTop="05dp"
             android:textStyle="bold"
             android:textSize="14sp" />
 
