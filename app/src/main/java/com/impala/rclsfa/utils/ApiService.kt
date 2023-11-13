@@ -22,6 +22,7 @@ import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.ZoneListModel
 import com.impala.rclsfa.activities.retailer.model.RetailerListModel
 import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtModel
+import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.SaveTargetModel
 import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.TgtRouteDetailsM
 import com.impala.rclsfa.models.AttendanceResponse
 import com.impala.rclsfa.models.LoginRequest
@@ -267,6 +268,12 @@ interface ApiService {
 //    @Headers("Content-Type: application/json")
 //    @POST("v1/login")
 //    fun srOrderList(@Body body: JsonObject?): Call<OrderListModel>
+
+    @GET("api/save_tgt_by_sr/{sr_id}/{target_amount}")
+    fun saveTargetBySr(
+        @Path("sr_id") sr_id: String,
+        @Path("target_amount") target_amount: String
+    ): Call<SaveTargetModel>
 
     companion object {
         // This function creates an instance of ApiService
