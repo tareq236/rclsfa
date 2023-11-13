@@ -2,6 +2,7 @@ package com.impala.rclsfa.activities.outlet_management
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.text.TextUtils.isEmpty
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +45,11 @@ class OutletListAdapter(val context: Context) :
 
         with(holder) {
             binding.nameEn.text = item.retailerName
+            if(isEmpty(item.nameBn)){
+                binding.nameBn.visibility = View.GONE
+            }
             binding.nameBn.text = item.nameBn
+            binding.address.text = "Address: " + item.address
             binding.targetAmountId.text = item.targetAmountRe
             binding.achId.text = item.ach.toString()+" %"
             binding.conId.text = item.con.toString()+" %"
@@ -55,20 +60,6 @@ class OutletListAdapter(val context: Context) :
 
     override fun getItemCount(): Int {
         return list.size
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    fun dateFormatter(dateTime: String): String {
-        var thisDate = ""
-        try {
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            val outputFormat = SimpleDateFormat("dd MMMM yyyy")
-            val date = inputFormat.parse(dateTime)
-            thisDate = outputFormat.format(date!!)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return thisDate
     }
 
 

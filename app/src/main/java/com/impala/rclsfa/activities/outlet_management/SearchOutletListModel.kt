@@ -9,6 +9,10 @@ class SearchOutletListModel {
     @Expose
     private var success: Boolean? = null
 
+    @SerializedName("message")
+    @Expose
+    private var message: String? = null
+
     @SerializedName("result")
     @Expose
     private var result: List<Result?>? = null
@@ -19,6 +23,14 @@ class SearchOutletListModel {
 
     fun setSuccess(success: Boolean?) {
         this.success = success
+    }
+
+    fun getMessage(): String? {
+        return message
+    }
+
+    fun setMessage(success: String?) {
+        this.message = message
     }
 
     fun getResult(): List<Result?>? {

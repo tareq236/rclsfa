@@ -50,9 +50,6 @@ class RouteWiseOutletMappingActivity : AppCompatActivity() {
         loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
             .setTitleText("Loading")
 
-
-
-
         binding.spinnerDiv.onItemClickListener =
             AdapterView.OnItemClickListener { parent, arg1, pos, id ->
                 val item = parent.getItemAtPosition(pos) as DivisionRouteModel.Result

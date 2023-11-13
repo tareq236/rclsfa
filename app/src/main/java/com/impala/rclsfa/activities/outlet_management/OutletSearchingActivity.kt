@@ -95,10 +95,7 @@ class OutletSearchingActivity : AppCompatActivity() {
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()
-                            showDialogBox(
-                                SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
-                                " Failed"
-                            )
+                            showDialogBox(SweetAlertDialog.WARNING_TYPE, "Problem-SF5801", data.getMessage().toString())
                         }
                     } else {
                         dismissLoadingDialog()
