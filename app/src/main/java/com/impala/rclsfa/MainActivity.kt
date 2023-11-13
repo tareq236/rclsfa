@@ -155,9 +155,14 @@ class MainActivity : AppCompatActivity() {
                             val jsonStringUserRole = gson.toJson(menuResponse.user_roles)
                             editor.putString("user_roles", jsonStringUserRole)
                             sessionManager.userRoles = jsonStringUserRole
-                            val menuList = UserRolesCheck.checkMenuRole(menuResponse.result, jsonStringUserRole)
-                            adapter = MenuAdapter(menuList)
-                            recyclerView.adapter = adapter
+                            if(jsonStringUserRole=="null"){
+
+                            }else{
+                                val menuList = UserRolesCheck.checkMenuRole(menuResponse.result, jsonStringUserRole)
+                                adapter = MenuAdapter(menuList)
+                                recyclerView.adapter = adapter
+                            }
+
                             dismissLoadingDialog()
                         }else{
                             dismissLoadingDialog()

@@ -1,10 +1,12 @@
 package com.impala.rclsfa.utils
 
+import com.google.gson.JsonObject
 import com.impala.rclsfa.activities.attendance.model.AllLeaveAttendListM
 import com.impala.rclsfa.activities.attendance.model.SaveLeaveAttendM
 import com.impala.rclsfa.activities.auth.model.ImageUploadModel
 import com.impala.rclsfa.activities.auth.model.ProfileDataModel
 import com.impala.rclsfa.activities.auth.model.ProfileUpdateModel
+import com.impala.rclsfa.activities.order.model.OrderListModel
 import com.impala.rclsfa.activities.outlet_management.SearchOutletListModel
 import com.impala.rclsfa.activities.outlet_management.UpdateLocationModel
 import com.impala.rclsfa.activities.outlet_management.outlet_entry.model.CategoryListModel
@@ -34,6 +36,7 @@ import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -254,6 +257,16 @@ interface ApiService {
         @Field("comments") comments: String,
         @Field("status") status: String
     ): Call<SaveLeaveAttendM>
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v1/order/sr_order_list")
+    fun srOrderList(
+        @Body body: JsonObject?
+    ): Call<OrderListModel>
+
+//    @Headers("Content-Type: application/json")
+//    @POST("v1/login")
+//    fun srOrderList(@Body body: JsonObject?): Call<OrderListModel>
 
     companion object {
         // This function creates an instance of ApiService
