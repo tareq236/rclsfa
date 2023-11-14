@@ -65,6 +65,11 @@ class ProfileActivity : AppCompatActivity() {
         binding.profileImage.setOnClickListener {
             startActivity(Intent(this, ProfilePhotoUploadActivity::class.java))
         }
+
+
+        binding.changePassword.setOnClickListener {
+            startActivity(Intent(this, ChangePasswordActivity::class.java))
+        }
     }
 
     override fun onResume() {

@@ -1,17 +1,14 @@
-package com.impala.rclsfa.activities.auth
+package com.impala.rclsfa.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.impala.rclsfa.R
-import com.impala.rclsfa.databinding.ActivityChangePasswordBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.impala.rclsfa.databinding.ActivityNotificationBinding
 
-class ChangePasswordActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityChangePasswordBinding
-
+class NotificationActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityNotificationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChangePasswordBinding.inflate(layoutInflater)
+        binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)

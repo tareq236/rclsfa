@@ -39,6 +39,8 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
+import com.impala.rclsfa.activities.NotificationActivity
+import com.impala.rclsfa.activities.SettingsActivity
 import com.impala.rclsfa.utils.SessionManager
 import com.impala.rclsfa.utils.UserRolesCheck
 
@@ -76,11 +78,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_menu_notification -> {
                     // Handle Notification item click
                     // Add your code here
+                    startActivity(Intent(this,NotificationActivity::class.java))
                     true
                 }
                 R.id.nav_menu_setting -> {
                     // Handle Setting item click
                     // Add your code here
+                    startActivity(Intent(this,SettingsActivity::class.java))
                     true
                 }
                 R.id.nav_menu_logout -> {
