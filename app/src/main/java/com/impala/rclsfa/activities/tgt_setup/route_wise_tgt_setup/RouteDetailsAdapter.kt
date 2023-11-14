@@ -49,17 +49,22 @@ class RouteDetailsAdapter(
         val item = list[position]
 
         with(holder) {
-            binding.nameEn.text = item.retailerName
-            binding.nameBn.text = item.nameBn
-            //binding.contribution.text = item.o
-            val dContribution = contribution.toDouble()
-            val iRetailerS = retailerSize.toInt()
-            val result = (dContribution / iRetailerS)
-            binding.contribution.text = roundTheNumber(result)+"%"
+            try {
+                binding.nameEn.text = item.retailerName
+                binding.nameBn.text = item.nameBn
+                //binding.contribution.text = item.o
+                val dContribution = contribution.toDouble()
+                val iRetailerS = retailerSize.toInt()
+                val result = (dContribution / iRetailerS)
+                binding.contribution.text = roundTheNumber(result)+"%"
 
-            val routeTarget = targetA.toInt()
-            val result1 = (routeTarget / iRetailerS)
-            binding.targetAmountId.text = result1.toString()
+                val routeTarget = targetA.toInt()
+                val result1 = (routeTarget / iRetailerS)
+                binding.targetAmountId.text = result1.toString()
+            }catch (e:NumberFormatException){
+                e.printStackTrace()
+            }
+
         }
 
     }

@@ -58,7 +58,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
 
         binding.profileUpdate.setOnClickListener {
             val mailId = binding.edtMailId.editText!!.text.toString()
-            val bloodGroup =binding.actvBloodG.text.toString()
+            val bloodGroup = binding.actvBloodG.text.toString()
             val nid = binding.edtNid.editText!!.text.toString()
             val phoneNumber = binding.edtPhone.editText!!.text.toString()
             val fatherName = binding.edtFatherName.editText!!.text.toString()
@@ -76,7 +76,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
 
 
 
-            if(validateInput(mailId,bloodGroup,nid,phoneNumber)){
+            if (validateInput(mailId, bloodGroup, nid, phoneNumber)) {
                 showLoadingDialog()
                 profileUpdate(
                     userId,
@@ -100,27 +100,49 @@ class ProfileUpdateActivity : AppCompatActivity() {
         }
 
     }
-    private fun validateInput(mailId: String, bloodGroup: String, nid: String,phoneNumber:String): Boolean {
+
+    private fun validateInput(
+        mailId: String,
+        bloodGroup: String,
+        nid: String,
+        phoneNumber: String
+    ): Boolean {
         if (mailId.isEmpty()) {
 //            usernameEditText.error = "Username is required"
-            showDialogBoxForValidation(SweetAlertDialog.WARNING_TYPE, "Validation", "Mail Id is required")
+            showDialogBoxForValidation(
+                SweetAlertDialog.WARNING_TYPE,
+                "Validation",
+                "Mail Id is required"
+            )
             return false
         }
         if (bloodGroup.isEmpty()) {
 //            usernameEditText.error = "Username is required"
-            showDialogBoxForValidation(SweetAlertDialog.WARNING_TYPE, "Validation", "Select your blood group")
+            showDialogBoxForValidation(
+                SweetAlertDialog.WARNING_TYPE,
+                "Validation",
+                "Select your blood group"
+            )
             return false
         }
 
 
         if (nid.isEmpty()) {
 //            passwordEditText.error = "Password is required"
-            showDialogBoxForValidation(SweetAlertDialog.WARNING_TYPE, "Validation", "NID is required")
+            showDialogBoxForValidation(
+                SweetAlertDialog.WARNING_TYPE,
+                "Validation",
+                "NID is required"
+            )
             return false
         }
         if (phoneNumber.isEmpty()) {
 //            passwordEditText.error = "Password is required"
-            showDialogBoxForValidation(SweetAlertDialog.WARNING_TYPE, "Validation", "Phone Number is required")
+            showDialogBoxForValidation(
+                SweetAlertDialog.WARNING_TYPE,
+                "Validation",
+                "Phone Number is required"
+            )
             return false
         }
         return true
@@ -332,6 +354,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
             }
         sweetAlertDialog.show()
     }
+
     private fun showDialogBoxForValidation(
         type: Int,
         title: String,
