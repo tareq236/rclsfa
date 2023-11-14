@@ -51,8 +51,7 @@ class RouteListActivity : AppCompatActivity(), RouteListByTGTAdapter.MainClickMa
             this
         )
 
-        loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-            .setTitleText("Loading")
+        loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading")
         srId = sessionManager.userId!!
         val designationId = sessionManager.designationId
 
@@ -123,12 +122,15 @@ class RouteListActivity : AppCompatActivity(), RouteListByTGTAdapter.MainClickMa
                             //adapter.addData(dataList as MutableList<RouteListByTgtModel.Result>)
                             targetAmount = data.getTargetAmount()!!
                             if(targetAmount==0){
-                                binding.saveTarget.visibility = View.VISIBLE
+                                binding.rlSearchId.visibility = View.VISIBLE
+                                binding.searchId.visibility = View.VISIBLE
                             }else {
                                 sessionManager.targetAmount = targetAmount.toString()
                                 binding.rlSearchId.visibility = View.GONE
                                 binding.searchId.visibility = View.GONE
                                 binding.saveTarget.visibility = View.GONE
+                                binding.rlSearchId.visibility = View.GONE
+                                binding.searchId.visibility = View.GONE
                                 adapter.addData(dataList as MutableList<RouteListByTgtModel.Result>)
                             }
                             dismissLoadingDialog()
@@ -187,12 +189,14 @@ class RouteListActivity : AppCompatActivity(), RouteListByTGTAdapter.MainClickMa
                             adapter.addData(dataList as MutableList<RouteListByTgtModel.Result>)
                            // targetAmount = data.getTargetAmount()!!
                             dismissLoadingDialog()
-                        } else {
+                            binding.saveTarget.visibility = View.VISIBLE
+                        }else{
                             dismissLoadingDialog()
                             showDialogBox(
                                 SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
                                 "Failed!!"
                             )
+                            binding.saveTarget.visibility = View.GONE
                         }
                     } else {
                         dismissLoadingDialog()
