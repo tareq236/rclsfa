@@ -2,29 +2,28 @@ package com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Intent
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.os.Bundle
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.model.RetailerListByKro
-import com.impala.rclsfa.databinding.ActivityKrooutletBinding
+import com.impala.rclsfa.R
+import com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.model.SaveKroTargetModel
+import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.SaveTargetModel
+import com.impala.rclsfa.databinding.ActivityRouteListBinding
+import com.impala.rclsfa.databinding.ActivitySaveTargetKroBinding
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Path
 
-class KROOutletActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityKrooutletBinding
-    lateinit var adapter: KROOutletListAdapter
+class SaveTargetKroActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySaveTargetKroBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
-    var srId = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityKrooutletBinding.inflate(layoutInflater)
+        binding = ActivitySaveTargetKroBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -35,56 +34,58 @@ class KROOutletActivity : AppCompatActivity() {
 
     private fun initView() {
         sessionManager = SessionManager(this)
-        adapter = KROOutletListAdapter(this)
         loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
             .setTitleText("Loading")
-        srId = sessionManager.userId!!
 
-        val linearLayoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerView.layoutManager = linearLayoutManager
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.setHasFixedSize(true)
+        val retailerId  = this.intent.getIntExtra("retailer_id",0)
 
-        binding.addKroOutlet.setOnClickListener {
-            startActivity(Intent(this,AddKroOutletActivity::class.java))
+        binding.saveTarget.setOnClickListener {
+            val targetAmount = binding.edtSearch.text.toString()
+            if (targetAmount.isEmpty()) {
+                showDialogBoxForValidation(
+                    SweetAlertDialog.WARNING_TYPE,
+                    "Validation",
+                    "Route Target is required"
+                )
+                return@setOnClickListener
+            }
+
+            showLoadingDialog()
+            saveKroTgtByRetailer(retailerId.toString(),targetAmount)
         }
 
-
-
     }
-
-    override fun onResume() {
-        super.onResume()
-        showLoadingDialog()
-        retailerListBySrRouteKro(srId)
-    }
-    private fun retailerListBySrRouteKro(
-       sr_id: String
+    private fun saveKroTgtByRetailer(
+         retailer_id: String,
+          tgt: String
     ) {
         val apiService = ApiService.CreateApi2()
-        apiService.retailerListBySrRouteKro(
-           sr_id
+        apiService.saveKroTgtByRetailer(
+            retailer_id ,
+            tgt
         ).enqueue(object :
-            Callback<RetailerListByKro> {
+            Callback<SaveKroTargetModel> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(
-                call: Call<RetailerListByKro>,
-                response: Response<RetailerListByKro>
+                call: Call<SaveKroTargetModel>,
+                response: Response<SaveKroTargetModel>
             ) {
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null) {
                         if (data.getSuccess()!!) {
                             val dataList = data.getResult()
-                            adapter.addData(dataList as MutableList<RetailerListByKro.Result>)
-                            // targetAmount = data.getTargetAmount()!!
+                            showFDialogBox(
+                                SweetAlertDialog.SUCCESS_TYPE,
+                                "SUCCESS-S5803",
+                                "Save Target Done  "
+                            )
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()
                             showDialogBox(
                                 SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
-                                "Failed!!"
+                                " Failed"
                             )
                         }
                     } else {
@@ -105,13 +106,12 @@ class KROOutletActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<RetailerListByKro>, t: Throwable) {
+            override fun onFailure(call: Call<SaveKroTargetModel>, t: Throwable) {
                 dismissLoadingDialog()
                 showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
             }
         })
     }
-
     private fun showLoadingDialog() {
         loadingDialog.setCancelable(false)
         loadingDialog.show()
@@ -137,4 +137,39 @@ class KROOutletActivity : AppCompatActivity() {
         sweetAlertDialog.show()
     }
 
+    private fun showDialogBoxForValidation(
+        type: Int,
+        title: String,
+        message: String,
+        callback: (() -> Unit)? = null
+    ) {
+        val sweetAlertDialog = SweetAlertDialog(this, type)
+            .setTitleText(title)
+            .setContentText(message)
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                callback?.invoke()
+
+            }
+        sweetAlertDialog.show()
+    }
+
+
+    private fun showFDialogBox(
+        type: Int,
+        title: String,
+        message: String,
+        callback: (() -> Unit)? = null
+    ) {
+        val sweetAlertDialog = SweetAlertDialog(this, type)
+            .setTitleText(title)
+            .setContentText(message)
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                callback?.invoke()
+
+                finish()
+            }
+        sweetAlertDialog.show()
+    }
 }

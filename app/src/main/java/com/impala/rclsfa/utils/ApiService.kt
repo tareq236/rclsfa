@@ -21,6 +21,10 @@ import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.SoListModel
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.ZoneListModel
 import com.impala.rclsfa.activities.retailer.model.RetailerListModel
+import com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.model.KroDetailsModel
+import com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.model.KroRouteListM
+import com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.model.RetailerListByKro
+import com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.model.SaveKroTargetModel
 import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtModel
 import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.SaveTargetModel
 import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.TgtRouteDetailsM
@@ -274,6 +278,31 @@ interface ApiService {
         @Path("sr_id") sr_id: String,
         @Path("target_amount") target_amount: String
     ): Call<SaveTargetModel>
+
+    @GET("api/retailer_list_by_sr_route_kro/{sr_id}")
+    fun retailerListBySrRouteKro(
+        @Path("sr_id") sr_id: String
+    ): Call<RetailerListByKro>
+
+    @GET("api/route_list_by_sr/{sr_id}/{designation_id}")
+    fun routeListBySrKro(
+        @Path("sr_id") sr_id: String,
+        @Path("designation_id") designation_id: String
+    ): Call<KroRouteListM>
+
+    @GET("api/retailer_list_by_sr_route/{sr_id}/{route_id}/{designation_id}")
+    fun retailerListBySrRouteKro(
+        @Path("sr_id") sr_id: String,
+        @Path("route_id") route_id: String,
+        @Path("designation_id") designation_id: String
+    ): Call<KroDetailsModel>
+
+    @GET("api/save_kro_tgt_by_sr/{retailer_id}/{tgt}")
+    fun saveKroTgtByRetailer(
+        @Path("retailer_id") retailer_id: String,
+        @Path("tgt") tgt: String
+    ): Call<SaveKroTargetModel>
+
 
     companion object {
         // This function creates an instance of ApiService

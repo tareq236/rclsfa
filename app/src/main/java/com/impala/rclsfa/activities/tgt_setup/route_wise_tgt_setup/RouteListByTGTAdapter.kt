@@ -65,11 +65,16 @@ class RouteListByTGTAdapter(
             }
 
             binding.itemView.setOnClickListener {
+                var achAmount = 0.0
+                if(item.achAmount!=null){
+                   achAmount = item.achAmount!!
+                }
+
                 click.doClick(
                     item.routeId.toString(),
                     item.contribution!!,
                     list.size.toString(),
-                    item.achAmount!!.toString()
+                    achAmount.toString()
                 )
             }
 

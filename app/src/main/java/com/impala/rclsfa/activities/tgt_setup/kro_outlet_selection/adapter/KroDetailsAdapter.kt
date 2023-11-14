@@ -2,11 +2,14 @@ package com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
+import com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.SaveTargetKroActivity
+import com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.model.KroDetailsModel
 import com.impala.rclsfa.databinding.RouteDetailsBinding
 
 
@@ -15,18 +18,18 @@ class KroDetailsAdapter(
 ) :
     RecyclerView.Adapter<KroDetailsAdapter.ViewHolder>() {
 
-   // var list: MutableList<TgtRouteDetailsM.Result> = mutableListOf()
+    var list: MutableList<KroDetailsModel.Result> = mutableListOf()
 
 
-//    fun addData(allCus: MutableList<TgtRouteDetailsM.Result>) {
-//        list.addAll(allCus)
-//        notifyDataSetChanged()
-//    }
+    fun addData(allCus: MutableList<KroDetailsModel.Result>) {
+        list.addAll(allCus)
+        notifyDataSetChanged()
+    }
 
-//    fun clearData() {
-//        list.clear()
-//        notifyDataSetChanged()
-//    }
+    fun clearData() {
+        list.clear()
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = RouteDetailsBinding.bind(itemView)
@@ -41,16 +44,31 @@ class KroDetailsAdapter(
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-      //  val item = list[position]
+        val item = list[position]
 
         with(holder) {
+            binding.nameEn.text = item.retailerName
+            binding.nameBn.text = item.nameBn
+            if(item.targetAmountRe!=null) {
+                binding.targetAmountId.text = item.targetAmountRe!!.toString()
+            }
+            if(item.targetPerRe!=null){
+                binding.contribution.text = roundTheNumber(item.targetPerRe!!)
+            }
+
+
+            binding.itemView.setOnClickListener {
+                context.startActivity(Intent(context,SaveTargetKroActivity::class.java)
+                    .putExtra("retailer_id",item.id)
+                )
+            }
 
         }
 
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return list.size
     }
 
     private fun roundTheNumber(numInDouble: Double): String {

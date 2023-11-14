@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
 import com.impala.rclsfa.activities.outlet_management.route_wise_outlet_mapping.model.RouteListBySRModel
 import com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.KroDetailsActivity
+import com.impala.rclsfa.activities.tgt_setup.kro_outlet_selection.model.KroRouteListM
 import com.impala.rclsfa.activities.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtModel
 import com.impala.rclsfa.databinding.RouteListByKroBinding
 
@@ -22,18 +23,18 @@ class RouteListByKroAdapter(
 ) :
     RecyclerView.Adapter<RouteListByKroAdapter.ViewHolder>() {
 
-   // var list: MutableList<RouteListByTgtModel.Result> = mutableListOf()
+    var list: MutableList<KroRouteListM.Result> = mutableListOf()
 
 
-//    fun addData(allCus: MutableList<RouteListByTgtModel.Result>) {
-//        list.addAll(allCus)
-//        notifyDataSetChanged()
-//    }
+    fun addData(allCus: MutableList<KroRouteListM.Result>) {
+        list.addAll(allCus)
+        notifyDataSetChanged()
+    }
 
-//    fun clearData() {
-//        list.clear()
-//        notifyDataSetChanged()
-//    }
+    fun clearData() {
+        list.clear()
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = RouteListByKroBinding.bind(itemView)
@@ -48,19 +49,25 @@ class RouteListByKroAdapter(
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-       // val item = list[position]
+        val item = list[position]
 
         with(holder) {
+            binding.nameEn.text = item.routeName
+            binding.targetAmountId.text = item.achAmount.toString()
+            binding.contributionId.text = item.contribution
 
-                binding.itemView.setOnClickListener {
-                    context.startActivity(Intent(context,KroDetailsActivity::class.java))
-                }
+            binding.itemView.setOnClickListener {
+                context.startActivity(Intent(context, KroDetailsActivity::class.java)
+                    .putExtra("route_id",item.routeId)
+                )
+            }
+
         }
 
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return list.size
     }
 
     private fun roundTheNumber(numInDouble: Double): String {
