@@ -3,6 +3,7 @@ package com.impala.rclsfa.utils
 import com.google.gson.JsonObject
 import com.impala.rclsfa.activities.attendance.model.AllLeaveAttendListM
 import com.impala.rclsfa.activities.attendance.model.SaveLeaveAttendM
+import com.impala.rclsfa.activities.auth.model.ChangePasswordM
 import com.impala.rclsfa.activities.auth.model.ImageUploadModel
 import com.impala.rclsfa.activities.auth.model.ProfileDataModel
 import com.impala.rclsfa.activities.auth.model.ProfileUpdateModel
@@ -302,6 +303,13 @@ interface ApiService {
         @Path("retailer_id") retailer_id: String,
         @Path("tgt") tgt: String
     ): Call<SaveKroTargetModel>
+
+
+    @POST("api/change_password")
+    fun changePassword(
+        @Query("user_id") user_id: String,
+        @Query("password") password: String
+    ): Call<ChangePasswordM>
 
 
     companion object {
