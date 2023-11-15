@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
@@ -39,13 +40,14 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
         fun bind(menuItem: MenuItem) {
             val menuNameTextView = itemView.findViewById<TextView>(R.id.menuNameTextView)
             val menuImageView = itemView.findViewById<ImageView>(R.id.menuImageView)
+            val llCard = itemView.findViewById<LinearLayout>(R.id.ll_card)
 
             menuNameTextView.text = menuItem.menu_name
             // Load and set the image using Picasso
-            Picasso.get().load("http://157.230.195.60:6011/api/v1/menu_icons/"+menuItem.image).into(menuImageView)
+            Picasso.get().load("http://157.230.195.60:9011/api/v1/menu_icons/"+menuItem.image).into(menuImageView)
 
             // Add a click listener to the image view
-            menuImageView.setOnClickListener {
+            llCard.setOnClickListener {
                 // Start the MenuDetailActivity when the image is clicked
                 if(menuItem.func == "attendance"){
                     val intent = Intent(itemView.context, AttendanceMenuActivity::class.java)

@@ -77,7 +77,6 @@ class NewOrderActivity : AppCompatActivity() {
             // Handle compression error
             Toast.makeText(applicationContext, "Internal Problem.", Toast.LENGTH_LONG).show()
         }
-
     }
 
     private fun getCurrentLocation(callback: OnSuccessListener<Location>) {

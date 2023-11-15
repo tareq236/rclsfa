@@ -9,8 +9,6 @@ import android.widget.Button
 import androidx.appcompat.widget.Toolbar
 import com.google.gson.Gson
 import com.impala.rclsfa.R
-import com.impala.rclsfa.activities.attendance.MorningAttendanceActivity
-import com.impala.rclsfa.databinding.ActivityAttendanceMenuBinding
 import com.impala.rclsfa.databinding.ActivityOrderMenuBinding
 import com.impala.rclsfa.models.AppButton
 import com.impala.rclsfa.models.UserRoles

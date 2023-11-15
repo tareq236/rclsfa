@@ -66,9 +66,6 @@
             android:name=".activities.tgt_setup.kro_outlet_selection.KROOutletActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.tgt_setup.kro_outlet_selection.AddKROOutletActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.tgt_setup.route_wise_tgt_setup.RouteListDetailsActivity"
             android:exported="false" />
         <activity

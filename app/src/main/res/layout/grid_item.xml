@@ -6,14 +6,15 @@
     android:orientation="vertical"
     android:background="@drawable/rounded_linear_layout"
     android:layout_margin="3dp"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:id="@+id/ll_card">
 
     <ImageView
         android:id="@+id/menuImageView"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:src="@drawable/placeholder_image" />
 
     <TextView
@@ -22,6 +23,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_color"
         android:text="Menu Name"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:textSize="11sp" />
 </LinearLayout>

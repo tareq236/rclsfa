@@ -2,8 +2,10 @@ package com.impala.rclsfa.activities.attendance
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.appcompat.widget.Toolbar
 import com.impala.rclsfa.R
 
 class MonthlyAttendaneActivity : AppCompatActivity() {
@@ -11,6 +13,12 @@ class MonthlyAttendaneActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_monthly_attendane)
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // Enable the Up button
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         webView = findViewById(R.id.webView)
 
@@ -28,5 +36,13 @@ class MonthlyAttendaneActivity : AppCompatActivity() {
         webView.webViewClient = WebViewClient()
 
         webView.loadUrl(url)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed() // Navigate back to the previous activity
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
