@@ -1,31 +1,23 @@
 package com.impala.rclsfa
 
+import android.Manifest
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.IntentSender
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.impala.rclsfa.adapter.MenuAdapter
-import com.impala.rclsfa.models.MenuResponse
-import com.impala.rclsfa.utils.ApiService
-import com.impala.rclsfa.utils.MyBackgroundService
-import com.impala.rclsfa.utils.MyForegroundService
-import com.impala.rclsfa.utils.SocketManager
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import android.Manifest
-import android.content.Context
-import android.content.IntentSender
-import android.content.SharedPreferences
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -41,8 +33,18 @@ import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import com.impala.rclsfa.activities.NotificationActivity
 import com.impala.rclsfa.activities.SettingsActivity
+import com.impala.rclsfa.adapter.MenuAdapter
+import com.impala.rclsfa.auth.LoginActivity
+import com.impala.rclsfa.models.MenuResponse
+import com.impala.rclsfa.utils.ApiService
+import com.impala.rclsfa.utils.MyBackgroundService
+import com.impala.rclsfa.utils.MyForegroundService
 import com.impala.rclsfa.utils.SessionManager
+import com.impala.rclsfa.utils.SocketManager
 import com.impala.rclsfa.utils.UserRolesCheck
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -334,6 +336,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             startService(serviceIntent)
         }
+    }
+
+    fun onTaskRemoved(rootIntent: Intent?) {
+        //do your task;
+        Log.d("app_close","App Closed")
     }
 
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.tgt_setup.kro_outlet_selection.AddKroOutletActivity">
+    tools:context=".tgt_setup.kro_outlet_selection.AddKroOutletActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

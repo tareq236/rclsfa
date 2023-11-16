@@ -30,100 +30,100 @@
             android:name=".activities.NotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.tgt_setup.kro_outlet_selection.SaveTargetKroActivity"
+            android:name=".tgt_setup.kro_outlet_selection.SaveTargetKroActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.OutletDetailsActivity"
+            android:name=".outletManagement.OutletDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.attendance.ApplyIOMApplicationActivity"
+            android:name=".attendance.ApplyIOMApplicationActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.attendance.IOMApplicationActivity"
+            android:name=".attendance.IOMApplicationActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.auth.ChangePasswordActivity"
+            android:name=".auth.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.attendance.MonthlyAttendaneActivity"
+            android:name=".attendance.MonthlyAttendaneActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.order.OrderListActivity"
+            android:name=".order.OrderListActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.tgt_setup.kro_outlet_selection.KroDetailsActivity"
+            android:name=".tgt_setup.kro_outlet_selection.KroDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.tgt_setup.kro_outlet_selection.AddKroOutletActivity"
+            android:name=".tgt_setup.kro_outlet_selection.AddKroOutletActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.attendance.ApplyLeaveApplicationActivity"
+            android:name=".attendance.ApplyLeaveApplicationActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.attendance.LeaveAttendanceApplicationListActivity"
+            android:name=".attendance.LeaveAttendanceApplicationListActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.tgt_setup.kro_outlet_selection.KROOutletActivity"
+            android:name=".tgt_setup.kro_outlet_selection.KROOutletActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.tgt_setup.route_wise_tgt_setup.RouteListDetailsActivity"
+            android:name=".tgt_setup.route_wise_tgt_setup.RouteListDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.tgt_setup.route_wise_tgt_setup.RouteListActivity"
+            android:name=".tgt_setup.route_wise_tgt_setup.RouteListActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.tgt_setup.TGTSetupMainActivity"
+            android:name=".tgt_setup.TGTSetupMainActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.UpdateLocationPageActivity"
+            android:name=".outletManagement.UpdateLocationPageActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.LocationUpdateActivity"
+            android:name=".outletManagement.LocationUpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.route_wise_outlet_mapping.ShowSRListActivity"
+            android:name=".outletManagement.route_wise_outlet_mapping.ShowSRListActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.OutletSearchingActivity"
+            android:name=".outletManagement.OutletSearchingActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.route_wise_outlet_mapping.RouteWiseOutletMappingActivity"
+            android:name=".outletManagement.route_wise_outlet_mapping.RouteWiseOutletMappingActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.retailer.RetailerSummeryActivity"
+            android:name=".retailer.RetailerSummeryActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.outlet_entry.SearchCategoryActivity"
+            android:name=".outletManagement.outlet_entry.SearchCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.outlet_entry.SearchUpazilaActivity"
+            android:name=".outletManagement.outlet_entry.SearchUpazilaActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.outlet_entry.SearchDistrictActivity"
+            android:name=".outletManagement.outlet_entry.SearchDistrictActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.outlet_entry.SearchDivisionActivity"
+            android:name=".outletManagement.outlet_entry.SearchDivisionActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.outlet_entry.SearchRouteActivity"
+            android:name=".outletManagement.outlet_entry.SearchRouteActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.outlet_entry.OutletEntryActivity"
+            android:name=".outletManagement.outlet_entry.OutletEntryActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.outlet_management.OutletManagementMainMenuActivity"
+            android:name=".outletManagement.OutletManagementMainMenuActivity"
             android:exported="false" />
         <activity
             android:name=".activities.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.auth.ProfilePhotoUploadActivity"
+            android:name=".auth.ProfilePhotoUploadActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.auth.ProfileUpdateActivity"
+            android:name=".auth.ProfileUpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.auth.ProfileActivity"
+            android:name=".auth.ProfileActivity"
             android:exported="false" />
 
         <service
@@ -132,10 +132,10 @@
             android:exported="false" />
 
         <activity
-            android:name=".activities.order.OrderMenuActivity"
+            android:name=".order.OrderMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.order.NewOrderActivity"
+            android:name=".order.NewOrderActivity"
             android:exported="false" />
 
         <provider
@@ -149,19 +149,19 @@
         </provider>
 
         <activity
-            android:name=".activities.attendance.EveningAttendanceActivity"
+            android:name=".attendance.EveningAttendanceActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.attendance.MorningAttendanceActivity"
+            android:name=".attendance.MorningAttendanceActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.attendance.AttendanceMenuActivity"
+            android:name=".attendance.AttendanceMenuActivity"
             android:exported="false" />
         <activity
             android:name=".PermissionActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".auth.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

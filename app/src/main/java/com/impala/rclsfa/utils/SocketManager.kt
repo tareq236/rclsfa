@@ -1,6 +1,7 @@
 package com.impala.rclsfa.utils
 
 import android.content.Context
+import android.util.Log
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
@@ -44,6 +45,7 @@ class SocketManager private constructor() {
             onConnectCallback?.invoke()
         }
         socket?.on(Socket.EVENT_DISCONNECT, onDisconnect)
+
         socket?.on(Socket.EVENT_CONNECT_ERROR, onError)
     }
 
@@ -54,6 +56,7 @@ class SocketManager private constructor() {
 
     fun connect() {
         socket?.connect()
+
     }
 
     fun disconnect() {
@@ -86,10 +89,12 @@ class SocketManager private constructor() {
 
     private val onConnect = Emitter.Listener {
         // Handle the connection event
+        Log.d("socket","connected")
     }
 
     private val onDisconnect = Emitter.Listener {
         // Handle the disconnection event
+        Log.d("socket","disconnected")
     }
 
     private val onError = Emitter.Listener {

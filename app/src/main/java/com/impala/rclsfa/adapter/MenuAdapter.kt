@@ -10,12 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
 import com.impala.rclsfa.activities.DashboardActivity
-import com.impala.rclsfa.activities.attendance.AttendanceMenuActivity
-import com.impala.rclsfa.activities.auth.ProfileActivity
-import com.impala.rclsfa.activities.order.OrderMenuActivity
-import com.impala.rclsfa.activities.outlet_management.OutletManagementMainMenuActivity
-import com.impala.rclsfa.activities.retailer.RetailerSummeryActivity
-import com.impala.rclsfa.activities.tgt_setup.TGTSetupMainActivity
+import com.impala.rclsfa.attendance.AttendanceMenuActivity
+import com.impala.rclsfa.auth.ProfileActivity
+import com.impala.rclsfa.order.OrderMenuActivity
+import com.impala.rclsfa.outletManagement.OutletManagementMainMenuActivity
+import com.impala.rclsfa.retailer.RetailerSummeryActivity
+import com.impala.rclsfa.tgt_setup.TGTSetupMainActivity
 import com.impala.rclsfa.models.MenuItem
 import com.squareup.picasso.Picasso
 
