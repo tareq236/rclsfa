@@ -2,6 +2,7 @@ package com.impala.rclsfa.tgt_setup.kro_outlet_selection
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,15 @@ class KROOutletListAdapter(val context: Context) :
             binding.nameEn.text = item.retailerName
             binding.nameBn.text = item.nameBn
             binding.targetAmountId.text = item.targetAmountRe
+
+            binding.editId.setOnClickListener {
+                context.startActivity(Intent(context,EditKroOutletTargetActivity::class.java)
+                    .putExtra("name_en",item.retailerName)
+                    .putExtra("name_bn",item.nameBn)
+                    .putExtra("target_amount",item.targetAmountRe)
+                    .putExtra("id",item.target_id)
+                )
+            }
         }
 
     }

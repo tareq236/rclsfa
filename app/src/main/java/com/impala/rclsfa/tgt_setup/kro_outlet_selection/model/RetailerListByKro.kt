@@ -37,6 +37,10 @@ class RetailerListByKro {
         @Expose
         var id: Int? = null
 
+        @SerializedName("target_id")
+        @Expose
+        var target_id: Int? = null
+
         @SerializedName("retailer_name")
         @Expose
         var retailerName: String? = null

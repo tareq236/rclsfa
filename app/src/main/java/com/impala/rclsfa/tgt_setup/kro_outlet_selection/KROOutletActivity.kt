@@ -77,6 +77,7 @@ class KROOutletActivity : AppCompatActivity() {
                     if (data != null) {
                         if (data.getSuccess()!!) {
                             val dataList = data.getResult()
+                            adapter.clearData()
                             adapter.addData(dataList as MutableList<RetailerListByKro.Result>)
                             // targetAmount = data.getTargetAmount()!!
                             dismissLoadingDialog()

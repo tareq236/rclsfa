@@ -1,114 +1,65 @@
-package com.impala.rclsfa.auth
+package com.impala.rclsfa.tgt_setup.kro_outlet_selection
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.impala.rclsfa.MainActivity
 import com.impala.rclsfa.R
-import com.impala.rclsfa.attendance.model.SaveLeaveAttendM
-import com.impala.rclsfa.auth.model.ChangePasswordM
-import com.impala.rclsfa.databinding.ActivityChangePasswordBinding
-import com.impala.rclsfa.databinding.ActivityNotificationBinding
+import com.impala.rclsfa.databinding.ActivityAddKroOutletBinding
+import com.impala.rclsfa.databinding.ActivityEditKroOutletTargetBinding
+import com.impala.rclsfa.tgt_setup.kro_outlet_selection.adapter.RouteListByKroAdapter
+import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.KroRouteListM
+import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.UpdateKroTargetM
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Query
+import retrofit2.http.Path
 
-class ChangePasswordActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityChangePasswordBinding
+class EditKroOutletTargetActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityEditKroOutletTargetBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChangePasswordBinding.inflate(layoutInflater)
+        binding = ActivityEditKroOutletTargetBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.setNavigationOnClickListener { finish() }
-
+        initView()
+    }
+    private fun initView(){
         sessionManager = SessionManager(this)
-        loadingDialog =
-            SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading")
-        val userId = sessionManager.userId
+        loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+            .setTitleText("Loading")
 
+        val nameEn = this.intent.getStringExtra("name_en")
+        val nameBn = this.intent.getStringExtra("name_bn")
+        val targetAmount = this.intent.getStringExtra("target_amount")
+        val id = this.intent.getIntExtra("id",0)
 
+        binding.edtNameEn.editText!!.setText(nameEn)
+        //binding.edtNameBn.editText!!.setText(nameBn)
+        binding.edtTargetAmount.editText!!.setText(targetAmount)
 
-        binding.changePassword.setOnClickListener {
-            val oldPassword = binding.edtOldPassword.editText!!.text.toString()
-            val newPassword = binding.edtNewPassword.editText!!.text.toString()
-            val confPassword = binding.edtConfPassword.editText!!.text.toString()
-
-            if (newPassword != confPassword) {
+        binding.updateId.setOnClickListener {
+            val targetAmount = binding.edtTargetAmount.editText!!.text.toString()
+            if (targetAmount.isEmpty()) {
                 showDialogBoxForValidation(
                     SweetAlertDialog.WARNING_TYPE,
                     "Validation",
-                    "Password not match"
+                    "Target Amount is required"
                 )
                 return@setOnClickListener
             }
 
-
-            if (validateInput(oldPassword, newPassword, confPassword)) {
-                if (!isPasswordValid(newPassword)) {
-                    // Password is valid, proceed with authentication or other actions
-                    showDialogBoxForValidation(
-                        SweetAlertDialog.WARNING_TYPE,
-                        "Validation",
-                        "At least one digit,At least one letter (uppercase or lowercase),Minimum length of 6 characters."
-                    )
-                    return@setOnClickListener
-                }
-
-                showLoadingDialog()
-                changePassword(userId!!, newPassword)
-            }
-
+            showLoadingDialog()
+            updateKroTgtByRetailer(id.toString(),targetAmount)
         }
-
-
-    }
-
-    private fun validateInput(
-        oldPassword: String,
-        newPassword: String,
-        confPassword: String,
-    ): Boolean {
-        if (oldPassword.isEmpty()) {
-            showDialogBoxForValidation(
-                SweetAlertDialog.WARNING_TYPE,
-                "Validation",
-                "Old password is required"
-            )
-            return false
-        } else if (newPassword.isEmpty()) {
-            showDialogBoxForValidation(
-                SweetAlertDialog.WARNING_TYPE,
-                "Validation",
-                "New password is required"
-            )
-            return false
-        } else if (confPassword.isEmpty()) {
-            showDialogBoxForValidation(
-                SweetAlertDialog.WARNING_TYPE,
-                "Validation",
-                "Confirm password is required"
-            )
-            return false
-        }
-
-        return true
-    }
-
-    fun isPasswordValid(password: String): Boolean {
-        val passwordRegex = "^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$"
-
-        return password.matches(passwordRegex.toRegex())
     }
 
     private fun showDialogBoxForValidation(
@@ -124,51 +75,40 @@ class ChangePasswordActivity : AppCompatActivity() {
                 it.dismissWithAnimation()
                 callback?.invoke()
 
-
             }
         sweetAlertDialog.show()
     }
-
-    private fun showLoadingDialog() {
-        loadingDialog.setCancelable(false)
-        loadingDialog.show()
-    }
-
-    private fun dismissLoadingDialog() {
-        loadingDialog.dismiss()
-    }
-
-    private fun changePassword(
-        user_id: String,
-        password: String
+    private fun updateKroTgtByRetailer(
+         id: String,
+         tgt: String
     ) {
         val apiService = ApiService.CreateApi2()
-        apiService.changePassword(
-            user_id,
-            password
+        apiService.updateKroTgtByRetailer(
+            id,
+            tgt
         ).enqueue(object :
-            Callback<ChangePasswordM> {
+            Callback<UpdateKroTargetM> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(
-                call: Call<ChangePasswordM>,
-                response: Response<ChangePasswordM>
+                call: Call<UpdateKroTargetM>,
+                response: Response<UpdateKroTargetM>
             ) {
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null) {
                         if (data.getSuccess()!!) {
-                            val dataList = data.getResult()
+                            val msg = data.getMessage()
                             showFDialogBox(
                                 SweetAlertDialog.SUCCESS_TYPE,
                                 "SUCCESS-S5803",
-                                "Change password successfully done "
+                                msg!!
                             )
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()
                             showDialogBox(
                                 SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
-                                " Failed"
+                                "Failed!!"
                             )
                         }
                     } else {
@@ -189,31 +129,12 @@ class ChangePasswordActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<ChangePasswordM>, t: Throwable) {
+            override fun onFailure(call: Call<UpdateKroTargetM>, t: Throwable) {
                 dismissLoadingDialog()
                 showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
             }
         })
     }
-
-
-    private fun showDialogBox(
-        type: Int,
-        title: String,
-        message: String,
-        callback: (() -> Unit)? = null
-    ) {
-        val sweetAlertDialog = SweetAlertDialog(this, type)
-            .setTitleText(title)
-            .setContentText(message)
-            .setConfirmClickListener {
-                it.dismissWithAnimation()
-                callback?.invoke()
-
-            }
-        sweetAlertDialog.show()
-    }
-
     private fun showFDialogBox(
         type: Int,
         title: String,
@@ -228,7 +149,31 @@ class ChangePasswordActivity : AppCompatActivity() {
                 callback?.invoke()
 
                 finish()
-                startActivity(Intent(this, MainActivity::class.java))
+            }
+        sweetAlertDialog.show()
+    }
+
+    private fun showLoadingDialog() {
+        loadingDialog.setCancelable(false)
+        loadingDialog.show()
+    }
+
+    private fun dismissLoadingDialog() {
+        loadingDialog.dismiss()
+    }
+
+    private fun showDialogBox(
+        type: Int,
+        title: String,
+        message: String,
+        callback: (() -> Unit)? = null
+    ) {
+        val sweetAlertDialog = SweetAlertDialog(this, type)
+            .setTitleText(title)
+            .setContentText(message)
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                callback?.invoke()
             }
         sweetAlertDialog.show()
     }

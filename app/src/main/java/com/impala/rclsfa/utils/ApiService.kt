@@ -33,6 +33,7 @@ import com.impala.rclsfa.models.AttendanceResponse
 import com.impala.rclsfa.models.LoginRequest
 import com.impala.rclsfa.models.LoginResponse
 import com.impala.rclsfa.models.MenuResponse
+import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.UpdateKroTargetM
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -310,6 +311,13 @@ interface ApiService {
         @Field("user_id") user_id: String,
         @Field("password") password: String
     ): Call<ChangePasswordM>
+
+
+    @GET("api/update_kro_tgt_by_sr/{id}/{tgt}")
+    fun updateKroTgtByRetailer(
+        @Path("id") id: String,
+        @Path("tgt") tgt: String
+    ): Call<UpdateKroTargetM>
 
 
     companion object {
