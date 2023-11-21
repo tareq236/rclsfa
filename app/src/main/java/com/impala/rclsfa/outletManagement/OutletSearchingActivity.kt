@@ -10,18 +10,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.impala.rclsfa.databinding.ActivityOutletSearchingBinding
+import com.impala.rclsfa.outletManagement.outlet_entry.model.CategoryListModel
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 class OutletSearchingActivity : AppCompatActivity(), OutletListAdapter.MainClickManage {
     private lateinit var binding: ActivityOutletSearchingBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
     lateinit var adapter: OutletListAdapter
-
+    lateinit var dataList: MutableList<SearchOutletListModel.Result>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +50,25 @@ class OutletSearchingActivity : AppCompatActivity(), OutletListAdapter.MainClick
         binding.recyclerView.adapter = adapter
         binding.recyclerView.setHasFixedSize(true)
 
+        showLoadingDialog()
+        searchOutletByName(userId!!,designationId.toString(),"")
 
         binding.edtSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if(s.toString().isNotEmpty()){
-                    searchOutletByName(userId!!,designationId.toString(),s.toString())
-                }else{
+//                if(s.toString().isNotEmpty()){
+//                    searchOutletByName(userId!!,designationId.toString(),s.toString())
+//                }else{
+//                    adapter.clearData()
+//                    adapter.notifyDataSetChanged()
+//                }
+
+                if (s.toString().isNotEmpty()) {
+                    filter(s.toString())
+                }else {
+                    showLoadingDialog()
                     adapter.clearData()
                     adapter.notifyDataSetChanged()
+                    searchOutletByName(userId!!,designationId.toString(),"")
                 }
 
             }
@@ -70,6 +83,22 @@ class OutletSearchingActivity : AppCompatActivity(), OutletListAdapter.MainClick
 
     }
 
+    fun filter(text: String) {
+
+        val filteredList: ArrayList<SearchOutletListModel.Result> = ArrayList()
+
+        //val courseAry : ArrayList<Course> = Helper.Companion.getVersionsList()
+
+        for (eachItem in dataList) {
+            if (eachItem.retailerName!!.toUpperCase(Locale.getDefault()).contains(text.toUpperCase()) || eachItem.retailerName!!.toUpperCase(
+                    Locale.getDefault()).contains(text.toLowerCase())) {
+                filteredList.add(eachItem)
+            }
+        }
+
+        //calling a method of the adapter class and passing the filtered list
+        adapter.filterList(filteredList);
+    }
     private fun searchOutletByName(
         srId: String,
         designation_id: String,
@@ -91,9 +120,9 @@ class OutletSearchingActivity : AppCompatActivity(), OutletListAdapter.MainClick
                     val data = response.body()
                     if (data != null) {
                         if (data.getSuccess()!!) {
-                            val dataList = data.getResult()
+                              dataList = data.getResult() as MutableList<SearchOutletListModel.Result>
                             adapter.clearData()
-                            adapter.addData(dataList as MutableList<SearchOutletListModel.Result>)
+                            adapter.addData(dataList )
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()

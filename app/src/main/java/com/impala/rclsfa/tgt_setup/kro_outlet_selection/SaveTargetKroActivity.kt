@@ -2,20 +2,17 @@ package com.impala.rclsfa.tgt_setup.kro_outlet_selection
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.impala.rclsfa.R
-import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.SaveKroTargetModel
-import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.SaveTargetModel
-import com.impala.rclsfa.databinding.ActivityRouteListBinding
 import com.impala.rclsfa.databinding.ActivitySaveTargetKroBinding
+import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.SaveKroTargetModel
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Path
 
 class SaveTargetKroActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySaveTargetKroBinding
@@ -168,7 +165,11 @@ class SaveTargetKroActivity : AppCompatActivity() {
                 it.dismissWithAnimation()
                 callback?.invoke()
 
-                finish()
+                //finish()
+                val intent = Intent(this, KROOutletActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+
             }
         sweetAlertDialog.show()
     }

@@ -28,6 +28,7 @@ import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 class LocationUpdateActivity : AppCompatActivity(), OutletListForLocationAdapter.IClickManage {
     private lateinit var binding: ActivityLocationUpdateBinding
@@ -38,6 +39,7 @@ class LocationUpdateActivity : AppCompatActivity(), OutletListForLocationAdapter
     var latitude = ""
     var longitude = ""
     private var lastLocation: Location? = null
+    lateinit var dataList: MutableList<SearchOutletListModel.Result>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,15 +67,25 @@ class LocationUpdateActivity : AppCompatActivity(), OutletListForLocationAdapter
         binding.recyclerView.adapter = adapter
         binding.recyclerView.setHasFixedSize(true)
 
+        showLoadingDialog()
+        searchOutletByName(userId!!, designationId.toString(), "")
+
         binding.edtSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+//                if (s.toString().isNotEmpty()) {
+//                    searchOutletByName(userId!!, designationId.toString(), s.toString())
+//                } else {
+//                    adapter.clearData()
+//                    adapter.notifyDataSetChanged()
+//                }
                 if (s.toString().isNotEmpty()) {
-                    searchOutletByName(userId!!, designationId.toString(), s.toString())
-                } else {
+                    filter(s.toString())
+                }else {
+                    showLoadingDialog()
                     adapter.clearData()
                     adapter.notifyDataSetChanged()
+                    searchOutletByName(userId!!,designationId.toString(),"")
                 }
-
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -83,6 +95,23 @@ class LocationUpdateActivity : AppCompatActivity(), OutletListForLocationAdapter
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
+    }
+
+    fun filter(text: String) {
+
+        val filteredList: ArrayList<SearchOutletListModel.Result> = ArrayList()
+
+        //val courseAry : ArrayList<Course> = Helper.Companion.getVersionsList()
+
+        for (eachItem in dataList) {
+            if (eachItem.retailerName!!.toUpperCase(Locale.getDefault()).contains(text.toUpperCase()) || eachItem.retailerName!!.toUpperCase(
+                    Locale.getDefault()).contains(text.toLowerCase())) {
+                filteredList.add(eachItem)
+            }
+        }
+
+        //calling a method of the adapter class and passing the filtered list
+        adapter.filterList(filteredList);
     }
 
     private fun searchOutletByName(
@@ -106,8 +135,8 @@ class LocationUpdateActivity : AppCompatActivity(), OutletListForLocationAdapter
                     val data = response.body()
                     if (data != null) {
                         if (data.getSuccess()!!) {
-                            val dataList = data.getResult()
-                            adapter.addData(dataList as MutableList<SearchOutletListModel.Result>)
+                             dataList = data.getResult() as MutableList<SearchOutletListModel.Result>
+                            adapter.addData(dataList )
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()

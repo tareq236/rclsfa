@@ -304,11 +304,11 @@ interface ApiService {
         @Path("tgt") tgt: String
     ): Call<SaveKroTargetModel>
 
-
+    @FormUrlEncoded
     @POST("api/change_password")
     fun changePassword(
-        @Query("user_id") user_id: String,
-        @Query("password") password: String
+        @Field("user_id") user_id: String,
+        @Field("password") password: String
     ): Call<ChangePasswordM>
 
 

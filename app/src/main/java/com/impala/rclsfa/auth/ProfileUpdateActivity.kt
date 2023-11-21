@@ -250,7 +250,7 @@ class ProfileUpdateActivity : AppCompatActivity() {
                             val name = dataList!!.userInfo!!.name
                             //binding.edtName.editText!!.setText(name)
                             val designation = dataList.userInfo!!.designation
-                            val phoneNumber = dataList.userInfo!!.mobileNumber
+                            val phoneNumber = dataList.phoneNumber
                             binding.edtPhone.editText!!.setText(phoneNumber)
                             val mailId = dataList.mailId
                             binding.edtMailId.editText!!.setText(mailId)

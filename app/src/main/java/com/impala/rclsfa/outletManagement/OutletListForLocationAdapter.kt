@@ -16,10 +16,10 @@ class OutletListForLocationAdapter(val context: Context,val click: IClickManage)
 
     var list: MutableList<SearchOutletListModel.Result> = mutableListOf()
 
-//    fun filterList(filteredList: ArrayList<RetailerListModel.Result>) {
-//        this.list = filteredList;
-//        notifyDataSetChanged();
-//    }
+    fun filterList(filteredList: ArrayList<SearchOutletListModel.Result>) {
+        this.list = filteredList;
+        notifyDataSetChanged();
+    }
 
     fun addData(allCus: MutableList<SearchOutletListModel.Result>) {
         list.addAll(allCus)

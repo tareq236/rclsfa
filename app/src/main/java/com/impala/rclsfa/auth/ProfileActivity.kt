@@ -18,6 +18,7 @@ import com.impala.rclsfa.models.AppButton
 import com.impala.rclsfa.models.UserRoles
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
+import com.squareup.picasso.Picasso
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -96,7 +97,7 @@ class ProfileActivity : AppCompatActivity() {
 
                             val name = dataList!!.userInfo!!.name
                             val designation = dataList.userInfo!!.designation
-                            val phoneNumber = dataList.userInfo!!.mobileNumber
+                            val phoneNumber = dataList.phoneNumber
                             val mailId = dataList.mailId
                             val nid = dataList.nid
                             val bloodGroup = dataList.bloodGroup
@@ -105,6 +106,9 @@ class ProfileActivity : AppCompatActivity() {
                             val motherName = dataList.motherName
                             val motherNid = dataList.motherNid
                             val userId = dataList.userId
+                            val cover = dataList.coverImage
+                            val avatar = dataList.avatarImage
+
 
                             binding.nameId.text = name
                             binding.userNameId.text = "$name($userId)"
@@ -118,7 +122,8 @@ class ProfileActivity : AppCompatActivity() {
                             binding.motherNameId.text = motherName
                             binding.motherNid.text = motherNid
 
-
+                            Picasso.get().load("http://157.230.195.60:9012/profile/$avatar").into(binding.profileImage)
+                            Picasso.get().load("http://157.230.195.60:9012/profile/$cover").into(binding.bgCover)
                             //alter 1
                             val alterName1 = dataList.alternativeNameOne
                             val alterPhone1 = dataList.alternativePhoneNumOne

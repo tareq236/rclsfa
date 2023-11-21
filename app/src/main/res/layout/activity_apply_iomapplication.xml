@@ -88,7 +88,7 @@
                 <TextView
                     android:id="@+id/fromDate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:layout_marginHorizontal="30dp"
                     android:gravity="center"
@@ -119,10 +119,10 @@
                 <TextView
                     android:id="@+id/toDate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:layout_marginHorizontal="30dp"
+                    android:gravity="center"
                     android:hint="Select Date" />
 
 

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
 import com.impala.rclsfa.databinding.OutletListItemBinding
+import com.impala.rclsfa.outletManagement.outlet_entry.model.CategoryListModel
 
 
 class OutletListAdapter(val context: Context, val click: MainClickManage) :
@@ -22,6 +23,11 @@ class OutletListAdapter(val context: Context, val click: MainClickManage) :
     fun addData(allCus: MutableList<SearchOutletListModel.Result>) {
         list.addAll(allCus)
         notifyDataSetChanged()
+    }
+
+    fun filterList(filteredList: ArrayList<SearchOutletListModel.Result>) {
+        this.list = filteredList;
+        notifyDataSetChanged();
     }
 
     fun clearData() {

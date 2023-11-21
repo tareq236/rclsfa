@@ -44,6 +44,14 @@ class ChangePasswordActivity : AppCompatActivity() {
             val newPassword = binding.edtNewPassword.editText!!.text.toString()
             val confPassword = binding.edtConfPassword.editText!!.text.toString()
 
+            if (newPassword != confPassword) {
+                showDialogBoxForValidation(
+                    SweetAlertDialog.WARNING_TYPE,
+                    "Validation",
+                    "Password not match"
+                )
+                return@setOnClickListener
+            }
             if (validateInput(oldPassword, newPassword, confPassword)) {
                 showLoadingDialog()
                 changePassword(userId!!, newPassword)
@@ -80,16 +88,8 @@ class ChangePasswordActivity : AppCompatActivity() {
                 "Confirm password is required"
             )
             return false
-        } else {
-            if (newPassword != confPassword) {
-                showDialogBoxForValidation(
-                    SweetAlertDialog.WARNING_TYPE,
-                    "Validation",
-                    "Password not match"
-                )
-            }
-            return false
         }
+
         return true
     }
 

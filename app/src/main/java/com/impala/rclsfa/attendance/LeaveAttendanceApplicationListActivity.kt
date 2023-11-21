@@ -58,6 +58,15 @@ class LeaveAttendanceApplicationListActivity : AppCompatActivity() {
             )
         }
 
+//        showLoadingDialog()
+//        leaveAttendanceSrList(userId!!)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val userId = sessionManager.userId
+        val designationId = sessionManager.designationId
         showLoadingDialog()
         leaveAttendanceSrList(userId!!)
     }
