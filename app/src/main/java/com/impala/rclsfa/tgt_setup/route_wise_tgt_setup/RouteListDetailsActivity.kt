@@ -23,7 +23,7 @@ class RouteListDetailsActivity : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
     var routeId = ""
     var contribution = ""
-    var retailerSize = ""
+
     var routeTarget = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +43,9 @@ class RouteListDetailsActivity : AppCompatActivity() {
             .setTitleText("Loading")
         routeId = this.intent.getStringExtra("route_id")!!
         contribution = this.intent.getStringExtra("contribution")!!
-        retailerSize = this.intent.getStringExtra("retailerSize")!!
+        //retailerSize = this.intent.getStringExtra("retailerSize")!!
         routeTarget = this.intent.getStringExtra("route_target")!!
-        adapter = RouteDetailsAdapter(this,contribution,retailerSize,routeTarget)
+        adapter = RouteDetailsAdapter(this, contribution, routeTarget)
         val designationId = sessionManager.designationId
         val srId = sessionManager.userId
 
@@ -57,19 +57,19 @@ class RouteListDetailsActivity : AppCompatActivity() {
         binding.recyclerView.setHasFixedSize(true)
 
         showLoadingDialog()
-        retailerListBySrRoute(srId!!,routeId,designationId.toString())
+        retailerListBySrRoute(srId!!, routeId, designationId.toString())
 
     }
 
     private fun retailerListBySrRoute(
-        sr_id : String,
-         route_id : String,
-        designation_id : String
+        sr_id: String,
+        route_id: String,
+        designation_id: String
     ) {
         val apiService = ApiService.CreateApi2()
         apiService.retailerListBySrRoute(
-            sr_id  ,
-            route_id  ,
+            sr_id,
+            route_id,
             designation_id
         ).enqueue(object :
             Callback<TgtRouteDetailsM> {
@@ -83,6 +83,7 @@ class RouteListDetailsActivity : AppCompatActivity() {
                     if (data != null) {
                         if (data.getSuccess()!!) {
                             val dataList = data.getResult()
+                            //retailerSize = dataList!!.size
                             adapter.addData(dataList as MutableList<TgtRouteDetailsM.Result>)
                             dismissLoadingDialog()
                         } else {

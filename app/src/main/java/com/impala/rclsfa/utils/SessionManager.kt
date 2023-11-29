@@ -5,11 +5,17 @@ import android.content.SharedPreferences
 
 class SessionManager(context: Context) {
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
-
-
     var userId: String?
         get() = sharedPreferences.getString("user_id", "")
         set(userId) = sharedPreferences.edit().putString("user_id", userId!!).apply()
+
+    var userName: String?
+        get() = sharedPreferences.getString("user_name", "")
+        set(userName) = sharedPreferences.edit().putString("user_name", userName!!).apply()
+    var designationName: String?
+        get() = sharedPreferences.getString("designation_name", "")
+        set(designationName) = sharedPreferences.edit().putString("designation_name", designationName!!).apply()
+
     var designationId: Int?
         get() = sharedPreferences.getInt("designation_id", 0)
         set(designationId) = sharedPreferences.edit().putInt("designation_id", designationId!!).apply()

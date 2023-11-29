@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat
 class RouteDetailsAdapter(
     val context: Context,
     val contribution: String,
-    val retailerSize: String,
     val targetA: String
 ) :
     RecyclerView.Adapter<RouteDetailsAdapter.ViewHolder>() {
@@ -48,19 +47,20 @@ class RouteDetailsAdapter(
 
         val item = list[position]
 
+
         with(holder) {
             try {
                 binding.nameEn.text = item.retailerName
                 binding.nameBn.text = item.nameBn
                 //binding.contribution.text = item.o
                 val dContribution = contribution.toDouble()
-                val iRetailerS = retailerSize.toInt()
+                val iRetailerS = list.size
                 val result = (dContribution / iRetailerS)
                 binding.contribution.text = roundTheNumber(result)+"%"
 
-                val routeTarget = targetA.toInt()
+                val routeTarget = targetA.toDouble()
                 val result1 = (routeTarget / iRetailerS)
-                binding.targetAmountId.text = result1.toString()
+                binding.targetAmountId.text = roundTheNumber(result1)
             }catch (e:NumberFormatException){
                 e.printStackTrace()
             }

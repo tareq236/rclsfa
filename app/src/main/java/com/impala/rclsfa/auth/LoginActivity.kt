@@ -130,7 +130,9 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("user_roles", jsonStringUserRole)
 
         sessionManager.userId = result.result.id
+        sessionManager.userName = result.result.name
         sessionManager.designationId = result.result.designation_id
+        sessionManager.designationName = result.result.designation_details.designation_name
         sessionManager.userRoles = jsonStringUserRole
         // Add other properties as needed
         //remove save data

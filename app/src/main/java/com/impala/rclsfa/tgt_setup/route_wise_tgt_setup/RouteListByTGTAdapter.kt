@@ -72,8 +72,8 @@ class RouteListByTGTAdapter(
                 click.doClick(
                     item.routeId.toString(),
                     item.contribution!!,
-                    list.size.toString(),
-                    achAmount.toString()
+                    achAmount.toString(),
+                    binding.targetAmountId.text.toString()
                 )
             }
 
@@ -94,7 +94,7 @@ class RouteListByTGTAdapter(
 
 
     interface MainClickManage {
-        fun doClick(id: String, contribution: String, retailerSize: String, achAmount: String)
+        fun doClick(id: String, contribution: String,achAmount: String,targetAmount:String)
     }
 
 }

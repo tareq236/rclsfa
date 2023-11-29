@@ -6,16 +6,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.impala.rclsfa.databinding.ActivityAddKroOutletBinding
 import com.impala.rclsfa.tgt_setup.kro_outlet_selection.adapter.RouteListByKroAdapter
 import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.KroRouteListM
-import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.RetailerListByKro
-import com.impala.rclsfa.databinding.ActivityAddKroOutletBinding
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Path
 
 class AddKroOutletActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddKroOutletBinding

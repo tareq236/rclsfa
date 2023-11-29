@@ -10,6 +10,7 @@ import com.impala.rclsfa.databinding.ActivityAddKroOutletBinding
 import com.impala.rclsfa.databinding.ActivityEditKroOutletTargetBinding
 import com.impala.rclsfa.tgt_setup.kro_outlet_selection.adapter.RouteListByKroAdapter
 import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.KroRouteListM
+import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.SaveKroTargetModel
 import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.UpdateKroTargetM
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
@@ -58,7 +59,8 @@ class EditKroOutletTargetActivity : AppCompatActivity() {
             }
 
             showLoadingDialog()
-            updateKroTgtByRetailer(id.toString(),targetAmount)
+           // updateKroTgtByRetailer(id.toString(),targetAmount)
+            saveKroTgtByRetailer(id.toString(),targetAmount)
         }
     }
 
@@ -78,37 +80,95 @@ class EditKroOutletTargetActivity : AppCompatActivity() {
             }
         sweetAlertDialog.show()
     }
-    private fun updateKroTgtByRetailer(
-         id: String,
-         tgt: String
+//    private fun updateKroTgtByRetailer(
+//         id: String,
+//         tgt: String
+//    ) {
+//        val apiService = ApiService.CreateApi2()
+//        apiService.updateKroTgtByRetailer(
+//            id,
+//            tgt
+//        ).enqueue(object :
+//            Callback<UpdateKroTargetM> {
+//            @SuppressLint("SetTextI18n")
+//            override fun onResponse(
+//                call: Call<UpdateKroTargetM>,
+//                response: Response<UpdateKroTargetM>
+//            ) {
+//                if (response.isSuccessful) {
+//                    val data = response.body()
+//                    if (data != null) {
+//                        if (data.getSuccess()!!) {
+//                            val msg = data.getMessage()
+//                            showFDialogBox(
+//                                SweetAlertDialog.SUCCESS_TYPE,
+//                                "SUCCESS-S5803",
+//                                msg!!
+//                            )
+//                            dismissLoadingDialog()
+//                        } else {
+//                            dismissLoadingDialog()
+//                            showDialogBox(
+//                                SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
+//                                "Failed!!"
+//                            )
+//                        }
+//                    } else {
+//                        dismissLoadingDialog()
+//                        showDialogBox(
+//                            SweetAlertDialog.WARNING_TYPE,
+//                            "Error-RN5801",
+//                            "Response NULL value. Try later."
+//                        )
+//                    }
+//                } else {
+//                    dismissLoadingDialog()
+//                    showDialogBox(
+//                        SweetAlertDialog.WARNING_TYPE,
+//                        "Error-RR5801",
+//                        "Response failed. Try later."
+//                    )
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<UpdateKroTargetM>, t: Throwable) {
+//                dismissLoadingDialog()
+//                showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
+//            }
+//        })
+//    }
+
+    private fun saveKroTgtByRetailer(
+        retailer_id: String,
+        tgt: String
     ) {
         val apiService = ApiService.CreateApi2()
-        apiService.updateKroTgtByRetailer(
-            id,
+        apiService.saveKroTgtByRetailer(
+            retailer_id ,
             tgt
         ).enqueue(object :
-            Callback<UpdateKroTargetM> {
+            Callback<SaveKroTargetModel> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(
-                call: Call<UpdateKroTargetM>,
-                response: Response<UpdateKroTargetM>
+                call: Call<SaveKroTargetModel>,
+                response: Response<SaveKroTargetModel>
             ) {
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null) {
                         if (data.getSuccess()!!) {
-                            val msg = data.getMessage()
+                            val dataList = data.getResult()
                             showFDialogBox(
                                 SweetAlertDialog.SUCCESS_TYPE,
                                 "SUCCESS-S5803",
-                                msg!!
+                                "Save Target Done  "
                             )
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()
                             showDialogBox(
                                 SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
-                                "Failed!!"
+                                " Failed"
                             )
                         }
                     } else {
@@ -129,7 +189,7 @@ class EditKroOutletTargetActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<UpdateKroTargetM>, t: Throwable) {
+            override fun onFailure(call: Call<SaveKroTargetModel>, t: Throwable) {
                 dismissLoadingDialog()
                 showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
             }

@@ -268,15 +268,14 @@ class RouteListActivity : AppCompatActivity(), RouteListByTGTAdapter.MainClickMa
     override fun doClick(
         id: String,
         contribution: String,
-        retailerSize: String,
-        achAmount: String
+        achAmount: String,
+        targetAmount: String
     ) {
         startActivity(
             Intent(this, RouteListDetailsActivity::class.java)
                 .putExtra("route_id", id)
                 .putExtra("contribution", contribution)
-                .putExtra("retailerSize", retailerSize)
-                .putExtra("route_target", binding.edtSearch.text.toString())
+                .putExtra("route_target", targetAmount)
         )
     }
 

@@ -84,8 +84,8 @@ class KROOutletActivity : AppCompatActivity() {
                         } else {
                             dismissLoadingDialog()
                             showDialogBox(
-                                SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
-                                "Failed!!"
+                                SweetAlertDialog.WARNING_TYPE, "Data not found",
+                                ""
                             )
                         }
                     } else {
