@@ -2,6 +2,7 @@ package com.impala.rclsfa.tgt_setup.route_wise_tgt_setup
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,14 @@ class RouteListByTGTAdapter(
             try {
                 val nameEn = item.routeName
                 val contribution = item.contribution
+
+                if(item.firstApproval == 0){
+                    binding.approvalId.setTextColor(Color.RED)
+                    binding.approvalId.text = "Padding"
+                }else if(item.firstApproval == 1){
+                    binding.approvalId.text = "Approved"
+                }
+
                 binding.nameEn.text = nameEn
                 binding.contributionId.text = contribution
                 val dContribution = item.contribution!!.toDouble()

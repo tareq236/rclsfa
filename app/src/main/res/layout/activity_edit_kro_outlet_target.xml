@@ -34,57 +34,28 @@
             android:orientation="vertical"
             android:paddingBottom="10dp"
             >
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtNameEn"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
+                android:id="@+id/txvNameEn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Karim Store"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="05dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
-                android:clipChildren="false"
-                android:hint="En Name"
-                app:boxStrokeWidth="1dp"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:textSize="14sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtNameBn"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textSize="14sp"
+            />
+            <TextView
+                android:id="@+id/txvNameBn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Karim Store"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="05dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
-                android:clipChildren="false"
-                android:hint="Bn Name"
-                app:boxStrokeWidth="1dp"
-                android:cursorVisible="false"
-                android:focusable="false"
+                android:textSize="14sp"
                 android:visibility="gone"
-                android:focusableInTouchMode="false"
-                app:endIconMode="clear_text">
+                />
 
-                <com.google.android.material.textfield.TextInputEditText
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:textSize="14sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edtTargetAmount"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -110,6 +81,7 @@
                     android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/updateId"
                 android:layout_width="140dp"

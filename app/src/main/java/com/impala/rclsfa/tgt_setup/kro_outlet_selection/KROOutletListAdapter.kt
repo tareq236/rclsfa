@@ -55,6 +55,7 @@ class KROOutletListAdapter(val context: Context) :
                     .putExtra("name_bn",item.nameBn)
                     .putExtra("target_amount",item.targetAmountRe)
                     .putExtra("id",item.target_id)
+                    .putExtra("retailer_id",item.id)
                 )
             }
         }

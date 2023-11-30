@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.impala.rclsfa.R
 import com.impala.rclsfa.databinding.ActivityAddKroOutletBinding
@@ -42,9 +43,13 @@ class EditKroOutletTargetActivity : AppCompatActivity() {
         val nameBn = this.intent.getStringExtra("name_bn")
         val targetAmount = this.intent.getStringExtra("target_amount")
         val id = this.intent.getIntExtra("id",0)
+        val retailerID = this.intent.getIntExtra("retailer_id",0)
 
-        binding.edtNameEn.editText!!.setText(nameEn)
-        //binding.edtNameBn.editText!!.setText(nameBn)
+        binding.txvNameEn.text = nameEn
+        if(!nameBn.isNullOrBlank()){
+            binding.txvNameBn.text = nameBn
+            binding.txvNameBn.visibility = View.VISIBLE
+        }
         binding.edtTargetAmount.editText!!.setText(targetAmount)
 
         binding.updateId.setOnClickListener {
@@ -58,9 +63,10 @@ class EditKroOutletTargetActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            showLoadingDialog()
            // updateKroTgtByRetailer(id.toString(),targetAmount)
-            saveKroTgtByRetailer(id.toString(),targetAmount)
+            if (retailerID != 0) {
+                saveKroTgtByRetailer(retailerID.toString(),targetAmount)
+            }
         }
     }
 
@@ -139,12 +145,13 @@ class EditKroOutletTargetActivity : AppCompatActivity() {
 //    }
 
     private fun saveKroTgtByRetailer(
-        retailer_id: String,
+        retailerID: String,
         tgt: String
     ) {
+        showLoadingDialog()
         val apiService = ApiService.CreateApi2()
         apiService.saveKroTgtByRetailer(
-            retailer_id ,
+            retailerID ,
             tgt
         ).enqueue(object :
             Callback<SaveKroTargetModel> {

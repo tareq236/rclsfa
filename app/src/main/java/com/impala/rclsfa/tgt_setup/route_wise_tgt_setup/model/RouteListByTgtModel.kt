@@ -4,9 +4,6 @@ import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
-
-
-
 class RouteListByTgtModel {
     @SerializedName("success")
     @Expose
@@ -68,6 +65,14 @@ class RouteListByTgtModel {
         @SerializedName("ach")
         @Expose
         var ach: Any? = null
+
+        @SerializedName("first_approval")
+        @Expose
+        var firstApproval: Int? = null
+
+        @SerializedName("second_approval")
+        @Expose
+        var secondApproval: Int? = null
     }
 
 }

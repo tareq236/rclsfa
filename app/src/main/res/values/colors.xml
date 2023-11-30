@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#27517C</color>
     <color name="black">#FF000000</color>
     <color name="text">#303030</color>
+    <color name="text_dark_blue">#172132</color>
+    <color name="text_dark_red">#53151B</color>
     <color name="white">#FFFFFFFF</color>
     <color name="bg">#E2E4ED</color>
     <color name="menu_bd">#30557C</color>
