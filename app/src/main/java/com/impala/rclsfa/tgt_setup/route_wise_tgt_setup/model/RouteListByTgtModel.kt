@@ -4,75 +4,33 @@ import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
-class RouteListByTgtModel {
+data class RouteListByTgtModel (
     @SerializedName("success")
-    @Expose
-    private var success: Boolean? = null
-
+    val success: Boolean,
     @SerializedName("result")
-    @Expose
-    private var result: List<Result?>? = null
-
+    val result: List<RouteListByTgtResult?>? = null,
     @SerializedName("target_amount")
-    @Expose
-    private var targetAmount: Int? = null
+    val targetAmount: Int? = null,
+    @SerializedName("steps")
+    val steps: Boolean
+)
 
-    fun getSuccess(): Boolean? {
-        return success
-    }
+data class RouteListByTgtResult (
+    @SerializedName("sr_code")
+    var srCode: String? = null,
+    @SerializedName("route_id")
+    var routeId: Int? = null,
+    @SerializedName("contribution")
+    var contribution: String? = null,
+    @SerializedName("route_name")
+    var routeName: String? = null,
+    @SerializedName("ach_amount")
+    var achAmount: Double? = null,
+    @SerializedName("ach")
+    var ach: Any? = null,
+    @SerializedName("first_approval")
+    var firstApproval: Int? = null,
+    @SerializedName("second_approval")
+    var secondApproval: Int? = null
+)
 
-    fun setSuccess(success: Boolean?) {
-        this.success = success
-    }
-
-    fun getResult(): List<Result?>? {
-        return result
-    }
-
-    fun setResult(result: List<Result?>?) {
-        this.result = result
-    }
-
-    fun getTargetAmount(): Int? {
-        return targetAmount
-    }
-
-    fun setTargetAmount(targetAmount: Int?) {
-        this.targetAmount = targetAmount
-    }
-
-    class Result {
-        @SerializedName("sr_code")
-        @Expose
-        var srCode: String? = null
-
-        @SerializedName("route_id")
-        @Expose
-        var routeId: Int? = null
-
-        @SerializedName("contribution")
-        @Expose
-        var contribution: String? = null
-
-        @SerializedName("route_name")
-        @Expose
-        var routeName: String? = null
-
-        @SerializedName("ach_amount")
-        @Expose
-        var achAmount: Double? = null
-
-        @SerializedName("ach")
-        @Expose
-        var ach: Any? = null
-
-        @SerializedName("first_approval")
-        @Expose
-        var firstApproval: Int? = null
-
-        @SerializedName("second_approval")
-        @Expose
-        var secondApproval: Int? = null
-    }
-
-}

@@ -16,6 +16,7 @@ import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtMode
 import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.SaveTargetModel
 
 import com.impala.rclsfa.databinding.ActivityRouteListBinding
+import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtResult
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
@@ -117,22 +118,26 @@ class RouteListActivity : AppCompatActivity(), RouteListByTGTAdapter.MainClickMa
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null) {
-                        if (data.getSuccess()!!) {
-                            val dataList = data.getResult()
-                            //adapter.addData(dataList as MutableList<RouteListByTgtModel.Result>)
-                            targetAmount = data.getTargetAmount()!!
-                            if(targetAmount==0){
-                                binding.rlSearchId.visibility = View.VISIBLE
-                                binding.searchId.visibility = View.VISIBLE
-                            }else {
-                                sessionManager.targetAmount = targetAmount.toString()
-                                binding.rlSearchId.visibility = View.GONE
-                                binding.searchId.visibility = View.GONE
-                                binding.saveTarget.visibility = View.GONE
-                                binding.rlSearchId.visibility = View.GONE
-                                binding.searchId.visibility = View.GONE
-                                adapter.addData(dataList as MutableList<RouteListByTgtModel.Result>)
+                        if (data.success) {
+                            if(data.steps){
+
+                            }else{
+                                val dataList = data.result
+                                targetAmount = data.targetAmount!!
+                                if(targetAmount==0){
+                                    binding.rlSearchId.visibility = View.VISIBLE
+                                    binding.searchId.visibility = View.VISIBLE
+                                }else {
+                                    sessionManager.targetAmount = targetAmount.toString()
+                                    binding.rlSearchId.visibility = View.GONE
+                                    binding.searchId.visibility = View.GONE
+                                    binding.saveTarget.visibility = View.GONE
+                                    binding.rlSearchId.visibility = View.GONE
+                                    binding.searchId.visibility = View.GONE
+                                    adapter.addData(dataList as MutableList<RouteListByTgtResult>)
+                                }
                             }
+
                             dismissLoadingDialog()
                         } else {
                             dismissLoadingDialog()
@@ -184,9 +189,9 @@ class RouteListActivity : AppCompatActivity(), RouteListByTGTAdapter.MainClickMa
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null) {
-                        if (data.getSuccess()!!) {
-                            val dataList = data.getResult()
-                            adapter.addData(dataList as MutableList<RouteListByTgtModel.Result>)
+                        if (data.success!!) {
+                            val dataList = data.result
+                            adapter.addData(dataList as MutableList<RouteListByTgtResult>)
                            // targetAmount = data.getTargetAmount()!!
                             dismissLoadingDialog()
                             binding.saveTarget.visibility = View.VISIBLE

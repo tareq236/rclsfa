@@ -11,6 +11,7 @@ import com.impala.rclsfa.R
 import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtModel
 
 import com.impala.rclsfa.databinding.RouteListByTgtBinding
+import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtResult
 import com.impala.rclsfa.utils.SessionManager
 
 
@@ -21,10 +22,10 @@ class RouteListByTGTAdapter(
 ) :
     RecyclerView.Adapter<RouteListByTGTAdapter.ViewHolder>() {
 
-    var list: MutableList<RouteListByTgtModel.Result> = mutableListOf()
+    var list: MutableList<RouteListByTgtResult> = mutableListOf()
 
 
-    fun addData(allCus: MutableList<RouteListByTgtModel.Result>) {
+    fun addData(allCus: MutableList<RouteListByTgtResult>) {
         list.addAll(allCus)
         notifyDataSetChanged()
     }
