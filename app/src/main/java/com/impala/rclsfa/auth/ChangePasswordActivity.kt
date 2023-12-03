@@ -2,6 +2,7 @@ package com.impala.rclsfa.auth
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +13,7 @@ import com.impala.rclsfa.attendance.model.SaveLeaveAttendM
 import com.impala.rclsfa.auth.model.ChangePasswordM
 import com.impala.rclsfa.databinding.ActivityChangePasswordBinding
 import com.impala.rclsfa.databinding.ActivityNotificationBinding
+import com.impala.rclsfa.tgt_setup.kro_outlet_selection.KROOutletActivity
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
@@ -44,6 +46,15 @@ class ChangePasswordActivity : AppCompatActivity() {
             val newPassword = binding.edtNewPassword.editText!!.text.toString()
             val confPassword = binding.edtConfPassword.editText!!.text.toString()
 
+            if (!isPasswordValid(newPassword)) {
+                // Password is valid, proceed with authentication or other actions
+                showDialogBoxForValidation(
+                    SweetAlertDialog.WARNING_TYPE,
+                    "Validation",
+                    "At least one digit,At least one letter (uppercase or lowercase),Minimum length of 6 characters."
+                )
+                return@setOnClickListener
+            }
             if (newPassword != confPassword) {
                 showDialogBoxForValidation(
                     SweetAlertDialog.WARNING_TYPE,
@@ -55,15 +66,6 @@ class ChangePasswordActivity : AppCompatActivity() {
 
 
             if (validateInput(oldPassword, newPassword, confPassword)) {
-                if (!isPasswordValid(newPassword)) {
-                    // Password is valid, proceed with authentication or other actions
-                    showDialogBoxForValidation(
-                        SweetAlertDialog.WARNING_TYPE,
-                        "Validation",
-                        "At least one digit,At least one letter (uppercase or lowercase),Minimum length of 6 characters."
-                    )
-                    return@setOnClickListener
-                }
 
                 showLoadingDialog()
                 changePassword(userId!!, newPassword)
@@ -105,7 +107,7 @@ class ChangePasswordActivity : AppCompatActivity() {
         return true
     }
 
-    fun isPasswordValid(password: String): Boolean {
+    private fun isPasswordValid(password: String): Boolean {
         val passwordRegex = "^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$"
 
         return password.matches(passwordRegex.toRegex())
@@ -226,9 +228,13 @@ class ChangePasswordActivity : AppCompatActivity() {
             .setConfirmClickListener {
                 it.dismissWithAnimation()
                 callback?.invoke()
-
-                finish()
-                startActivity(Intent(this, MainActivity::class.java))
+                val sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.clear()
+                editor.apply()
+                val i = Intent(this, LoginActivity::class.java)
+                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(i)
             }
         sweetAlertDialog.show()
     }

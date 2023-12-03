@@ -56,7 +56,11 @@ class AttendanceMenuActivity : AppCompatActivity() {
         }
 
         binding.monthlyAttendanceButton.setOnClickListener {
-            val intent = Intent(this, MonthlyAttendaneActivity::class.java)
+            val intent = Intent(this, MonthlyAttendanceActivity::class.java)
+            startActivity(intent)
+        }
+        binding.viewPaySlipButton.setOnClickListener {
+            val intent = Intent(this, ViewPaySlipActivity::class.java)
             startActivity(intent)
         }
 

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
 import com.impala.rclsfa.activities.DashboardActivity
+import com.impala.rclsfa.activities.LeaderBoardActivity
 import com.impala.rclsfa.attendance.AttendanceMenuActivity
 import com.impala.rclsfa.auth.ProfileActivity
 import com.impala.rclsfa.order.OrderMenuActivity
@@ -82,7 +83,10 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
                     itemView.context.startActivity(intent)
                 }
 
-
+                if(menuItem.func == "laeder_board"){
+                    val intent = Intent(itemView.context, LeaderBoardActivity::class.java)
+                    itemView.context.startActivity(intent)
+                }
             }
 
         }

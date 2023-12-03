@@ -54,6 +54,10 @@ class ProfileActivity : AppCompatActivity() {
         loadingDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
             .setTitleText("Loading")
 
+        val designationName = sessionManager.designationName
+        binding.designation1.text = designationName
+        binding.designationNameId.text = designationName
+
 
         binding.profileUpdate.setOnClickListener {
             startActivity(Intent(this, ProfileUpdateActivity::class.java))
@@ -112,7 +116,7 @@ class ProfileActivity : AppCompatActivity() {
 
                             binding.nameId.text = name
                             binding.userNameId.text = "$name($userId)"
-                            binding.designationId.text = designation
+                         //   binding.designationNameId.text = designation
                             binding.phoneNumberId.text = phoneNumber
                             binding.mailId.text = mailId
                             binding.nid.text = nid

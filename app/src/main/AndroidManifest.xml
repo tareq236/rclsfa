@@ -24,6 +24,12 @@
         android:theme="@style/Theme.RCLSFA"
         tools:targetApi="31">
         <activity
+            android:name=".activities.LeaderBoardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".attendance.ViewPaySlipActivity"
+            android:exported="false" />
+        <activity
             android:name=".tgt_setup.kro_outlet_selection.EditKroOutletTargetActivity"
             android:exported="false" />
         <activity
@@ -48,7 +54,7 @@
             android:name=".auth.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".attendance.MonthlyAttendaneActivity"
+            android:name=".attendance.MonthlyAttendanceActivity"
             android:exported="false" />
         <activity
             android:name=".order.OrderListActivity"

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-   >
+    android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -13,33 +13,33 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:title="Profile"
         app:titleTextColor="@color/white" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
                 <ImageView
                     android:id="@+id/bgCover"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:orientation="vertical"
                     android:scaleType="fitXY"
-                    android:src="@drawable/multicolor_gradiant"
-                    >
+                    android:src="@drawable/multicolor_gradiant">
 
 
                 </ImageView>
@@ -48,72 +48,70 @@
                     android:id="@+id/profile_image"
                     android:layout_width="140dp"
                     android:layout_height="140dp"
-                    android:src="@drawable/splash"
-                    app:civ_border_width="3dp"
                     android:layout_gravity="center_horizontal"
-                    app:civ_border_color="#fff"
                     android:layout_marginTop="90dp"
-                    />
+                    android:src="@drawable/splash"
+                    app:civ_border_color="#fff"
+                    app:civ_border_width="3dp" />
 
 
             </FrameLayout>
+
             <TextView
                 android:id="@+id/editPhotoId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit Profile Photo"
                 android:layout_gravity="center"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                />
+                android:text="Edit Profile Photo"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/userNameId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Test SO(360221)"
                 android:layout_gravity="center"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#295B67"
                 android:layout_marginTop="10dp"
-                />
+                android:textColor="#295B67"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/designation1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SR"
                 android:layout_gravity="center"
+                android:textColor="#295B67"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#295B67"
 
                 />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#E6E6E6"
-                android:layout_marginTop="05dp"
                 android:layout_marginHorizontal="10dp"
-                />
+                android:layout_marginTop="05dp"
+                android:background="#E6E6E6" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2"
                 android:orientation="horizontal"
-                >
+                android:weightSum="2">
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/profileUpdate"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
-                    app:cardBackgroundColor="#295B67"
                     android:layout_weight="1"
+                    app:cardBackgroundColor="#295B67"
                     app:cardCornerRadius="6dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -126,6 +124,7 @@
                             android:textColor="@color/white" />
                     </RelativeLayout>
                 </com.google.android.material.card.MaterialCardView>
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/changePassword"
                     android:layout_width="0dp"
@@ -135,6 +134,7 @@
 
                     android:layout_weight="1"
                     app:cardCornerRadius="6dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -150,83 +150,84 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
-                >
+                android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:background="#D6E8FC"
-                    >
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Name"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Name" />
+
                     <TextView
                         android:id="@+id/nameId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Test So"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:orientation="horizontal"
 
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Designation"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Designation" />
+
                     <TextView
-                        android:id="@+id/designationId"
+                        android:id="@+id/designationNameId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SR"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="jkfgsd" />
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:background="#D6E8FC"
-                    >
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mail Id"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Mail Id" />
+
                     <TextView
                         android:id="@+id/mailId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="545"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
@@ -236,47 +237,46 @@
                     android:orientation="horizontal"
 
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Phone Number"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Phone Number" />
+
                     <TextView
                         android:id="@+id/phoneNumberId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SR"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:background="#D6E8FC"
-                    >
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NID"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="NID" />
+
                     <TextView
                         android:id="@+id/nid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="545"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
@@ -286,47 +286,46 @@
                     android:orientation="horizontal"
 
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Blood Group"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Blood Group" />
+
                     <TextView
                         android:id="@+id/bloodGroup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="A+"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:background="#D6E8FC"
-                    >
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Father Name"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Father Name" />
+
                     <TextView
                         android:id="@+id/fatherNameId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="asas"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
@@ -336,46 +335,46 @@
                     android:orientation="horizontal"
 
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Father NID"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Father NID" />
+
                     <TextView
                         android:id="@+id/fatherNid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="545656"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:background="#D6E8FC"
-                    >
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mother Name"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Mother Name" />
+
                     <TextView
                         android:id="@+id/motherNameId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="asas"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
@@ -385,22 +384,22 @@
                     android:orientation="horizontal"
 
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mother NID"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Mother NID" />
+
                     <TextView
                         android:id="@+id/motherNid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="545656"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
@@ -408,12 +407,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="Alternative One"
-                    android:textStyle="bold"
-                    android:background="#005F8F"
-                    android:textColor="@color/white"
+                    android:background="#D6E8FC"
                     android:gravity="center"
-                    />
+                    android:text="Alternative One"
+
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -421,47 +419,46 @@
                     android:orientation="horizontal"
 
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Name"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Name" />
+
                     <TextView
                         android:id="@+id/alterNameId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="545656"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:background="#D6E8FC"
-                    >
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Phone"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Phone" />
+
                     <TextView
                         android:id="@+id/alterPhoneId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="asas"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
@@ -471,34 +468,32 @@
                     android:orientation="horizontal"
 
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Relation"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Relation" />
+
                     <TextView
                         android:id="@+id/alterRelationId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="545656"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="Alternative Two"
-                    android:textStyle="bold"
-                    android:background="#005F8F"
-                    android:textColor="@color/white"
+                    android:background="#D6E8FC"
                     android:gravity="center"
-                    />
+                    android:text="Alternative Two"
+
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -506,47 +501,46 @@
                     android:orientation="horizontal"
 
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Name"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Name" />
+
                     <TextView
                         android:id="@+id/alter2NameId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="545656"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:background="#D6E8FC"
-                    >
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Phone"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Phone" />
+
                     <TextView
                         android:id="@+id/alter2PhoneId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="asas"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
 
@@ -556,22 +550,22 @@
                     android:orientation="horizontal"
 
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Relation"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_centerVertical="true"
-                        />
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Relation" />
+
                     <TextView
                         android:id="@+id/alter2RelationId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="545656"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_centerVertical="true"
+
                         android:layout_centerInParent="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="10dp" />
 
                 </RelativeLayout>
             </LinearLayout>
