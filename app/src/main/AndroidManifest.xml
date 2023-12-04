@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -23,6 +24,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RCLSFA"
         tools:targetApi="31">
+        <activity
+            android:name=".order.SinglePrintActivity"
+            android:exported="false" />
+        <activity
+            android:name=".order.PrintAllActivity"
+            android:exported="false" />
+        <activity
+            android:name=".order.SalesConfirmationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".order.ProductWiseSummeryActivity"
+            android:exported="false"
+            android:label="@string/title_activity_product_wise_summery"
+            android:theme="@style/Theme.RCLSFA" />
+        <activity
+            android:name=".order.BasicSummeryActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.LeaderBoardActivity"
             android:exported="false" />

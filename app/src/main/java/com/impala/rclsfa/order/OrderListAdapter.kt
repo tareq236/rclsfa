@@ -2,6 +2,7 @@ package com.impala.rclsfa.order
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,9 @@ class OrderListAdapter(val context: Context) :
             binding.retName.text = item.retailerDetails!!.retailerName
             binding.orderDate.text = dateFormatter(item.orderDate!!)
 
+            binding.invoiceId.setOnClickListener {
+                context.startActivity(Intent(context,SinglePrintActivity::class.java))
+            }
         }
 
     }

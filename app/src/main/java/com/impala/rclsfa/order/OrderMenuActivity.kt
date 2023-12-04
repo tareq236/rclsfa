@@ -52,6 +52,20 @@ class OrderMenuActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun basicSummaryButton(view: View?) {
+        val intent = Intent(this, BasicSummeryActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun productWiseSummaryButton(view: View?) {
+        val intent = Intent(this, ProductWiseSummeryActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun salesConfirmationNightWorkButton(view: View?) {
+        val intent = Intent(this, SalesConfirmationActivity::class.java)
+        startActivity(intent)
+    }
 
     // Handle the Up button click event
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

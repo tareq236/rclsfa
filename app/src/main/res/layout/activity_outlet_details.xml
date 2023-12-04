@@ -37,10 +37,18 @@
             android:layout_marginTop="10dp"
             android:paddingBottom="10dp"
             >
+            <ImageView
+                android:id="@+id/outletImageId"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="05dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"

@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.impala.rclsfa.R
 import com.impala.rclsfa.databinding.ActivityOutletDetailsBinding
 import com.impala.rclsfa.databinding.ActivityOutletSearchingBinding
+import com.squareup.picasso.Picasso
 
 class OutletDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOutletDetailsBinding
@@ -19,7 +20,8 @@ class OutletDetailsActivity : AppCompatActivity() {
         initView()
 
     }
-    fun initView(){
+
+    fun initView() {
 
         val retailerName = this.intent.getStringExtra("retailerName")
         val nameBn = this.intent.getStringExtra("nameBn")
@@ -33,6 +35,10 @@ class OutletDetailsActivity : AppCompatActivity() {
         val fChildBirthDay = this.intent.getStringExtra("fChildBirthDay")
         val sChildName = this.intent.getStringExtra("sChildName")
         val sChildBirthDay = this.intent.getStringExtra("sChildBirthDay")
+        val image = this.intent.getStringExtra("image")
+
+        Picasso.get().load("http://157.230.195.60:9012/outlet/$image")
+            .placeholder(R.drawable.default_image).into(binding.outletImageId)
 
         binding.retailerNameEn.text = retailerName
         binding.retailerNameBn.text = nameBn

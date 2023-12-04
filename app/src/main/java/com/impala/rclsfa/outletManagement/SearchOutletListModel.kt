@@ -140,7 +140,7 @@ class SearchOutletListModel {
 
         @SerializedName("image")
         @Expose
-        var image: Any? = null
+        var image: String? = null
 
         @SerializedName("target_amount_re")
         @Expose

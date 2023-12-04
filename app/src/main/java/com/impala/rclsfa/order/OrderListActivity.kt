@@ -3,7 +3,14 @@ package com.impala.rclsfa.order
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
+import android.print.PrintAttributes
+import android.print.PrintJob
+import android.print.PrintManager
+import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -21,6 +28,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Body
+import java.io.File
+import java.security.AccessController
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -33,6 +42,8 @@ class OrderListActivity : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
     var userCode = ""
     lateinit var adapter: OrderListAdapter
+    private lateinit var printJob: PrintJob
+    private var printBtnPressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,8 +80,8 @@ class OrderListActivity : AppCompatActivity() {
                 val sdf = SimpleDateFormat(myFormat, Locale.US)
                 binding.selectDate.text = sdf.format(cal.time)
 
-               // val setOrderJson = setOrderListJson("30031",sdf.format(cal.time),0,50)
-                val setOrderJson = setOrderListJson(userCode,sdf.format(cal.time),0,50)
+                // val setOrderJson = setOrderListJson("30031",sdf.format(cal.time),0,50)
+                val setOrderJson = setOrderListJson(userCode, sdf.format(cal.time), 0, 50)
                 val jsonParser = JsonParser()
                 val gsonObject = jsonParser.parse(setOrderJson) as JsonObject
                 srOrderList(gsonObject)
@@ -89,7 +100,9 @@ class OrderListActivity : AppCompatActivity() {
 
         }
 
-
+        binding.printAllId.setOnClickListener {
+            startActivity(Intent(this, PrintAllActivity::class.java))
+        }
     }
 
     private fun srOrderList(
@@ -97,7 +110,7 @@ class OrderListActivity : AppCompatActivity() {
     ) {
         val apiService = ApiService.CreateApi1()
         apiService.srOrderList(
-             body
+            body
         ).enqueue(object :
             Callback<OrderListModel> {
             @SuppressLint("SetTextI18n")
@@ -143,6 +156,7 @@ class OrderListActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun setOrderListJson(
         userCode: String,
         fromDate: String,
@@ -193,21 +207,42 @@ class OrderListActivity : AppCompatActivity() {
         sweetAlertDialog.show()
     }
 
-    private fun showFDialogBox(
-        type: Int,
-        title: String,
-        message: String,
-        callback: (() -> Unit)? = null
-    ) {
-        val sweetAlertDialog = SweetAlertDialog(this, type)
-            .setTitleText(title)
-            .setContentText(message)
-            .setConfirmClickListener {
-                it.dismissWithAnimation()
-                callback?.invoke()
-
-                finish()
+    @SuppressLint("ServiceCast")
+    fun printWebPage(webView: WebView) {
+        // on below line we are initializing
+        // print button pressed variable to true.
+        printBtnPressed = true
+        // on below line we are initializing
+        // our print manager variable.
+        val printManager =
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                this.getSystemService(Context.PRINT_SERVICE) as PrintManager
+            } else {
+                TODO("VERSION.SDK_INT < KITKAT")
             }
-        sweetAlertDialog.show()
+
+        // on below line we are creating a variable for job name
+        val jobName = " webpage" + webView.url
+        // on below line we are initializing our print adapter.
+        val printAdapter =
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                // on below line we are creating
+                // our print document adapter.
+                webView.createPrintDocumentAdapter(jobName)
+            } else {
+                TODO("VERSION.SDK_INT < LOLLIPOP")
+            }
+        // on below line we are checking id
+        // print manager is not null
+        assert(printManager != null)
+
+        // on below line we are initializing
+        // our print job with print manager
+        printJob = printManager.print(
+            jobName, printAdapter,
+            // on below line we are calling
+            // build method for print attributes.
+            PrintAttributes.Builder().build()
+        )
     }
 }

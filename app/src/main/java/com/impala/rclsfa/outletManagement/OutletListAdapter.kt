@@ -71,6 +71,12 @@ class OutletListAdapter(val context: Context, val click: MainClickManage) :
             }
 
             binding.itemView.setOnClickListener {
+                var image = ""
+                if (item.image != null) {
+                    image = item.image!!
+                } else {
+                    image = ""
+                }
                 click.details(
                     item.retailerName!!,
                     item.nameBn!!,
@@ -83,7 +89,8 @@ class OutletListAdapter(val context: Context, val click: MainClickManage) :
                     item.firstChildrenName!!,
                     item.firstChildrenBirthday!!,
                     item.secondChildrenName!!,
-                    item.secondChildrenBirthday!!
+                    item.secondChildrenBirthday!!,
+                    image
                 )
             }
 
@@ -109,6 +116,7 @@ class OutletListAdapter(val context: Context, val click: MainClickManage) :
             fChildBirthDay: String,
             sChildName: String,
             sChildBirthDay: String,
+            image: String
         )
     }
 

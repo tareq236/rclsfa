@@ -192,7 +192,8 @@ class OutletSearchingActivity : AppCompatActivity(), OutletListAdapter.MainClick
         fChildName: String,
         fChildBirthDay: String,
         sChildName: String,
-        sChildBirthDay: String
+        sChildBirthDay: String,
+        image: String
     ) {
 
         startActivity(Intent(this, OutletDetailsActivity::class.java)
@@ -208,6 +209,7 @@ class OutletSearchingActivity : AppCompatActivity(), OutletListAdapter.MainClick
             .putExtra("fChildBirthDay",fChildBirthDay)
             .putExtra("sChildName",sChildName)
             .putExtra("sChildBirthDay",sChildBirthDay)
+            .putExtra("image",image)
         )
 
     }
