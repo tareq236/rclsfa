@@ -4,25 +4,19 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.impala.rclsfa.attendance.model.SaveLeaveAttendM
-
-import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtModel
-import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.SaveTargetModel
-
 import com.impala.rclsfa.databinding.ActivityRouteListBinding
+import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtModel
 import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtResult
+import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.SaveTargetModel
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Path
 
 
 class RouteListActivity : AppCompatActivity(), RouteListByTGTAdapter.MainClickManage {

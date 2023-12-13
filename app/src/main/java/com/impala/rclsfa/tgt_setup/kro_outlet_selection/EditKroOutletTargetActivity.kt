@@ -2,23 +2,17 @@ package com.impala.rclsfa.tgt_setup.kro_outlet_selection
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.impala.rclsfa.R
-import com.impala.rclsfa.databinding.ActivityAddKroOutletBinding
 import com.impala.rclsfa.databinding.ActivityEditKroOutletTargetBinding
-import com.impala.rclsfa.tgt_setup.kro_outlet_selection.adapter.RouteListByKroAdapter
-import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.KroRouteListM
 import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.SaveKroTargetModel
-import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.UpdateKroTargetM
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Path
 
 class EditKroOutletTargetActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditKroOutletTargetBinding

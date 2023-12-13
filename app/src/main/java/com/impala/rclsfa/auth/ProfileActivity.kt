@@ -4,10 +4,8 @@ package com.impala.rclsfa.auth
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.google.android.material.card.MaterialCardView
@@ -19,11 +17,9 @@ import com.impala.rclsfa.models.UserRoles
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import com.squareup.picasso.Picasso
-import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
 
 
 class ProfileActivity : AppCompatActivity() {

@@ -1,18 +1,16 @@
 package com.impala.rclsfa.tgt_setup
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
-import com.impala.rclsfa.R
-import com.impala.rclsfa.tgt_setup.kro_outlet_selection.KROOutletActivity
-import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.RouteListActivity
-import com.impala.rclsfa.databinding.ActivityOutletManagementMainMenuBinding
 import com.impala.rclsfa.databinding.ActivityTgtsetupMainBinding
 import com.impala.rclsfa.models.AppButton
 import com.impala.rclsfa.models.UserRoles
+import com.impala.rclsfa.tgt_setup.kro_outlet_selection.KROOutletActivity
+import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.RouteListActivity
 import com.impala.rclsfa.utils.SessionManager
 
 class TGTSetupMainActivity : AppCompatActivity() {

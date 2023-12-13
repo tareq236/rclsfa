@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
 import com.impala.rclsfa.attendance.model.AllLeaveAttendListM
 import com.impala.rclsfa.databinding.LeaveApplicationListBinding
-import com.impala.rclsfa.databinding.OutletListItemBinding
 import java.text.SimpleDateFormat
 
 

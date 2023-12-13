@@ -59,6 +59,9 @@ class OutletEntryActivity : AppCompatActivity() {
     var districtId = -1
     var upazilaId = -1
     var imageBase = ""
+    var divisionName =""
+    var districtName =""
+    var upazilaName =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,8 +148,11 @@ class OutletEntryActivity : AppCompatActivity() {
 
             val child2ndName = binding.edt2ndChildName.editText!!.text.toString()
             val child2ndBirthDay = binding.edt2ndChildBirthDay.editText!!.text.toString()
+              divisionName = binding.actvDivision.text.toString()
+              districtName = binding.actvDistrict.text.toString()
+              upazilaName = binding.actvUpazila.text.toString()
 
-            if (validateInput(route, enName, mobileNumber, address, latitude, longitude)) {
+            if (validateInput(route, enName, mobileNumber,divisionName,districtName,upazilaName, address, latitude, longitude)) {
                 showLoadingDialog()
                 saveNewRetailer(
                     userId,
@@ -196,6 +202,9 @@ class OutletEntryActivity : AppCompatActivity() {
         route: String,
         nameEn: String,
         phoneNumber: String,
+        divisionName:String,
+        districtName:String,
+        upazilaName:String,
         presentAddress: String,
         latitude: String,
         longitude: String
@@ -226,6 +235,33 @@ class OutletEntryActivity : AppCompatActivity() {
                 SweetAlertDialog.WARNING_TYPE,
                 "Validation",
                 "Phone Number is required"
+            )
+            return false
+        }
+        if (divisionName.isEmpty()) {
+//            passwordEditText.error = "Password is required"
+            showDialogBoxForValidation(
+                SweetAlertDialog.WARNING_TYPE,
+                "Validation",
+                "Division is required"
+            )
+            return false
+        }
+        if (districtName.isEmpty()) {
+//            passwordEditText.error = "Password is required"
+            showDialogBoxForValidation(
+                SweetAlertDialog.WARNING_TYPE,
+                "Validation",
+                "District is required"
+            )
+            return false
+        }
+        if (upazilaName.isEmpty()) {
+//            passwordEditText.error = "Password is required"
+            showDialogBoxForValidation(
+                SweetAlertDialog.WARNING_TYPE,
+                "Validation",
+                "Upazila is required"
             )
             return false
         }
@@ -308,7 +344,6 @@ class OutletEntryActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
                 mUri
-
                 CropImage.activity(mUri)
                     .setAspectRatio(1, 1)
                     .start(this)

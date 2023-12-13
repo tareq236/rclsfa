@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.print.PrintAttributes
 import android.print.PrintJob
 import android.print.PrintManager
@@ -15,8 +14,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.impala.rclsfa.databinding.ActivityPrintAllBinding
 import com.impala.rclsfa.utils.SessionManager
-import java.io.File
-import java.security.AccessController.getContext
 
 
 class PrintAllActivity : AppCompatActivity() {

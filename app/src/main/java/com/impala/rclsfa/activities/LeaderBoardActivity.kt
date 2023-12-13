@@ -1,10 +1,8 @@
 package com.impala.rclsfa.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebViewClient
-import com.impala.rclsfa.R
-import com.impala.rclsfa.databinding.ActivityDashboardBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.impala.rclsfa.databinding.ActivityLeaderBoardBinding
 import com.impala.rclsfa.utils.SessionManager
 

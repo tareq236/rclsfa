@@ -1,10 +1,9 @@
 package com.impala.rclsfa.outletManagement
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.impala.rclsfa.R
 import com.impala.rclsfa.databinding.ActivityOutletDetailsBinding
-import com.impala.rclsfa.databinding.ActivityOutletSearchingBinding
 import com.squareup.picasso.Picasso
 
 class OutletDetailsActivity : AppCompatActivity() {

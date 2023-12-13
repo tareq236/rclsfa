@@ -3,7 +3,6 @@ package com.impala.rclsfa.order
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.print.PrintAttributes
 import android.print.PrintJob
@@ -12,8 +11,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.impala.rclsfa.R
-import com.impala.rclsfa.databinding.ActivityPrintAllBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.impala.rclsfa.databinding.ActivitySinglePrintBinding
 import com.impala.rclsfa.utils.SessionManager
 

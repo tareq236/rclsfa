@@ -4,22 +4,16 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.impala.rclsfa.MainActivity
-import com.impala.rclsfa.R
-import com.impala.rclsfa.attendance.model.SaveLeaveAttendM
 import com.impala.rclsfa.auth.model.ChangePasswordM
 import com.impala.rclsfa.databinding.ActivityChangePasswordBinding
-import com.impala.rclsfa.databinding.ActivityNotificationBinding
-import com.impala.rclsfa.tgt_setup.kro_outlet_selection.KROOutletActivity
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Query
 
 class ChangePasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChangePasswordBinding

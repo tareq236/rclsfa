@@ -1,11 +1,9 @@
 package com.impala.rclsfa.order
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebViewClient
-import com.impala.rclsfa.R
+import androidx.appcompat.app.AppCompatActivity
 import com.impala.rclsfa.databinding.ActivityBasicSummeryBinding
-import com.impala.rclsfa.databinding.ActivityDashboardBinding
 import com.impala.rclsfa.utils.SessionManager
 
 class BasicSummeryActivity : AppCompatActivity() {
