@@ -246,9 +246,9 @@ class MainActivity : AppCompatActivity() {
                 locationResult.lastLocation?.let { location ->
                     // Handle the location result
                     // You can send this location to the server via socket
-                    val latitude = location.latitude
-                    val longitude = location.longitude
-                     socketManager.sendLocationViaSocket(latitude, longitude)
+//                    val latitude = location.latitude
+//                    val longitude = location.longitude
+                     socketManager.sendLocationViaSocket(applicationContext,location)
                 }
             }
         }

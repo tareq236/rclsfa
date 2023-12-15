@@ -27,7 +27,7 @@ class BasicSummeryActivity : AppCompatActivity() {
         val designationId = sessionManager.designationId
         binding.webView.webViewClient = WebViewClient()
         // this will load the url of the website
-        binding.webView.loadUrl("http://157.230.195.60:9012/mobile_view/dashboard?user_id=$userId&designation_id=$designationId")
+        binding.webView.loadUrl("http://157.230.195.60:9012/mobile_view/order_basic_summary?user_id=$userId&designation_id=$designationId")
 
         // this will enable the javascript settings, it can also allow xss vulnerabilities
         binding.webView.settings.javaScriptEnabled = true

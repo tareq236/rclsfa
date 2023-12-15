@@ -1,6 +1,7 @@
 package com.impala.rclsfa.utils
 
 import android.content.Context
+import android.location.Location
 import android.util.Log
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -31,9 +32,7 @@ class SocketManager private constructor() {
         options.reconnection = true
 
         try {
-//            socket = IO.socket("http://192.168.0.102:6044", options)
-            socket = IO.socket("http://172.16.16.91:6044", options)
-//            socket = IO.socket("http://157.230.195.60:6044", options)
+            socket = IO.socket("http://157.230.39.154:6044", options)
             setupSocketListeners()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -76,10 +75,27 @@ class SocketManager private constructor() {
         socket?.emit("send_socket_info", dataToSend)
     }
 
-    fun sendLocationViaSocket(latitude: Double, longitude: Double) {
-        socket?.emit("coordinates", JSONObject().apply {
-            put("latitude", latitude)
-            put("longitude", longitude)
+    fun sendLocationViaSocket(context: Context, location: Location) {
+        val jsonLocation = JSONObject().apply {
+            put("latitude", location.latitude)
+            put("longitude", location.longitude)
+            put("altitude", location.altitude)
+            put("accuracy", location.accuracy)
+            put("bearing", location.bearing)
+            put("speed", location.speed)
+        }
+        val sharedPreferences = context.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+        val jsonUserDetails = JSONObject().apply {
+            put("designation_id", sharedPreferences.getInt("designation_id",0))
+            put("name", sharedPreferences.getString("name", ""))
+            put("id", sharedPreferences.getString("id", ""))
+            put("designation", sharedPreferences.getString("designation", ""))
+            put("mobile_number", sharedPreferences.getString("mobile_number", ""))
+        }
+
+        socket?.emit("coordinates_android", JSONObject().apply {
+            put("location", jsonLocation)
+            put("user_details", jsonUserDetails)
         })
     }
 
