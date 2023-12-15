@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
 
 
-
         drawerLayout = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
