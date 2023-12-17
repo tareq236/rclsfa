@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-
+    def work_version = "2.8.0"
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.5.0'
@@ -70,5 +70,8 @@ dependencies {
     //crop image
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+
+    // Kotlin + coroutines
+    implementation("androidx.work:work-runtime-ktx:$work_version")
 
 }
