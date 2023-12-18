@@ -9,7 +9,6 @@ import android.content.IntentSender
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -19,11 +18,6 @@ import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -46,14 +40,12 @@ import com.impala.rclsfa.models.MenuResponse
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.MyBackgroundService
 import com.impala.rclsfa.utils.MyForegroundService
-import com.impala.rclsfa.utils.MyWorker
 import com.impala.rclsfa.utils.SessionManager
 import com.impala.rclsfa.utils.SocketManager
 import com.impala.rclsfa.utils.UserRolesCheck
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -81,14 +73,10 @@ class MainActivity : AppCompatActivity() {
 
         sessionManager = SessionManager(this)
 
-
         drawerLayout = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
-        //worker start
-        startWorkManager()
 
         val navView: NavigationView = findViewById(R.id.nav_view)
 
@@ -359,32 +347,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             startService(serviceIntent)
         }
-    }
-
-    fun onTaskRemoved(rootIntent: Intent?) {
-        //do your task;
-        Log.d("app_close","App Closed")
-
-        startWorkManager()
-    }
-
-    @SuppressLint("InvalidPeriodicWorkRequestInterval")
-    private fun startWorkManager() {
-        val myConstraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val refreshCpnWork =
-            PeriodicWorkRequest.Builder(MyWorker::class.java, 1, TimeUnit.MINUTES)
-                .setInitialDelay(2, TimeUnit.MINUTES)
-                .setConstraints(myConstraints)
-                .addTag("myWorkManager")
-                .build()
-
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-            "myWorkManager",
-            ExistingPeriodicWorkPolicy.REPLACE, refreshCpnWork
-        )
     }
 
 }
