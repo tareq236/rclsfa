@@ -10,6 +10,7 @@ import com.impala.rclsfa.databinding.ActivityTgtsetupMainBinding
 import com.impala.rclsfa.models.AppButton
 import com.impala.rclsfa.models.UserRoles
 import com.impala.rclsfa.tgt_setup.kro_outlet_selection.KROOutletActivity
+import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.AssignUserListActivity
 import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.RouteListActivity
 import com.impala.rclsfa.utils.SessionManager
 
@@ -19,7 +20,9 @@ class TGTSetupMainActivity : AppCompatActivity() {
     private val appButtons : List<AppButton> = listOf(
         AppButton("RouteWiseTgtSetup", "routeWiseTgtSetup"),
         AppButton("KROOutletSelection", "kroOutletSelection"),
+        AppButton("RouteWiseTgtApprove", "routeWiseTgtApprove")
     )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +39,9 @@ class TGTSetupMainActivity : AppCompatActivity() {
         binding.kroOutletSelection.setOnClickListener {
             startActivity(Intent(this, KROOutletActivity::class.java))
         }
-
+        binding.routeWiseTgtApprove.setOnClickListener {
+            startActivity(Intent(this, AssignUserListActivity::class.java))
+        }
         userRolesCheck()
 
     }

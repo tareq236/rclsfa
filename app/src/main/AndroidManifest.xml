@@ -25,6 +25,15 @@
         android:theme="@style/Theme.RCLSFA"
         tools:targetApi="31">
         <activity
+            android:name=".tgt_setup.route_wise_tgt_setup.RouteListByTGTApproveActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tgt_setup.route_wise_tgt_setup.AssignUserListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".webview.WebViewModelActivity"
+            android:exported="false" />
+        <activity
             android:name=".order.SinglePrintActivity"
             android:exported="false" />
         <activity

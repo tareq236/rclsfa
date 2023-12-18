@@ -18,6 +18,7 @@ import com.impala.rclsfa.outletManagement.OutletManagementMainMenuActivity
 import com.impala.rclsfa.retailer.RetailerSummeryActivity
 import com.impala.rclsfa.tgt_setup.TGTSetupMainActivity
 import com.impala.rclsfa.models.MenuItem
+import com.impala.rclsfa.webview.WebViewModelActivity
 import com.squareup.picasso.Picasso
 
 class MenuAdapter(private val menuList: List<MenuItem>) :
@@ -65,7 +66,8 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
                 }
 
                 if(menuItem.func == "dashboard"){
-                    val intent = Intent(itemView.context, DashboardActivity::class.java)
+                    val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                    intent.putExtra("activity_flag","dashboard")
                     itemView.context.startActivity(intent)
                 }
                 if(menuItem.func == "outlet"){

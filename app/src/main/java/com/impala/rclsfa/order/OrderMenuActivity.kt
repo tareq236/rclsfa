@@ -13,6 +13,7 @@ import com.impala.rclsfa.databinding.ActivityOrderMenuBinding
 import com.impala.rclsfa.models.AppButton
 import com.impala.rclsfa.models.UserRoles
 import com.impala.rclsfa.utils.SessionManager
+import com.impala.rclsfa.webview.WebViewModelActivity
 
 class OrderMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOrderMenuBinding
@@ -53,17 +54,20 @@ class OrderMenuActivity : AppCompatActivity() {
     }
 
     fun basicSummaryButton(view: View?) {
-        val intent = Intent(this, BasicSummeryActivity::class.java)
+        val intent = Intent(this, WebViewModelActivity::class.java)
+        intent.putExtra("activity_flag","basic_summary")
         startActivity(intent)
     }
 
     fun productWiseSummaryButton(view: View?) {
-        val intent = Intent(this, ProductWiseSummeryActivity::class.java)
+        val intent = Intent(this, WebViewModelActivity::class.java)
+        intent.putExtra("activity_flag","product_wise_summary")
         startActivity(intent)
     }
 
     fun salesConfirmationNightWorkButton(view: View?) {
-        val intent = Intent(this, SalesConfirmationActivity::class.java)
+        val intent = Intent(this, WebViewModelActivity::class.java)
+        intent.putExtra("activity_flag","sales_confirmation")
         startActivity(intent)
     }
 

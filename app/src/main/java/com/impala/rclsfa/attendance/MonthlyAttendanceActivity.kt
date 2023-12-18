@@ -32,7 +32,6 @@ class MonthlyAttendanceActivity : AppCompatActivity() {
         val userId = sessionManager.userId
         val monthYear = getCurrentMonthYear()
         val result = "sr_id=$userId&month=$monthYear"
-
         val url = "http://157.230.195.60:9012/mobile_view/monthly_attendance_report/?$result"
         webView.settings.javaScriptEnabled = true
         webView.settings.userAgentString =

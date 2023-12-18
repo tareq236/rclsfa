@@ -57,7 +57,7 @@ class RouteListByTGTAdapter(
 
                 if(item.firstApproval == 0){
                     binding.approvalId.setTextColor(Color.RED)
-                    binding.approvalId.text = "Padding"
+                    binding.approvalId.text = "Pending"
                 }else if(item.firstApproval == 1){
                     binding.approvalId.text = "Approved"
                 }

@@ -33,6 +33,9 @@ import com.impala.rclsfa.models.AttendanceResponse
 import com.impala.rclsfa.models.LoginRequest
 import com.impala.rclsfa.models.LoginResponse
 import com.impala.rclsfa.models.MenuResponse
+import com.impala.rclsfa.models.RouteWiseTargetModel
+import com.impala.rclsfa.models.UsersModel
+import com.impala.rclsfa.models.UsersModelResult
 import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.UpdateKroTargetM
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -51,6 +54,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+    @GET("api/v3/so_list")
+    fun soList(
+        @Query("user_id") user_id: String,
+        @Query("designation_id") designation_id: String
+    ): Call<UsersModel>
 
     @Multipart
     @POST("api/save_end_attendance_sr_with_image")
@@ -210,7 +218,11 @@ interface ApiService {
         @Path("designation_id") designation_id: String
     ): Call<RouteListByTgtModel>
 
-
+    @GET("api/route_wise_target_list")
+    fun routeListBySrTgtApprove(
+        @Query("user_id") sr_code: String,
+        @Query("designation_id") designation_id: String
+    ): Call<RouteWiseTargetModel>
     @FormUrlEncoded
     @POST("api/retailer_list_by_name")
     fun searchOutletByName(

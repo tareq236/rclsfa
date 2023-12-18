@@ -15,6 +15,7 @@ import com.impala.rclsfa.databinding.ActivityAttendanceMenuBinding
 import com.impala.rclsfa.models.AppButton
 import com.impala.rclsfa.models.UserRoles
 import com.impala.rclsfa.utils.SessionManager
+import com.impala.rclsfa.webview.WebViewModelActivity
 
 
 class AttendanceMenuActivity : AppCompatActivity() {
@@ -56,11 +57,13 @@ class AttendanceMenuActivity : AppCompatActivity() {
         }
 
         binding.monthlyAttendanceButton.setOnClickListener {
-            val intent = Intent(this, MonthlyAttendanceActivity::class.java)
+            val intent = Intent(this, WebViewModelActivity::class.java)
+            intent.putExtra("activity_flag","monthly_attendance")
             startActivity(intent)
         }
         binding.viewPaySlipButton.setOnClickListener {
-            val intent = Intent(this, ViewPaySlipActivity::class.java)
+            val intent = Intent(this, WebViewModelActivity::class.java)
+            intent.putExtra("activity_flag","view_pay_slip")
             startActivity(intent)
         }
 

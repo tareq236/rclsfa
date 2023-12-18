@@ -40,5 +40,14 @@
             android:layout_marginHorizontal="10dp"
             app:cornerRadius="6dp"
             />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/routeWiseTgtApprove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Route Wise TGT Approve"
+            android:layout_marginHorizontal="10dp"
+            app:cornerRadius="6dp"
+            />
     </LinearLayout>
 </LinearLayout>
