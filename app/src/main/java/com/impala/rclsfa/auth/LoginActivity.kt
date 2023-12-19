@@ -19,7 +19,6 @@ import com.impala.rclsfa.PermissionActivity
 import com.impala.rclsfa.R
 import com.impala.rclsfa.utils.SessionManager
 
-
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var usernameEditText: EditText

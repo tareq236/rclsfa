@@ -57,14 +57,30 @@ class AttendanceMenuActivity : AppCompatActivity() {
         }
 
         binding.monthlyAttendanceButton.setOnClickListener {
-            val intent = Intent(this, WebViewModelActivity::class.java)
-            intent.putExtra("activity_flag","monthly_attendance")
-            startActivity(intent)
+            val userRoles = sessionManager.userRoles
+            val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+            val buttonDetails = userRolesList.firstOrNull { it.access_name == "MonthlyAttendance" }
+            if (buttonDetails != null) {
+                if(buttonDetails.access_url != ""){
+                    val intent = Intent(this, WebViewModelActivity::class.java)
+                    intent.putExtra("access_url",buttonDetails.access_url)
+                    intent.putExtra("menu_name",buttonDetails.menu_name)
+                    startActivity(intent)
+                }
+            }
         }
         binding.viewPaySlipButton.setOnClickListener {
-            val intent = Intent(this, WebViewModelActivity::class.java)
-            intent.putExtra("activity_flag","view_pay_slip")
-            startActivity(intent)
+            val userRoles = sessionManager.userRoles
+            val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+            val buttonDetails = userRolesList.firstOrNull { it.access_name == "ViewPaySlip" }
+            if (buttonDetails != null) {
+                if(buttonDetails.access_url != ""){
+                    val intent = Intent(this, WebViewModelActivity::class.java)
+                    intent.putExtra("access_url",buttonDetails.access_url)
+                    intent.putExtra("menu_name",buttonDetails.menu_name)
+                    startActivity(intent)
+                }
+            }
         }
 
         userRolesCheck()

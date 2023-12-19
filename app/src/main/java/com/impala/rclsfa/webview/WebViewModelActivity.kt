@@ -13,8 +13,6 @@ import java.time.format.DateTimeFormatter
 class WebViewModelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWebviewModelBinding
     private lateinit var sessionManager: SessionManager
-    var url = ""
-    var activityFlag = ""
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,47 +28,27 @@ class WebViewModelActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initView() {
-        activityFlag = this.intent.getStringExtra("activity_flag")!!
+        var accessUrl = this.intent.getStringExtra("access_url")!!
+        val menuName = this.intent.getStringExtra("menu_name")!!
         sessionManager = SessionManager(this)
         val userId = sessionManager.userId
-        val designationId = sessionManager.designationId
+        val designationId = sessionManager.designationId.toString()
+        val monthYear = getCurrentMonthYear()
         binding.webView.webViewClient = WebViewClient()
 
-        if (activityFlag == "dashboard") {
-            binding.toolbar.title = "Dashboard"
-            binding.webView.loadUrl("http://157.230.195.60:9012/mobile_view/dashboard?user_id=$userId&designation_id=$designationId")
-        } else if (activityFlag == "view_pay_slip") {
-            binding.toolbar.title = "View Pay Slip"
-            val result = "user_id=$userId&designation_id=$designationId"
-            val url = "http://157.230.195.60:9012/mobile_view/pay_slip?$result"
-            binding.webView.loadUrl(url)
-        } else if (activityFlag == "monthly_attendance") {
-            binding.toolbar.title = "Monthly Attendance"
-            val userId = sessionManager.userId
-            val monthYear = getCurrentMonthYear()
-            val result = "sr_id=$userId&month=$monthYear"
-            val url = "http://157.230.195.60:9012/mobile_view/monthly_attendance_report/?$result"
-            binding.webView.loadUrl(url)
-        }else if(activityFlag == "product_wise_summary"){
-            binding.toolbar.title = "Product Wise Summery"
-            binding.webView.loadUrl("http://157.230.195.60:9012/mobile_view/order_product_wise_summary?user_id=$userId&designation_id=$designationId")
-        }else if(activityFlag == "basic_summary"){
-            binding.toolbar.title = "Basic Summery"
-            binding.webView.loadUrl("http://157.230.195.60:9012/mobile_view/order_basic_summary?user_id=$userId&designation_id=$designationId")
-        }else if(activityFlag == "sales_confirmation"){
-            binding.toolbar.title = "Sales Confirmation"
-            binding.webView.loadUrl("http://157.230.195.60:5011/#/mobile-order/sales-confirmation/$userId")
-        }else if(activityFlag == "leader_board"){
-            binding.toolbar.title = "Leader Board"
-            binding.webView.loadUrl("http://157.230.195.60:5011/#/mobile-order/sales-confirmation/$userId")
+        if (accessUrl.contains("{userid}")) {
+            accessUrl = userId?.let { accessUrl.replace("{userid}", it) }.toString()
         }
-        // this will load the url of the website
+        if (accessUrl.contains("{designationid}")) {
+            accessUrl = designationId?.let { accessUrl.replace("{designationid}", it) }.toString()
+        }
+        if (accessUrl.contains("{monthyear}")) {
+            accessUrl = monthYear?.let { accessUrl.replace("{monthyear}", it) }.toString()
+        }
 
-
-        // this will enable the javascript settings, it can also allow xss vulnerabilities
+        binding.toolbar.title = menuName
+        binding.webView.loadUrl(accessUrl)
         binding.webView.settings.javaScriptEnabled = true
-
-        // if you want to enable zoom feature
         binding.webView.settings.setSupportZoom(true)
     }
 

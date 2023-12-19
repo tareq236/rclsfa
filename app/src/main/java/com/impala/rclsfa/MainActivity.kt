@@ -176,7 +176,7 @@ class MainActivity : AppCompatActivity() {
 
                             }else{
                                 val menuList = UserRolesCheck.checkMenuRole(menuResponse.result, jsonStringUserRole)
-                                adapter = MenuAdapter(menuList)
+                                adapter = MenuAdapter(menuList,sessionManager)
                                 recyclerView.adapter = adapter
                             }
 

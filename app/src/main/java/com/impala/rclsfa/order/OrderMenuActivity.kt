@@ -54,21 +54,45 @@ class OrderMenuActivity : AppCompatActivity() {
     }
 
     fun basicSummaryButton(view: View?) {
-        val intent = Intent(this, WebViewModelActivity::class.java)
-        intent.putExtra("activity_flag","basic_summary")
-        startActivity(intent)
+        val userRoles = sessionManager.userRoles
+        val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+        val buttonDetails = userRolesList.firstOrNull { it.access_name == "BasicSummary" }
+        if (buttonDetails != null) {
+            if(buttonDetails.access_url != ""){
+                val intent = Intent(this, WebViewModelActivity::class.java)
+                intent.putExtra("access_url",buttonDetails.access_url)
+                intent.putExtra("menu_name",buttonDetails.menu_name)
+                startActivity(intent)
+            }
+        }
     }
 
     fun productWiseSummaryButton(view: View?) {
-        val intent = Intent(this, WebViewModelActivity::class.java)
-        intent.putExtra("activity_flag","product_wise_summary")
-        startActivity(intent)
+        val userRoles = sessionManager.userRoles
+        val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+        val buttonDetails = userRolesList.firstOrNull { it.access_name == "ProductWiseSummary" }
+        if (buttonDetails != null) {
+            if(buttonDetails.access_url != ""){
+                val intent = Intent(this, WebViewModelActivity::class.java)
+                intent.putExtra("access_url",buttonDetails.access_url)
+                intent.putExtra("menu_name",buttonDetails.menu_name)
+                startActivity(intent)
+            }
+        }
     }
 
     fun salesConfirmationNightWorkButton(view: View?) {
-        val intent = Intent(this, WebViewModelActivity::class.java)
-        intent.putExtra("activity_flag","sales_confirmation")
-        startActivity(intent)
+        val userRoles = sessionManager.userRoles
+        val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+        val buttonDetails = userRolesList.firstOrNull { it.access_name == "SalesConfirmationNightWork" }
+        if (buttonDetails != null) {
+            if(buttonDetails.access_url != ""){
+                val intent = Intent(this, WebViewModelActivity::class.java)
+                intent.putExtra("access_url",buttonDetails.access_url)
+                intent.putExtra("menu_name",buttonDetails.menu_name)
+                startActivity(intent)
+            }
+        }
     }
 
     // Handle the Up button click event
