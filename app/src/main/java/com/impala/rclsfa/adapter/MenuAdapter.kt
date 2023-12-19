@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.impala.rclsfa.R
 import com.impala.rclsfa.activities.DashboardActivity
 import com.impala.rclsfa.activities.LeaderBoardActivity
@@ -18,10 +19,12 @@ import com.impala.rclsfa.outletManagement.OutletManagementMainMenuActivity
 import com.impala.rclsfa.retailer.RetailerSummeryActivity
 import com.impala.rclsfa.tgt_setup.TGTSetupMainActivity
 import com.impala.rclsfa.models.MenuItem
+import com.impala.rclsfa.models.UserRoles
+import com.impala.rclsfa.utils.SessionManager
 import com.impala.rclsfa.webview.WebViewModelActivity
 import com.squareup.picasso.Picasso
 
-class MenuAdapter(private val menuList: List<MenuItem>) :
+class MenuAdapter(private val menuList: List<MenuItem>,private val sessionManager: SessionManager) :
     RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,7 +34,7 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val menuItem = menuList[position]
-        holder.bind(menuItem)
+        holder.bind(menuItem, sessionManager)
     }
 
     override fun getItemCount(): Int {
@@ -39,7 +42,7 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(menuItem: MenuItem) {
+        fun bind(menuItem: MenuItem, sessionManager: SessionManager) {
             val menuNameTextView = itemView.findViewById<TextView>(R.id.menuNameTextView)
             val menuImageView = itemView.findViewById<ImageView>(R.id.menuImageView)
             val llCard = itemView.findViewById<LinearLayout>(R.id.ll_card)
@@ -66,9 +69,17 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
                 }
 
                 if(menuItem.func == "dashboard"){
-                    val intent = Intent(itemView.context, WebViewModelActivity::class.java)
-                    intent.putExtra("activity_flag","dashboard")
-                    itemView.context.startActivity(intent)
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "Dashboard" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
                 }
                 if(menuItem.func == "outlet"){
                     val intent = Intent(itemView.context, OutletManagementMainMenuActivity::class.java)
@@ -76,8 +87,17 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
                 }
 
                 if(menuItem.func == "retailer_summary"){
-                    val intent = Intent(itemView.context, RetailerSummeryActivity::class.java)
-                    itemView.context.startActivity(intent)
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "RetailerSummary" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
                 }
 
                 if(menuItem.func == "tgt_setup"){
@@ -86,9 +106,145 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
                 }
 
                 if(menuItem.func == "laeder_board"){
-                    val intent = Intent(itemView.context, LeaderBoardActivity::class.java)
-                    itemView.context.startActivity(intent)
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "LaederBoard" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
                 }
+
+                if(menuItem.func == "daily_report"){
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "DailyReport" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
+                }
+
+                if(menuItem.func == "position"){
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "Position" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
+                }
+
+                if(menuItem.func == "kpi"){
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "KPI" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
+                }
+
+                if(menuItem.func == "kpi"){
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "KPI" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
+                }
+
+                if(menuItem.func == "stock_challan"){
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "StockChallan" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
+                }
+
+                if(menuItem.func == "products"){
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "Products" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
+                }
+
+                if(menuItem.func == "campaign"){
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "Campaign" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
+                }
+
+                if(menuItem.func == "notice_board"){
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "NoticeBoard" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
+                }
+
+                if(menuItem.func == "about"){
+                    val userRoles = sessionManager.userRoles
+                    val userRolesList = Gson().fromJson(userRoles, Array<UserRoles>::class.java).toList()
+                    val buttonDetails = userRolesList.firstOrNull { it.access_name == "AboutCompany" }
+                    if (buttonDetails != null) {
+                        if(buttonDetails.access_url != ""){
+                            val intent = Intent(itemView.context, WebViewModelActivity::class.java)
+                            intent.putExtra("access_url",buttonDetails.access_url)
+                            intent.putExtra("menu_name",buttonDetails.menu_name)
+                            itemView.context.startActivity(intent)
+                        }
+                    }
+                }
+
             }
 
         }
