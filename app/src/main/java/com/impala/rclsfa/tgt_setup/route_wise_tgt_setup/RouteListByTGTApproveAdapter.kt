@@ -100,19 +100,20 @@ class RouteListByTGTApproveAdapter(
             }
 
 
-//            binding.itemView.setOnClickListener {
-//                var achAmount = 0.0
-//                if(item.achAmount!=null){
-//                   achAmount = item.achAmount!!
-//                }
-//
-//                click.doClick(
-//                    item.routeId.toString(),
-//                    item.contribution!!,
-//                    achAmount.toString(),
-//                    binding.targetAmountId.text.toString()
-//                )
-//            }
+            binding.itemView.setOnClickListener {
+                var achAmount = 0.0
+                if(item.route_target_per!=null){
+                   achAmount = item.route_target_per!!
+                }
+
+                click.doClick(
+                    item.route_id.toString(),
+                    item.route_target_amount!!,
+                    achAmount ,
+                    item.route_target_amount,
+                    item.user_id
+                )
+            }
 
 
         }
@@ -133,5 +134,7 @@ class RouteListByTGTApproveAdapter(
     interface MainClickManage {
         fun onEditAmount(targetAmount: String, itemId: String, userId: String, routeId: String)
         fun setApprove(itemId: String)
+
+        fun doClick(id: String, contribution: Double,achAmount: Double,targetAmount:Double,userId:String)
     }
 }

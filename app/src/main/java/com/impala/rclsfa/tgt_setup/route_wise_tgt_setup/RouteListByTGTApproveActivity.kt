@@ -2,6 +2,7 @@ package com.impala.rclsfa.tgt_setup.route_wise_tgt_setup
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -375,6 +376,23 @@ class RouteListByTGTApproveActivity : AppCompatActivity(),
     override fun setApprove(itemId: String) {
         showLoadingDialog()
         giveApprove(itemId)
+    }
+
+    override fun doClick(
+        id: String,
+        contribution: Double,
+        achAmount: Double,
+        targetAmount: Double,
+        userId: String
+    ) {
+        startActivity(
+            Intent(this, RouteListApproveDetailsActivity::class.java)
+                .putExtra("route_id", id.toString())
+                .putExtra("contribution", contribution.toString())
+                .putExtra("route_target", targetAmount.toString())
+                .putExtra("user_id", userId)
+                .putExtra("designation_id", designationId.toString())
+        )
     }
 
 
