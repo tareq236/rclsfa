@@ -79,4 +79,15 @@
         android:layout_alignParentBottom="true"
         android:visibility="gone"
         />
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
+        >
+        <include
+            android:id="@+id/incB"
+            layout="@layout/bottom_dialog_edit_amount" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

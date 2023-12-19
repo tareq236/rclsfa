@@ -54,6 +54,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linApprove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_tgt"
@@ -89,6 +90,36 @@
             android:gravity="left|center_vertical"
             android:text="80%" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linApprove"
+            >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editAmountButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Edit Amount"
+                app:cornerRadius="6dp"
+                app:strokeColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/approveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Approve"
+                app:cornerRadius="6dp"
+                app:strokeColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>
 

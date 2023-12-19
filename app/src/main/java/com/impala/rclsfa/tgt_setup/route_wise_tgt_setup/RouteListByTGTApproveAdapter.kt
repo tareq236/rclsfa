@@ -7,14 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.impala.rclsfa.R
 import com.impala.rclsfa.databinding.RouteListByTgtApproveBinding
 import com.impala.rclsfa.models.RouteWiseTargetModelResult
-import com.impala.rclsfa.utils.SessionManager
 
 
 class RouteListByTGTApproveAdapter(
-    val context: Context
+    val context: Context,
+    val click:MainClickManage
 ) :
     RecyclerView.Adapter<RouteListByTGTApproveAdapter.ViewHolder>() {
 
@@ -37,7 +38,8 @@ class RouteListByTGTApproveAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.route_list_by_tgt_approve, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.route_list_by_tgt_approve, parent, false)
         return ViewHolder(view)
     }
 
@@ -51,10 +53,10 @@ class RouteListByTGTApproveAdapter(
                 val nameEn = item.route_name
                 val contribution = item.route_target_per
 
-                if(item.first_approval == 0){
+                if (item.first_approval == 0) {
                     binding.approvalId.setTextColor(Color.RED)
                     binding.approvalId.text = "Pending"
-                }else if(item.first_approval == 1){
+                } else if (item.first_approval == 1) {
                     binding.approvalId.text = "Approved"
                 }
 
@@ -65,9 +67,28 @@ class RouteListByTGTApproveAdapter(
 
                 val result = targetA * dContribution / 100
                 binding.targetAmountId.text = roundTheNumber(result)
-            }catch (e:NumberFormatException){
+            } catch (e: NumberFormatException) {
                 e.printStackTrace()
             }
+
+            binding.approveButton.setOnClickListener {
+
+                SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Are you sure?")
+                    .setContentText("Approve this")
+                    .setCancelText("No,Cancel")
+                    .setConfirmText("Yes,delete it!")
+                    .showCancelButton(true)
+                    .setCancelClickListener { sDialog -> sDialog.cancel() }
+                    .setConfirmClickListener {
+
+                    }
+                    .show()
+            }
+            binding.editAmountButton.setOnClickListener {
+                click.onEditAmount(binding.targetAmountId.text.toString())
+            }
+
 
 //            binding.itemView.setOnClickListener {
 //                var achAmount = 0.0
@@ -101,4 +122,7 @@ class RouteListByTGTApproveAdapter(
 
 
 
+    interface MainClickManage {
+        fun onEditAmount(targetAmount:String)
+    }
 }

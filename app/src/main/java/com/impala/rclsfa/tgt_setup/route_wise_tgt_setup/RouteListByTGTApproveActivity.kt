@@ -2,31 +2,32 @@ package com.impala.rclsfa.tgt_setup.route_wise_tgt_setup
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.impala.rclsfa.R
-import com.impala.rclsfa.databinding.ActivityRouteListBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.impala.rclsfa.databinding.ActivityRouteListByTgtapproveBinding
 import com.impala.rclsfa.models.RouteWiseTargetModel
 import com.impala.rclsfa.models.RouteWiseTargetModelResult
-import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtModel
-import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.RouteListByTgtResult
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RouteListByTGTApproveActivity : AppCompatActivity() {
+class RouteListByTGTApproveActivity : AppCompatActivity(),
+    RouteListByTGTApproveAdapter.MainClickManage {
     private lateinit var binding: ActivityRouteListByTgtapproveBinding
     lateinit var adapter: RouteListByTGTApproveAdapter
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
     var srId = ""
     var targetAmount = 0
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRouteListByTgtapproveBinding.inflate(layoutInflater)
@@ -39,8 +40,12 @@ class RouteListByTGTApproveActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.incB.bottomSheet)
+
+
         sessionManager = SessionManager(this)
         adapter = RouteListByTGTApproveAdapter(
+            this,
             this
         )
 
@@ -57,7 +62,30 @@ class RouteListByTGTApproveActivity : AppCompatActivity() {
 
         showLoadingDialog()
         routeListBySr(srId, designationId.toString())
+
+        //#3 Listening to State Changes of BottomSheet
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+//                buttonBottomSheetPersistent.text = when (newState) {
+//                    BottomSheetBehavior.STATE_EXPANDED -> "Close Persistent Bottom Sheet"
+//                    BottomSheetBehavior.STATE_COLLAPSED -> "Open Persistent Bottom Sheet"
+//                    else -> "Persistent Bottom Sheet"
+//                }
+            }
+        })
+
+
+        binding.incB.imageClose.setOnClickListener {
+            bottomSheetBehavior.isHideable = true
+            bottomSheetBehavior.peekHeight = 0
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
     }
+
     private fun routeListBySr(
         user_code: String,
         designation_id: String
@@ -78,9 +106,9 @@ class RouteListByTGTApproveActivity : AppCompatActivity() {
                     if (data != null) {
                         if (data.success!!) {
                             val dataList = data.result
-                            if(dataList!=null){
+                            if (dataList != null) {
                                 adapter.addData(dataList as MutableList<RouteWiseTargetModelResult>)
-                            }else{
+                            } else {
                                 showDialogBox(
                                     SweetAlertDialog.WARNING_TYPE,
                                     "Error-RN5801",
@@ -91,7 +119,7 @@ class RouteListByTGTApproveActivity : AppCompatActivity() {
                             // targetAmount = data.getTargetAmount()!!
                             dismissLoadingDialog()
                             binding.saveTarget.visibility = View.GONE
-                        }else{
+                        } else {
                             dismissLoadingDialog()
                             showDialogBox(
                                 SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
@@ -164,5 +192,17 @@ class RouteListByTGTApproveActivity : AppCompatActivity() {
 
             }
         sweetAlertDialog.show()
+    }
+
+    override fun onEditAmount(targetAmount:String) {
+       // bottomSheetBehavior.peekHeight = 400
+        binding.incB.edtAmount.editText!!.setText(targetAmount)
+        binding.coordinate.visibility = View.VISIBLE
+        val state =
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
+                BottomSheetBehavior.STATE_COLLAPSED
+            else
+                BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetBehavior.state = state
     }
 }
