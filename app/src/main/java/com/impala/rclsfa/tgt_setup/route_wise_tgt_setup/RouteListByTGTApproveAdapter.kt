@@ -15,12 +15,16 @@ import com.impala.rclsfa.models.RouteWiseTargetModelResult
 
 class RouteListByTGTApproveAdapter(
     val context: Context,
-    val click:MainClickManage
+    val click: MainClickManage
 ) :
     RecyclerView.Adapter<RouteListByTGTApproveAdapter.ViewHolder>() {
 
     var list: MutableList<RouteWiseTargetModelResult> = mutableListOf()
 
+    fun clearData() {
+        list.clear()
+        notifyDataSetChanged()
+    }
 
     fun addData(allCus: MutableList<RouteWiseTargetModelResult>) {
         list.addAll(allCus)
@@ -63,10 +67,10 @@ class RouteListByTGTApproveAdapter(
                 binding.nameEn.text = nameEn
                 binding.contributionId.text = contribution.toString()
                 val dContribution = item.route_target_amount!!.toDouble()
-                val targetA = item.target_amount
+                val targetA = item.route_target_amount
 
                 val result = targetA * dContribution / 100
-                binding.targetAmountId.text = roundTheNumber(result)
+                binding.targetAmountId.text = roundTheNumber(targetA)
             } catch (e: NumberFormatException) {
                 e.printStackTrace()
             }
@@ -76,17 +80,23 @@ class RouteListByTGTApproveAdapter(
                 SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Are you sure?")
                     .setContentText("Approve this")
-                    .setCancelText("No,Cancel")
-                    .setConfirmText("Yes,delete it!")
+                    .setCancelText("No")
+                    .setConfirmText("Yes")
                     .showCancelButton(true)
                     .setCancelClickListener { sDialog -> sDialog.cancel() }
-                    .setConfirmClickListener {
-
+                    .setConfirmClickListener { sDialog ->
+                        sDialog.cancel()
+                        click.setApprove(item.id.toString())
                     }
                     .show()
             }
             binding.editAmountButton.setOnClickListener {
-                click.onEditAmount(binding.targetAmountId.text.toString())
+                click.onEditAmount(
+                    binding.targetAmountId.text.toString(),
+                    item.id.toString(),
+                    item.user_id,
+                    item.route_id.toString()
+                )
             }
 
 
@@ -120,9 +130,8 @@ class RouteListByTGTApproveAdapter(
     }
 
 
-
-
     interface MainClickManage {
-        fun onEditAmount(targetAmount:String)
+        fun onEditAmount(targetAmount: String, itemId: String, userId: String, routeId: String)
+        fun setApprove(itemId: String)
     }
 }

@@ -37,6 +37,7 @@ import com.impala.rclsfa.models.RouteWiseTargetModel
 import com.impala.rclsfa.models.UsersModel
 import com.impala.rclsfa.models.UsersModelResult
 import com.impala.rclsfa.tgt_setup.kro_outlet_selection.model.UpdateKroTargetM
+import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.UpdateResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -54,6 +55,20 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+
+    @GET("api/update_route_wise_first_approval")
+    fun updateAmount(
+        @Query("id") id: String,
+        @Query("user_id") userId: String,
+        @Query("route_id") routeId: String,
+        @Query("route_amount") route_amount: String
+    ): Call<UpdateResponse>
+
+    @GET("api/route_wise_first_approval")
+    fun setApprove(
+        @Query("id") id: String
+    ): Call<UpdateResponse>
+
     @GET("api/v3/so_list")
     fun soList(
         @Query("user_id") user_id: String,

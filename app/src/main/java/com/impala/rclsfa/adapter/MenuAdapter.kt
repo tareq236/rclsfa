@@ -18,6 +18,7 @@ import com.impala.rclsfa.outletManagement.OutletManagementMainMenuActivity
 import com.impala.rclsfa.retailer.RetailerSummeryActivity
 import com.impala.rclsfa.tgt_setup.TGTSetupMainActivity
 import com.impala.rclsfa.models.MenuItem
+import com.impala.rclsfa.utils.SessionManager
 import com.impala.rclsfa.webview.WebViewModelActivity
 import com.squareup.picasso.Picasso
 
@@ -31,6 +32,7 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val menuItem = menuList[position]
+
         holder.bind(menuItem)
     }
 
@@ -43,6 +45,7 @@ class MenuAdapter(private val menuList: List<MenuItem>) :
             val menuNameTextView = itemView.findViewById<TextView>(R.id.menuNameTextView)
             val menuImageView = itemView.findViewById<ImageView>(R.id.menuImageView)
             val llCard = itemView.findViewById<LinearLayout>(R.id.ll_card)
+
 
             menuNameTextView.text = menuItem.menu_name
             // Load and set the image using Picasso

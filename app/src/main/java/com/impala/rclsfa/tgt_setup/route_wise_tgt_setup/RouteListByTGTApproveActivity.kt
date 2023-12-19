@@ -12,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.impala.rclsfa.databinding.ActivityRouteListByTgtapproveBinding
 import com.impala.rclsfa.models.RouteWiseTargetModel
 import com.impala.rclsfa.models.RouteWiseTargetModelResult
+import com.impala.rclsfa.tgt_setup.route_wise_tgt_setup.model.UpdateResponse
 import com.impala.rclsfa.utils.ApiService
 import com.impala.rclsfa.utils.SessionManager
 import retrofit2.Call
@@ -27,6 +28,10 @@ class RouteListByTGTApproveActivity : AppCompatActivity(),
     var srId = ""
     var targetAmount = 0
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    var id = ""
+    var mUserId = ""
+    var mRouteId = ""
+    var designationId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +45,11 @@ class RouteListByTGTApproveActivity : AppCompatActivity(),
     }
 
     private fun initView() {
+        loadingDialog =
+            SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading")
+        srId = this.intent.getStringExtra("user_id")!!
+        designationId = this.intent.getIntExtra("designation_id", 0)!!
+
         bottomSheetBehavior = BottomSheetBehavior.from(binding.incB.bottomSheet)
 
 
@@ -49,10 +59,6 @@ class RouteListByTGTApproveActivity : AppCompatActivity(),
             this
         )
 
-        loadingDialog =
-            SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading")
-        srId = this.intent.getStringExtra("user_id")!!
-        val designationId = this.intent.getStringExtra("designation_id")
 
         val linearLayoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -84,6 +90,155 @@ class RouteListByTGTApproveActivity : AppCompatActivity(),
             bottomSheetBehavior.peekHeight = 0
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
+
+        binding.incB.btnUpdate.setOnClickListener {
+            val amount = binding.incB.edtAmount.editText!!.text.toString()
+            if (amount.isEmpty()) {
+                showDialogBox(
+                    SweetAlertDialog.WARNING_TYPE,
+                    "Warning",
+                    "Enter a amount"
+                )
+                return@setOnClickListener
+            }
+            showLoadingDialog()
+            updateAmount(
+                id,
+                mUserId,
+                mRouteId,
+                amount
+            )
+        }
+
+
+    }
+
+    private fun updateAmount(
+        id: String,
+        userId: String,
+        routeId: String,
+        route_amount: String
+    ) {
+        val apiService = ApiService.CreateApi2()
+        apiService.updateAmount(
+            id,
+            userId,
+            routeId,
+            route_amount
+        ).enqueue(object :
+            Callback<UpdateResponse> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(
+                call: Call<UpdateResponse>,
+                response: Response<UpdateResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    if (data != null) {
+                        if (data.success!!) {
+                            bottomSheetBehavior.isHideable = true
+                            bottomSheetBehavior.peekHeight = 0
+                            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                            val message = data.message
+                            showDialogForSuccess(
+                                SweetAlertDialog.SUCCESS_TYPE,
+                                "Success",
+                                message
+                            )
+                            dismissLoadingDialog()
+
+                        } else {
+                            dismissLoadingDialog()
+                            showDialogBox(
+                                SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
+                                "Failed!!"
+                            )
+
+                        }
+                    } else {
+                        dismissLoadingDialog()
+                        showDialogBox(
+                            SweetAlertDialog.WARNING_TYPE,
+                            "Error-RN5801",
+                            "Response NULL value. Try later."
+                        )
+                    }
+                } else {
+                    dismissLoadingDialog()
+                    showDialogBox(
+                        SweetAlertDialog.WARNING_TYPE,
+                        "Error-RR5801",
+                        "Response failed. Try later."
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<UpdateResponse>, t: Throwable) {
+                dismissLoadingDialog()
+                showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
+            }
+        })
+    }
+
+    private fun giveApprove(
+        id: String
+    ) {
+        val apiService = ApiService.CreateApi2()
+        apiService.setApprove(
+            id
+        ).enqueue(object :
+            Callback<UpdateResponse> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(
+                call: Call<UpdateResponse>,
+                response: Response<UpdateResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    if (data != null) {
+                        if (data.success!!) {
+                            bottomSheetBehavior.isHideable = true
+                            bottomSheetBehavior.peekHeight = 0
+                            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                            val message = data.message
+                            showDialogForSuccess(
+                                SweetAlertDialog.SUCCESS_TYPE,
+                                "Success",
+                                message
+                            )
+                            dismissLoadingDialog()
+
+                        } else {
+                            dismissLoadingDialog()
+                            showDialogBox(
+                                SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
+                                "Failed!!"
+                            )
+
+                        }
+                    } else {
+                        dismissLoadingDialog()
+                        showDialogBox(
+                            SweetAlertDialog.WARNING_TYPE,
+                            "Error-RN5801",
+                            "Response NULL value. Try later."
+                        )
+                    }
+                } else {
+                    dismissLoadingDialog()
+                    showDialogBox(
+                        SweetAlertDialog.WARNING_TYPE,
+                        "Error-RR5801",
+                        "Response failed. Try later."
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<UpdateResponse>, t: Throwable) {
+                dismissLoadingDialog()
+                showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
+            }
+        })
     }
 
     private fun routeListBySr(
@@ -107,6 +262,7 @@ class RouteListByTGTApproveActivity : AppCompatActivity(),
                         if (data.success!!) {
                             val dataList = data.result
                             if (dataList != null) {
+                                adapter.clearData()
                                 adapter.addData(dataList as MutableList<RouteWiseTargetModelResult>)
                             } else {
                                 showDialogBox(
@@ -177,7 +333,7 @@ class RouteListByTGTApproveActivity : AppCompatActivity(),
         sweetAlertDialog.show()
     }
 
-    private fun showDialogBoxForValidation(
+    private fun showDialogForSuccess(
         type: Int,
         title: String,
         message: String,
@@ -189,13 +345,23 @@ class RouteListByTGTApproveActivity : AppCompatActivity(),
             .setConfirmClickListener {
                 it.dismissWithAnimation()
                 callback?.invoke()
-
+                showLoadingDialog()
+                routeListBySr(srId, designationId.toString())
             }
         sweetAlertDialog.show()
     }
 
-    override fun onEditAmount(targetAmount:String) {
-       // bottomSheetBehavior.peekHeight = 400
+    override fun onEditAmount(
+        targetAmount: String,
+        itemId: String,
+        userId: String,
+        routeId: String
+    ) {
+        // bottomSheetBehavior.peekHeight = 400
+        id = itemId
+        mUserId = userId
+        mRouteId = routeId
+
         binding.incB.edtAmount.editText!!.setText(targetAmount)
         binding.coordinate.visibility = View.VISIBLE
         val state =
@@ -205,4 +371,11 @@ class RouteListByTGTApproveActivity : AppCompatActivity(),
                 BottomSheetBehavior.STATE_EXPANDED
         bottomSheetBehavior.state = state
     }
+
+    override fun setApprove(itemId: String) {
+        showLoadingDialog()
+        giveApprove(itemId)
+    }
+
+
 }
