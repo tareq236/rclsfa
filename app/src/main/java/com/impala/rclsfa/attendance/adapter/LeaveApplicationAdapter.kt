@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.impala.rclsfa.R
 import com.impala.rclsfa.attendance.model.AllLeaveAttendListM
 import com.impala.rclsfa.databinding.LeaveApplicationListBinding
+import com.impala.rclsfa.utils.SessionManager
 import java.text.SimpleDateFormat
 
 
-class LeaveApplicationAdapter(val context: Context) :
+class LeaveApplicationAdapter(val context: Context,private val sessionManager: SessionManager,private val clickMange:MainClickManage) :
     RecyclerView.Adapter<LeaveApplicationAdapter.ViewHolder>() {
 
     var list: MutableList<AllLeaveAttendListM.Result> = mutableListOf()
@@ -64,6 +66,30 @@ class LeaveApplicationAdapter(val context: Context) :
             binding.comments.text = item.comments
             binding.fromDate.text = item.absentFromDate
             binding.toDate.text = item.absentToDate
+            val designationId = sessionManager.designationId
+            if(designationId==8){
+                binding.applicationApprove.visibility = View.VISIBLE
+
+            }else {
+                binding.applicationApprove.visibility = View.GONE
+            }
+
+            binding.applicationApprove.setOnClickListener {
+
+                SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Are you sure?")
+                    .setContentText("Approve this")
+                    .setCancelText("No")
+                    .setConfirmText("Yes")
+                    .showCancelButton(true)
+                    .setCancelClickListener { sDialog -> sDialog.cancel() }
+                    .setConfirmClickListener { sDialog ->
+                        sDialog.cancel()
+                        clickMange.setApprove(item.id.toString())
+                    }
+                    .show()
+            }
+
         }
 
     }
@@ -86,5 +112,10 @@ class LeaveApplicationAdapter(val context: Context) :
         return thisDate
     }
 
+    interface MainClickManage {
 
+        fun setApprove(itemId: String)
+
+
+    }
 }

@@ -61,6 +61,7 @@ class RouteListByTGTApproveAdapter(
                     binding.approvalId.setTextColor(Color.RED)
                     binding.approvalId.text = "Pending"
                 } else if (item.first_approval == 1) {
+                    binding.approvalId.setTextColor(Color.GREEN)
                     binding.approvalId.text = "Approved"
                 }
 

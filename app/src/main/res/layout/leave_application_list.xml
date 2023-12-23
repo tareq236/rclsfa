@@ -137,6 +137,18 @@
                 android:textColor="@color/text_color"
                 android:textSize="14sp" />
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/applicationApprove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="Approve"
+            app:cornerRadius="6dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="05dp"
+            android:layout_below="@+id/linComments"
+            />
     </RelativeLayout>
 
 

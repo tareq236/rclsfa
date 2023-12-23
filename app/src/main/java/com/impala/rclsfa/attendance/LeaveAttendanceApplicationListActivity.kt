@@ -16,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LeaveAttendanceApplicationListActivity : AppCompatActivity() {
+class LeaveAttendanceApplicationListActivity : AppCompatActivity(),LeaveApplicationAdapter.MainClickManage {
     private lateinit var binding: ActivityLeaveAttendanceApplicationListBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
@@ -36,8 +36,9 @@ class LeaveAttendanceApplicationListActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        adapter = LeaveApplicationAdapter(this)
         sessionManager = SessionManager(this)
+        adapter = LeaveApplicationAdapter(this, sessionManager,this)
+
         val userId = sessionManager.userId
         val designationId = sessionManager.designationId
         // Initialize the loading dialog
@@ -52,9 +53,10 @@ class LeaveAttendanceApplicationListActivity : AppCompatActivity() {
 
 
         binding.applyId.setOnClickListener {
-            startActivity(Intent(this, ApplyLeaveApplicationActivity::class.java)
-                .putExtra("first_approval",firstApproval)
-                .putExtra("final_approval",finalApproval)
+            startActivity(
+                Intent(this, ApplyLeaveApplicationActivity::class.java)
+                    .putExtra("first_approval", firstApproval)
+                    .putExtra("final_approval", finalApproval)
             )
         }
 
@@ -89,6 +91,7 @@ class LeaveAttendanceApplicationListActivity : AppCompatActivity() {
                     if (data != null) {
                         if (data.getSuccess()!!) {
                             val dataList = data.getResult()
+                            adapter.clearData()
                             adapter.addData(dataList as MutableList<AllLeaveAttendListM.Result>)
                             firstApproval = data.getFirstApproval()!!.name!!
                             finalApproval = data.getFinalApproval()!!.name!!
@@ -149,5 +152,12 @@ class LeaveAttendanceApplicationListActivity : AppCompatActivity() {
                 callback?.invoke()
             }
         sweetAlertDialog.show()
+    }
+
+    override fun setApprove(itemId: String) {
+        val userId = sessionManager.userId
+        val designationId = sessionManager.designationId
+        showLoadingDialog()
+        leaveAttendanceSrList(userId!!)
     }
 }

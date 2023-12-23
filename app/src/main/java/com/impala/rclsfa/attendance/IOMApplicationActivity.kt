@@ -18,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class IOMApplicationActivity : AppCompatActivity() {
+class IOMApplicationActivity : AppCompatActivity(),LeaveApplicationAdapter.MainClickManage {
     private lateinit var binding: ActivityIomapplicationBinding
     private lateinit var loadingDialog: Dialog
     private lateinit var sessionManager: SessionManager
@@ -37,8 +37,9 @@ class IOMApplicationActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        adapter = LeaveApplicationAdapter(this)
         sessionManager = SessionManager(this)
+        adapter = LeaveApplicationAdapter(this,sessionManager,this)
+
         val userId = sessionManager.userId
         val designationId = sessionManager.designationId
         // Initialize the loading dialog
@@ -76,6 +77,7 @@ class IOMApplicationActivity : AppCompatActivity() {
                     if (data != null) {
                         if (data.getSuccess()!!) {
                             val dataList = data.getResult()
+                            adapter.clearData()
                             adapter.addData(dataList as MutableList<AllLeaveAttendListM.Result>)
                             firstApproval = data.getFirstApproval()!!.name!!
                             finalApproval = data.getFinalApproval()!!.name!!
@@ -135,6 +137,12 @@ class IOMApplicationActivity : AppCompatActivity() {
                 callback?.invoke()
             }
         sweetAlertDialog.show()
+    }
+
+    override fun setApprove(itemId: String) {
+        val userId = sessionManager.userId
+        showLoadingDialog()
+        iomAttendanceSrList(userId!!)
     }
 
 }

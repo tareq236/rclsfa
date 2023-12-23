@@ -7,7 +7,7 @@
     android:layout_margin="3dp"
     android:orientation="vertical"
     android:padding="8dp"
-    app:cardBackgroundColor="#E3E3E3"
+    app:cardBackgroundColor="#fff"
     app:strokeColor="#E3E3E3">
 
     <RelativeLayout
