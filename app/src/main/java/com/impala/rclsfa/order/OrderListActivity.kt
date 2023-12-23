@@ -74,13 +74,14 @@ class OrderListActivity : AppCompatActivity() {
                 binding.selectDate.text = sdf.format(cal.time)
 
                 // val setOrderJson = setOrderListJson("30031",sdf.format(cal.time),0,50)
+                showLoadingDialog()
                 val setOrderJson = setOrderListJson(userCode, sdf.format(cal.time), 0, 50)
                 val jsonParser = JsonParser()
                 val gsonObject = jsonParser.parse(setOrderJson) as JsonObject
                 srOrderList(gsonObject)
             }
 
-        binding.selectDate.setOnClickListener {
+        binding.rlSelectDate.setOnClickListener {
             DatePickerDialog(
                 this,
                 dateSetListener,
@@ -90,11 +91,12 @@ class OrderListActivity : AppCompatActivity() {
                 cal.get(Calendar.DAY_OF_MONTH)
             ).show()
 
-
         }
 
         binding.printAllId.setOnClickListener {
-            startActivity(Intent(this, PrintAllActivity::class.java))
+            startActivity(Intent(this, PrintAllActivity::class.java)
+                .putExtra("select_date",binding.selectDate.text.toString())
+            )
         }
     }
 

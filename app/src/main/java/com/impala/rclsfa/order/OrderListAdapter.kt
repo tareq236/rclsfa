@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.impala.rclsfa.R
 import com.impala.rclsfa.order.model.OrderListModel
 import com.impala.rclsfa.databinding.OrderListBinding
+import com.impala.rclsfa.webview.WebViewModelActivity
 import java.text.SimpleDateFormat
 
 
@@ -52,6 +53,11 @@ class OrderListAdapter(val context: Context) :
 
             binding.invoiceId.setOnClickListener {
                 context.startActivity(Intent(context,SinglePrintActivity::class.java))
+            }
+            binding.editOrderId.setOnClickListener {
+                context.startActivity(Intent(context,EditOrderActivity::class.java)
+                    .putExtra("order_id",item.id)
+                )
             }
         }
 

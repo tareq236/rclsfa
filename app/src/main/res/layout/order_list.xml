@@ -132,6 +132,7 @@
                 android:layout_marginHorizontal="10dp"
                 />
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/editOrderId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cornerRadius="6dp"

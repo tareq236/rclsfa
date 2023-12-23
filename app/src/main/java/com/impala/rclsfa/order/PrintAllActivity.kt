@@ -25,6 +25,7 @@ class PrintAllActivity : AppCompatActivity() {
     // on below line we are initializing
     // button pressed variable as false
     var printBtnPressed = false
+    private var selectDate = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +39,7 @@ class PrintAllActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-
+        selectDate = this.intent.getStringExtra("select_date")!!
         sessionManager = SessionManager(this)
 
         val userId = sessionManager.userId
@@ -49,7 +50,7 @@ class PrintAllActivity : AppCompatActivity() {
             }
         }
         // this will load the url of the website
-        binding.webView.loadUrl("http://157.230.195.60:9012/mobile_view/sr_all_order_preview?sr_id=30029&&order_date=2023-08-13")
+        binding.webView.loadUrl("http://157.230.195.60:9012/mobile_view/sr_all_order_preview?sr_id=$userId&&order_date=$selectDate")
 
         // this will enable the javascript settings, it can also allow xss vulnerabilities
         binding.webView.settings.javaScriptEnabled = true

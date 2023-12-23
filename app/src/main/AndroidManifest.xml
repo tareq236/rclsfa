@@ -25,9 +25,11 @@
         android:theme="@style/Theme.RCLSFA"
         tools:targetApi="31">
         <activity
+            android:name=".order.EditOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".tgt_setup.route_wise_tgt_setup.RouteListByTGTApproveActivity"
             android:exported="false" />
-
         <activity
             android:name=".tgt_setup.route_wise_tgt_setup.RouteListApproveDetailsActivity"
             android:exported="false" />
