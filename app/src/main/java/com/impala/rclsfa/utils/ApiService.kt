@@ -2,6 +2,7 @@ package com.impala.rclsfa.utils
 
 import com.google.gson.JsonObject
 import com.impala.rclsfa.attendance.model.AllLeaveAttendListM
+import com.impala.rclsfa.attendance.model.ApproveLeaveApplicationM
 import com.impala.rclsfa.attendance.model.SaveLeaveAttendM
 import com.impala.rclsfa.auth.model.ChangePasswordM
 import com.impala.rclsfa.auth.model.ImageUploadModel
@@ -55,6 +56,20 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+
+    @GET("api/leave_attendance_approved_by_asm")
+    fun leaveAttendanceApprovedByAsm(
+        @Query("id") id: String,
+        @Query("user_id") user_id: String,
+        @Query("designation_id") designation_id: String
+    ): Call<ApproveLeaveApplicationM>
+
+    @GET("api/pending_attendance_approved_by_asm")
+    fun imoAttendanceApprovedByAsm(
+        @Query("id") id: String,
+        @Query("user_id") user_id: String,
+        @Query("designation_id") designation_id: String
+    ): Call<ApproveLeaveApplicationM>
 
     @GET("api/update_route_wise_first_approval")
     fun updateAmount(

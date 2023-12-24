@@ -10,6 +10,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.impala.rclsfa.R
 import com.impala.rclsfa.attendance.adapter.LeaveApplicationAdapter
 import com.impala.rclsfa.attendance.model.AllLeaveAttendListM
+import com.impala.rclsfa.attendance.model.ApproveLeaveApplicationM
 import com.impala.rclsfa.databinding.ActivityIomapplicationBinding
 import com.impala.rclsfa.databinding.ActivityLeaveAttendanceApplicationListBinding
 import com.impala.rclsfa.utils.ApiService
@@ -141,8 +142,62 @@ class IOMApplicationActivity : AppCompatActivity(),LeaveApplicationAdapter.MainC
 
     override fun setApprove(itemId: String) {
         val userId = sessionManager.userId
+        val designationId = sessionManager.designationId
         showLoadingDialog()
-        iomAttendanceSrList(userId!!)
-    }
+        imoAttendanceApprovedByAsm(itemId, userId!!, designationId.toString())
 
+    }
+    private fun imoAttendanceApprovedByAsm(
+        id: String,
+        user_id: String,
+        designation_id: String
+    ) {
+        val apiService = ApiService.CreateApi2()
+        apiService.imoAttendanceApprovedByAsm(
+            id, user_id, designation_id
+        ).enqueue(object :
+            Callback<ApproveLeaveApplicationM> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(
+                call: Call<ApproveLeaveApplicationM>,
+                response: Response<ApproveLeaveApplicationM>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    if (data != null) {
+                        if (data.getSuccess()!!) {
+                            showLoadingDialog()
+                            iomAttendanceSrList(user_id!!)
+                            dismissLoadingDialog()
+                        } else {
+                            dismissLoadingDialog()
+                            showDialogBox(
+                                SweetAlertDialog.WARNING_TYPE, "Problem-SF5801",
+                                "Failed!!"
+                            )
+                        }
+                    } else {
+                        dismissLoadingDialog()
+                        showDialogBox(
+                            SweetAlertDialog.WARNING_TYPE,
+                            "Error-RN5801",
+                            "Response NULL value. Try later."
+                        )
+                    }
+                } else {
+                    dismissLoadingDialog()
+                    showDialogBox(
+                        SweetAlertDialog.WARNING_TYPE,
+                        "Error-RR5801",
+                        "Response failed. Try later."
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<ApproveLeaveApplicationM>, t: Throwable) {
+                dismissLoadingDialog()
+                showDialogBox(SweetAlertDialog.ERROR_TYPE, "Error-NF5801", "Network error")
+            }
+        })
+    }
 }
