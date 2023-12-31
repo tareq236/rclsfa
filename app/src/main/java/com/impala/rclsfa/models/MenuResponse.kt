@@ -5,6 +5,7 @@ data class MenuResponse(
     val message: String,
     val result: List<MenuItem>,
     val user_roles: List<UserRoles>,
+    val version: Double,
     val success: Boolean
 )
 

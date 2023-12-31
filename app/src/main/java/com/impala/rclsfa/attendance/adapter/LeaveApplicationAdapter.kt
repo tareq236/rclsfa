@@ -2,6 +2,7 @@ package com.impala.rclsfa.attendance.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,11 @@ import com.impala.rclsfa.utils.SessionManager
 import java.text.SimpleDateFormat
 
 
-class LeaveApplicationAdapter(val context: Context,private val sessionManager: SessionManager,private val clickMange:MainClickManage) :
+class LeaveApplicationAdapter(
+    val context: Context,
+    private val sessionManager: SessionManager,
+    private val clickMange: MainClickManage
+) :
     RecyclerView.Adapter<LeaveApplicationAdapter.ViewHolder>() {
 
     var list: MutableList<AllLeaveAttendListM.Result> = mutableListOf()
@@ -36,7 +41,8 @@ class LeaveApplicationAdapter(val context: Context,private val sessionManager: S
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.leave_application_list, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.leave_application_list, parent, false)
         return ViewHolder(view)
     }
 
@@ -47,19 +53,23 @@ class LeaveApplicationAdapter(val context: Context,private val sessionManager: S
 
         with(holder) {
 
-             if(item.asmApprove==null){
-                 binding.firstApproval.text = "Pending"
-             }else if(item.asmApprove==1){
-                 binding.firstApproval.text = "Approve"
-             }else if(item.asmApprove==2){
-                 binding.firstApproval.text = "Cancel"
-             }
+            if (item.asmApprove == null) {
+                binding.firstApproval.text = "Pending"
 
-            if(item.saApprove==null){
+            } else if (item.asmApprove == 1) {
+                binding.firstApproval.text = "Approve"
+
+                binding.firstApproval.setTextColor(Color.GREEN)
+            } else if (item.asmApprove == 2) {
+                binding.firstApproval.text = "Cancel"
+
+            }
+
+            if (item.saApprove == null) {
                 binding.finalApproval.text = "Pending"
-            }else if(item.saApprove==1){
+            } else if (item.saApprove == 1) {
                 binding.finalApproval.text = "Approve"
-            }else if(item.saApprove==2){
+            } else if (item.saApprove == 2) {
                 binding.finalApproval.text = "Cancel"
             }
 
@@ -67,10 +77,14 @@ class LeaveApplicationAdapter(val context: Context,private val sessionManager: S
             binding.fromDate.text = item.absentFromDate
             binding.toDate.text = item.absentToDate
             val designationId = sessionManager.designationId
-            if(designationId==8){
-                binding.applicationApprove.visibility = View.VISIBLE
+            if (designationId == 8) {
+                if (item.asmApprove == 1) {
+                    binding.applicationApprove.visibility = View.GONE
+                } else {
+                    binding.applicationApprove.visibility = View.VISIBLE
+                }
+            } else {
 
-            }else {
                 binding.applicationApprove.visibility = View.GONE
             }
 

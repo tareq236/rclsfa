@@ -166,21 +166,28 @@ class MainActivity : AppCompatActivity() {
                     val menuResponse = response.body()
                     if (menuResponse != null) {
                         if(menuResponse.success){
-                            val sharedPreferences: SharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE)
-                            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                            val gson = Gson()
-                            val jsonStringUserRole = gson.toJson(menuResponse.user_roles)
-                            editor.putString("user_roles", jsonStringUserRole)
-                            sessionManager.userRoles = jsonStringUserRole
-                            if(jsonStringUserRole=="null"){
+                            val versionName = BuildConfig.VERSION_NAME
+                            if(menuResponse.version!=versionName.toDouble()){
+                                startActivity(Intent(this@MainActivity,UpdateAppActivity::class.java))
+                                finish()
+                            }else {
+                                val sharedPreferences: SharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE)
+                                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                                val gson = Gson()
+                                val jsonStringUserRole = gson.toJson(menuResponse.user_roles)
+                                editor.putString("user_roles", jsonStringUserRole)
+                                sessionManager.userRoles = jsonStringUserRole
+                                if(jsonStringUserRole=="null"){
 
-                            }else{
-                                val menuList = UserRolesCheck.checkMenuRole(menuResponse.result, jsonStringUserRole)
-                                adapter = MenuAdapter(menuList,sessionManager)
-                                recyclerView.adapter = adapter
+                                }else{
+                                    val menuList = UserRolesCheck.checkMenuRole(menuResponse.result, jsonStringUserRole)
+                                    adapter = MenuAdapter(menuList,sessionManager)
+                                    recyclerView.adapter = adapter
+                                }
+
+                                dismissLoadingDialog()
                             }
 
-                            dismissLoadingDialog()
                         }else{
                             dismissLoadingDialog()
                             showDialogBox(SweetAlertDialog.WARNING_TYPE, "Problem-SF5801", menuResponse.message)

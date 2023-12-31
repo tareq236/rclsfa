@@ -263,7 +263,7 @@ class AllLeaveAttendListM {
 
         @SerializedName("asm_approve")
         @Expose
-        var asmApprove: Any? = null
+        var asmApprove: Int? = null
 
         @SerializedName("asm_approve_date")
         @Expose
@@ -275,7 +275,7 @@ class AllLeaveAttendListM {
 
         @SerializedName("sa_approve")
         @Expose
-        var saApprove: Any? = null
+        var saApprove: Int? = null
 
         @SerializedName("sa_approve_date")
         @Expose
