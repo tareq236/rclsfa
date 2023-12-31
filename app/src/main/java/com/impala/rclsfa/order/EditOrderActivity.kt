@@ -50,7 +50,19 @@ class EditOrderActivity : AppCompatActivity() {
         binding.webView.settings.builtInZoomControls = true
         binding.webView.settings.displayZoomControls = false
 
+        binding.webView.clearCache(true);
+        binding.webView.clearHistory();
+        binding.webView.settings.allowContentAccess = true;
+        binding.webView.settings.domStorageEnabled = true;
 
+        binding.webView.settings.builtInZoomControls = true;
+        binding.webView.settings.setSupportZoom(true);
+        binding.webView.settings.loadWithOverviewMode = true;
+        binding.webView.settings.useWideViewPort = true;
+        binding.webView.settings.displayZoomControls = false;
+        binding.webView.settings.allowFileAccess = false;
+        binding.webView.settings.loadsImagesAutomatically = true;
+        binding.webView.settings.databaseEnabled = true;
 
     }
 
